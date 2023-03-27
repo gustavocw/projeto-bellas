@@ -12,8 +12,9 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import LoginDialog from "../LoginDialog/Login";
 
-const Links = ["Cidades", "Acompanhantes", "Vídeos"];
+const Links = ["Cidades", "Acompanhantes"];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -71,15 +72,7 @@ export default function Header() {
             >
               Anunciar
             </Link>
-            <Button
-              variant={"solid"}
-              colorScheme={"pink"}
-              size={"sm"}
-              mr={4}
-              leftIcon={<ArrowRightIcon />}
-            >
-              Minha conta
-            </Button>
+              <LoginDialog />
             <Button
               variant={"solid"}
               colorScheme={"red"}
