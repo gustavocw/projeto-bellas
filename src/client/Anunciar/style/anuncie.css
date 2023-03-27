@@ -1,0 +1,16 @@
+.foto{
+    background-color: #f104f1;
+    color: #fff;
+}
+
+.all{
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+}
+
+@media screen and (min-width: 200px) {
+    .all{
+        display: block;
+    }
+}

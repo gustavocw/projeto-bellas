@@ -1,0 +1,79 @@
+body{
+    background-color: #131313 !important;
+}
+
+.content{
+    width: 100%;
+    height: 100%
+}
+
+.apresentacao{
+    text-align: center;
+    font-size: 27px;
+    color: #fff;
+    border-bottom: 2px solid #f700ff;
+}
+
+.anuncio{
+    margin: 20px;
+}
+
+.anuncio:hover{
+    cursor: pointer;
+}
+
+.card-content{
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (max-width: 768px) and (min-width: 200px)  {
+    .card{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+.card{
+    display: flex;
+    width: 40%;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    font-size: 26px;
+    color: #fff;
+}
+
+.distritos{
+    display: flex;
+    justify-content: center;
+    margin: 5%;
+    flex-direction: column;
+}
+
+.link-distrito{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: #f700ff;
+    padding: 1px 10px;
+    font-weight: 700;
+}
+
+.link-distrito:hover{
+    background-color: #fff;
+    color: #f700ff;
+    text-decoration: none !important;
+}
+
+.qtd{
+    background-color: #000;
+    border-radius: 5px;
+    color: #fff;
+    padding: 2px;
+    margin-left: 10px;
+}
