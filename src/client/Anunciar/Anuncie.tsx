@@ -22,7 +22,7 @@ export default function AnunciePage(): JSX.Element {
         <div className="anuncio">
           <Flex
             className="all-cards"
-            bg={useColorModeValue("gray.50", "gray.800")}
+            bg="white"
           >
             <Stack
               className="all"
@@ -30,13 +30,11 @@ export default function AnunciePage(): JSX.Element {
               maxW={"lg"}
               bg={useColorModeValue("white", "gray.700")}
               rounded={"xl"}
-              boxShadow={"lg"}
               p="12"
             >
               <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
                 Preencha com suas características
               </Heading>
-              <div className="formulario">
                 <FormControl id="userName">
                   <Stack direction={["column"]} spacing={6}>
                     <Center>
@@ -54,9 +52,16 @@ export default function AnunciePage(): JSX.Element {
                     </Center>
                   </Stack>
                 </FormControl>
-              </div>
-              <div className="formulario">
-                <FormControl id="userName" isRequired>
+            </Stack>
+            <Stack
+              className="all"
+              spacing={6}
+              maxW={"lg"}
+              bg={useColorModeValue("white", "gray.700")}
+              rounded={"xl"}
+              p="12"
+            >
+              <FormControl id="userName" isRequired>
                   <FormLabel>Nome</FormLabel>
                   <Input
                     placeholder="Nome"
@@ -80,30 +85,6 @@ export default function AnunciePage(): JSX.Element {
                     type="tel"
                   />
                 </FormControl>
-              </div>
-              <Stack spacing={6} direction={["column", "row"]}>
-                <Button
-                  bg={"pink.400"}
-                  color={"white"}
-                  w="full"
-                  _hover={{
-                    bg: "pink.500",
-                  }}
-                >
-                  Concluir
-                </Button>
-              </Stack>
-            </Stack>
-            <Stack
-              className="all"
-              spacing={6}
-              maxW={"lg"}
-              bg={useColorModeValue("white", "gray.700")}
-              rounded={"xl"}
-              boxShadow={"lg"}
-              p="12"
-            >
-              <div className="formulario">
                 <FormControl id="userName" isRequired>
                   <FormLabel>Tipo</FormLabel>
                   <Input
@@ -128,31 +109,6 @@ export default function AnunciePage(): JSX.Element {
                     type="tel"
                   />
                 </FormControl>
-                <FormControl id="manequim" isRequired>
-                  <FormLabel>Manequim</FormLabel>
-                  <Input
-                    placeholder="36, 40..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
-                <FormControl id="pes" isRequired>
-                  <FormLabel>Pés</FormLabel>
-                  <Input
-                    placeholder="35, 38..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
-                <FormControl id="altura" isRequired>
-                  <FormLabel>Altura</FormLabel>
-                  <Input
-                    placeholder="1,65..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
-              </div>
             </Stack>
             <Stack
               className="all"
@@ -160,10 +116,32 @@ export default function AnunciePage(): JSX.Element {
               maxW={"lg"}
               bg={useColorModeValue("white", "gray.700")}
               rounded={"xl"}
-              boxShadow={"lg"}
               p="12"
             >
-              <div className="formulario">
+              <FormControl id="manequim" isRequired>
+                  <FormLabel>Manequim</FormLabel>
+                  <Input
+                    placeholder="36, 40..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="tel"
+                  />
+                </FormControl>
+              <FormControl id="pes" isRequired>
+                  <FormLabel>Pés</FormLabel>
+                  <Input
+                    placeholder="35, 38..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="tel"
+                  />
+                </FormControl>
+              <FormControl id="altura" isRequired>
+                  <FormLabel>Altura</FormLabel>
+                  <Input
+                    placeholder="1,65..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="tel"
+                  />
+                </FormControl>
                 <FormControl id="peso" isRequired>
                   <FormLabel>Peso</FormLabel>
                   <Input
@@ -188,7 +166,18 @@ export default function AnunciePage(): JSX.Element {
                     type="tel"
                   />
                 </FormControl>
-              </div>
+              <Stack spacing={6} direction={["column", "row"]}>
+                <Button
+                  bg={"pink.400"}
+                  color={"white"}
+                  w="full"
+                  _hover={{
+                    bg: "pink.500",
+                  }}
+                >
+                  Concluir
+                </Button>
+              </Stack>
             </Stack>
           </Flex>
         </div>

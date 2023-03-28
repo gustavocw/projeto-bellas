@@ -41,7 +41,8 @@ export default function LoginDialog() {
     return (
       <>
         <Button
-        style={{ backgroundColor: '#f104f1', margin: '0px 10px' }}
+        size={'sm'}
+        style={{ width: '30%', backgroundColor: '#f104f1', margin: '0px 10px' }}
         onClick={onOpen}>
         Cirar conta
         </Button>

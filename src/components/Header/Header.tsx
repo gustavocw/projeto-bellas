@@ -11,10 +11,10 @@ import {
   useColorModeValue,
   Stack,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import LoginDialog from "../LoginDialog/Login";
 
-const Links = ["Cidades", "Acompanhantes"];
+const Links = ["Início"];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -25,7 +25,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     _hover={{
       textDecoration: "none",
     }}
-    href={"#"}
+    href={"/home"}
   >
     {children}
   </Link>
@@ -46,12 +46,6 @@ export default function Header() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Link
-              href="/home"
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              LOGO
-            </Link>
             <HStack
               as={"nav"}
               spacing={4}
@@ -66,7 +60,7 @@ export default function Header() {
             <Link
               href="/anunciar"
               size={"sm"}
-              mr={4}
+              mx={2}
               color="#fff"
               className="anunciar"
             >
