@@ -1,6 +1,7 @@
 import "./style/anuncie.css";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import api from "../../services/api"
 import {
   Button,
   Flex,
@@ -49,8 +50,16 @@ export default function AnunciePage(): JSX.Element {
     setAnswer("casal");
   };
 
-  const handleNoClick = () => {
-    setAnswer("não");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const response = await api.post("/escort/create", {
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

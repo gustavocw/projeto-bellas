@@ -1,3 +1,4 @@
+import "./dtls.css"
 import {
   Box,
   chakra,
@@ -17,11 +18,13 @@ import {
   ListItem,
   IconButton,
   Link,
+  Spinner,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaWhatsapp, FaYoutube } from "react-icons/fa";
-import { MdLocalShipping } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa";
 import Slider from "react-slick";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import api from "../../../services/api";
+import { useParams } from "react-router-dom";
 import React from "react";
 
 const settings = {
@@ -36,24 +39,52 @@ const settings = {
   slidesToScroll: 1,
 };
 
+type Companion = {
+  id: string;
+  name: string;
+  price: string;
+  description: string;
+  images: string[];
+  contact: string;
+  type: string;
+  eyeColor: string;
+  tattoos: number;
+  piercings: number;
+  height: string;
+  weight: string;
+  age: number;
+  scheduleAndLocation: string;
+};
+
 export default function DetailsUser() {
   const [slider, setSlider] = React.useState<Slider | null>(null);
   const top = useBreakpointValue({ base: "90%", md: "50%" });
   const side = useBreakpointValue({ base: "30%", md: "40px" });
+  const { id } = useParams();
 
-  const cards = [
-    {
-      image: "http://www.caurn.org.br/wp-content/uploads/2017/03/IMG_7320.jpg",
-    },
-    {
-      image:
-        "https://img.freepik.com/fotos-gratis/foto-da-cintura-para-cima-de-uma-mulher-tenra-feminina-e-gentil-com-penteado-encaracolado-penteado-para-o-lado-direito-inclinando-a-cabeca-e-sorrindo-sedutor-tornando-o-olhar-romantico-para-a-camera-se-abracando-sobre-o-fundo-amarelo_1258-81987.jpg",
-    },
-    {
-      image:
-        "https://img.freepik.com/fotos-gratis/retrato-da-beleza-da-mulher-ruiva-posando-sobre-parede-rosa-cabelos-ondulados-sorriso-perfeito_273443-4466.jpg",
-    },
-  ];
+  const [companion, setCompanion] = React.useState<Companion | null>(null);
+  React.useEffect(() => {
+    if (id) {
+      api.get(`/companions/${id}`).then((response) => {
+        setCompanion(response.data);
+      });
+    }
+  }, [id]);
+
+  if (!companion) {
+    return (
+      <div className="spinner" >
+        <Spinner
+          style={{ margin: 'auto' }}
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="pink.500"
+          size="xl"
+        />
+      </div>
+    );
+  }
 
   return (
     <Container maxW={"7xl"}>
@@ -111,7 +142,7 @@ export default function DetailsUser() {
             </IconButton>
             {/* Slider */}
             <Slider {...settings} ref={(slider: any) => setSlider(slider)}>
-              {cards.map((card, index) => (
+              {companion.images.map((image, index) => (
                 <Box
                   key={index}
                   height={"1xl"}
@@ -119,7 +150,7 @@ export default function DetailsUser() {
                   backgroundPosition="center"
                   backgroundRepeat="no-repeat"
                   backgroundSize="cover"
-                  backgroundImage={`url(${card.image})`}
+                  backgroundImage={`url(${image})`}
                 >
                   {/* This is the block you need to change, to customize the caption */}
                   <Container
@@ -149,10 +180,10 @@ export default function DetailsUser() {
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
               color="#fff"
             >
-              Renata Souza
+              {companion.name}
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
-              ¢100,00
+              {companion.price}
             </Text>
           </Box>
 
@@ -167,8 +198,7 @@ export default function DetailsUser() {
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
               <Text color="#fff" fontSize={"2xl"} fontWeight={"300"}>
-                Loira , linda gata , super envolvente e sensual , iniciante
-                .....universitária.....
+                {companion.description}
               </Text>
             </VStack>
             <Box>
@@ -178,77 +208,76 @@ export default function DetailsUser() {
                 fontWeight={"500"}
                 textTransform={"uppercase"}
                 mb={"4"}
-                style={{ display: 'flex', justifyContent: 'center' }}
+                style={{ display: "flex", justifyContent: "center" }}
               >
                 Detalhes
               </Text>
 
               <List
                 spacing={2}
-                style={{ color: "#fff", display: "flex", alignItems: "center", justifyContent: 'space-around' }}
+                style={{
+                  color: "#fff",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                }}
               >
                 <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Contacto:
                     </Text>{" "}
-                    {`(47) 9.9658-3827`}
+                    {companion.contact}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Tipo:
                     </Text>{" "}
-                    {`Loira (o)`}
+                    {companion.type}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Olhos:
                     </Text>{" "}
-                    {`Mel`}
+                    {companion.eyeColor}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Cintura:
+                      Qtd. tatuagens:
                     </Text>{" "}
-                    {`60 cm`}
+                    {companion.tattoos}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Manequim:
+                      Qtd. Piercings:
                     </Text>{" "}
-                    {`38`}
+                    {companion.piercings}
                   </ListItem>
                 </div>
                 <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Pés:
-                    </Text>{" "}
-                    {` 36`}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
                       Altura:
                     </Text>{" "}
-                    {`1,65`}
+                    {companion.height}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Peso:
                     </Text>{" "}
-                    {`57 kg`}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Quadril:
-                    </Text>{" "}
-                    {`100 cm`}
+                    {companion.weight}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Idade:
                     </Text>{" "}
-                    {`20 anos`}
+                    {companion.age}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Horario e Local:
+                    </Text>{" "}
+                    {companion.scheduleAndLocation}
                   </ListItem>
                 </div>
               </List>
@@ -272,6 +301,8 @@ export default function DetailsUser() {
               transform: "translateY(2px)",
               boxShadow: "lg",
             }}
+            href={`https://wa.me/${companion.contact}}`}
+            isExternal
           >
             <Text
               style={{
