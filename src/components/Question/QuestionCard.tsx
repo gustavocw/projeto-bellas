@@ -29,29 +29,27 @@ const FirstQuestion: React.FC<Props> = ({
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const navigate = useNavigate();
   const [answer, setAnswer] = useState("");
+  const [answerG, setAnswerG] = useState("");
 
   const handleYesClick = () => {
     setAnswer("sim");
   };
   const h = () => {
-    setAnswer("homens");
-    navigate("/home/homens");
+    setAnswerG("homens");
+      navigate("/homens")
   };
   const m = () => {
-    setAnswer("mulheres");
-    navigate("/home/mulheres");
+    setAnswerG("mulheres");
   };
   const t = () => {
-    setAnswer("trans");
-    navigate("/home/trans");
+    setAnswerG("trans");
   };
   const c = () => {
-    setAnswer("casais");
-    navigate("/home/casais");
+    setAnswerG("casais");
   };
 
   const handleNoClick = () => {
-    setAnswer("não");
+    setAnswer("nao");
     navigate("/naopermitido");
   };
 
@@ -67,7 +65,7 @@ const FirstQuestion: React.FC<Props> = ({
         <ModalContent>
           <ModalHeader>Responda para nós antes</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody>
             <FormControl m={"2"}>
               <FormLabel m={"2"}>Você é maior de 18 ?</FormLabel>
               <Button
@@ -88,6 +86,7 @@ const FirstQuestion: React.FC<Props> = ({
                 NÃO
               </Button>
             </FormControl>
+            {['sim'].includes(answer) && (
             <FormControl>
               <FormLabel>Oque procura no site ?</FormLabel>
               <Button
@@ -97,7 +96,7 @@ const FirstQuestion: React.FC<Props> = ({
                 mx={"2"}
                 my={"2"}
                 onClick={h}
-                isLoading={answer === "homens"}
+                isLoading={answerG === "homens"}
               >
                 HOMENS
               </Button>
@@ -108,7 +107,7 @@ const FirstQuestion: React.FC<Props> = ({
                 mx={"2"}
                 my={"2"}
                 onClick={m}
-                isLoading={answer === "mulheres"}
+                isLoading={answerG === "mulheres"}
               >
                 MULHERES
               </Button>
@@ -119,7 +118,7 @@ const FirstQuestion: React.FC<Props> = ({
                 mx={"2"}
                 my={"2"}
                 onClick={t}
-                isLoading={answer === "trans"}
+                isLoading={answerG === "trans"}
               >
                 TRANS
               </Button>
@@ -130,13 +129,13 @@ const FirstQuestion: React.FC<Props> = ({
                 mx={"2"}
                 my={"2"}
                 onClick={c}
-                isLoading={answer === "casais"}
+                isLoading={answerG === "casais"}
               >
                 CASAIS
               </Button>
             </FormControl>
+            )}
           </ModalBody>
-
           <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
