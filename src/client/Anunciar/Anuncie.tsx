@@ -13,6 +13,7 @@ import {
   Center,
   useDisclosure,
   Textarea,
+  Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import LoginDialogUser from "../../components/LoginDialog/LoginUser";
@@ -20,6 +21,7 @@ import LoginDialogUser from "../../components/LoginDialog/LoginUser";
 export default function AnunciePage(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
+  const [answer, setAnswer] = useState("");
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -32,8 +34,24 @@ export default function AnunciePage(): JSX.Element {
     }
   };
 
-  const DEFAULT_IMAGE_SRC = 'https://via.placeholder.com/450';
+  const DEFAULT_IMAGE_SRC = "https://via.placeholder.com/450";
 
+  const h = () => {
+    setAnswer("homem");
+  };
+  const m = () => {
+    setAnswer("mulher");
+  };
+  const t = () => {
+    setAnswer("trans");
+  };
+  const c = () => {
+    setAnswer("casal");
+  };
+
+  const handleNoClick = () => {
+    setAnswer("não");
+  };
 
   return (
     <div className="container">
@@ -55,7 +73,7 @@ export default function AnunciePage(): JSX.Element {
               <FormControl id="userName">
                 <Stack direction={["column"]} spacing={6}>
                   <Center>
-                  <img src={imageSrc || DEFAULT_IMAGE_SRC} alt="imagem" />
+                    <img src={imageSrc || DEFAULT_IMAGE_SRC} alt="imagem" />
                   </Center>
                   <Center>
                     <Input
@@ -65,7 +83,7 @@ export default function AnunciePage(): JSX.Element {
                       onChange={handleImageChange}
                     />
                   </Center>
-                    <FormLabel>Fale sobre você</FormLabel>
+                  <FormLabel>Fale um pouco de sí (*)</FormLabel>
                   <Center>
                     <Textarea />
                   </Center>
@@ -80,20 +98,86 @@ export default function AnunciePage(): JSX.Element {
               rounded={"xl"}
               p="12"
             >
+              <Center>
+                <Button
+                  bg={"pink.500"}
+                  color={"#fff"}
+                  size={"sm"}
+                  onClick={h}
+                  isLoading={answer === "homem"}
+                  px={"2"}
+                  mx={"1"}
+                >
+                  homem
+                </Button>
+                <Button
+                  bg={"pink.500"}
+                  color={"#fff"}
+                  size={"sm"}
+                  onClick={m}
+                  isLoading={answer === "mulher"}
+                  px={"2"}
+                  mx={"1"}
+                >
+                  mulher
+                </Button>
+                <Button
+                  bg={"pink.500"}
+                  color={"#fff"}
+                  size={"sm"}
+                  onClick={t}
+                  isLoading={answer === "trans"}
+                  px={"2"}
+                  mx={"1"}
+                >
+                  TRANS
+                </Button>
+                <Button
+                  bg={"pink.500"}
+                  color={"#fff"}
+                  size={"sm"}
+                  onClick={c}
+                  isLoading={answer === "casal"}
+                  px={"2"}
+                  mx={"1"}
+                >
+                  casal
+                </Button>
+              </Center>
+              <FormControl id="userName" isRequired>
+                <Select placeholder="Localização">
+                  <option value="Aveiro">Aveiro</option>
+                  <option value="Bragança">Bragança</option>
+                  <option value="Castelo Branco">Castelo Branco</option>
+                  <option value="Coimbra">Coimbra</option>
+                  <option value="Évora">Évora</option>
+                  <option value="Faro">Faro</option>
+                  <option value="Guarda">Guarda</option>
+                  <option value="Leiria">Leiria</option>
+                  <option value="Braga">Braga</option>
+                  <option value="Portalegre">Portalegre</option>
+                  <option value="Porto">Porto</option>
+                  <option value="Santarém">Santarém</option>
+                  <option value="Setúbal">Setúbal</option>
+                  <option value="Viana do Castelo">Viana do Castelo</option>
+                  <option value="Vila Real">Vila Real</option>
+                  <option value="Viseu">Viseu</option>
+                </Select>
+              </FormControl>
+              <FormControl id="idade" isRequired>
+                <FormLabel>Idade</FormLabel>
+                <Input
+                  placeholder="19, 25..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
               <FormControl id="userName" isRequired>
                 <FormLabel>Nome</FormLabel>
                 <Input
                   placeholder="Nome"
                   _placeholder={{ color: "gray.500" }}
                   type="text"
-                />
-              </FormControl>
-              <FormControl id="email" isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input
-                  placeholder="email@example.com"
-                  _placeholder={{ color: "gray.500" }}
-                  type="email"
                 />
               </FormControl>
               <FormControl id="password" isRequired>
@@ -120,14 +204,6 @@ export default function AnunciePage(): JSX.Element {
                   type="text"
                 />
               </FormControl>
-              <FormControl id="cintura" isRequired>
-                <FormLabel>Cintura</FormLabel>
-                <Input
-                  placeholder="60cm, 55cm..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="tel"
-                />
-              </FormControl>
             </Stack>
             <Stack
               className="all"
@@ -137,18 +213,18 @@ export default function AnunciePage(): JSX.Element {
               rounded={"xl"}
               p="12"
             >
-              <FormControl id="manequim" isRequired>
-                <FormLabel>Manequim</FormLabel>
+              <FormControl id="tatoo" isRequired>
+                <FormLabel>Qtd. Tatuagens</FormLabel>
                 <Input
-                  placeholder="36, 40..."
+                  placeholder="0, 1, 2..."
                   _placeholder={{ color: "gray.500" }}
                   type="tel"
                 />
               </FormControl>
-              <FormControl id="pes" isRequired>
-                <FormLabel>Pés</FormLabel>
+              <FormControl id="manequim" isRequired>
+                <FormLabel>Qtd. Piercings</FormLabel>
                 <Input
-                  placeholder="35, 38..."
+                  placeholder="0, 1, 2..."
                   _placeholder={{ color: "gray.500" }}
                   type="tel"
                 />
@@ -164,41 +240,36 @@ export default function AnunciePage(): JSX.Element {
               <FormControl id="peso" isRequired>
                 <FormLabel>Peso</FormLabel>
                 <Input
-                  placeholder="58, 60..."
+                  placeholder="58, 60kg..."
                   _placeholder={{ color: "gray.500" }}
                   type="tel"
                 />
               </FormControl>
-              <FormControl id="quadril" isRequired>
-                <FormLabel>Quadril</FormLabel>
+              <FormControl id="peso" isRequired>
+                <FormLabel>Informe Horário e Local em que atende</FormLabel>
                 <Input
-                  placeholder="100cm..."
+                  placeholder="Ex: Ap 123, somente a noite..."
                   _placeholder={{ color: "gray.500" }}
                   type="tel"
                 />
               </FormControl>
-              <FormControl id="idade" isRequired>
-                <FormLabel>Idade</FormLabel>
-                <Input
-                  placeholder="19, 25..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="tel"
-                />
-              </FormControl>
-              <LoginDialogUser isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+              <LoginDialogUser
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
               <Stack spacing={6} direction={["column", "row"]}>
                 {isLoggedIn && (
-                <Button
-                  disabled={!isLoggedIn}
-                  bg={"pink.400"}
-                  color={"white"}
-                  w="full"
-                  _hover={{
-                    bg: "pink.500",
-                  }}
-                >
-                  Concluir
-                </Button>
+                  <Button
+                    disabled={!isLoggedIn}
+                    bg={"pink.400"}
+                    color={"white"}
+                    w="full"
+                    _hover={{
+                      bg: "pink.500",
+                    }}
+                  >
+                    Concluir
+                  </Button>
                 )}
               </Stack>
             </Stack>

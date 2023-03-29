@@ -73,10 +73,11 @@ import {
         {!isLoggedIn && (
           <Button
             size={"md"}
+            px={'6'}
+            fontSize={'12'}
             style={{
               width: "100%",
               backgroundColor: "#e048e0",
-              margin: "10px auto",
               color: '#fff'
             }}
             onClick={onOpen}
