@@ -11,19 +11,36 @@ import {
   Stack,
   useColorModeValue,
   Center,
+  useDisclosure,
+  Textarea,
 } from "@chakra-ui/react";
-import { SmallCloseIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import LoginDialogUser from "../../components/LoginDialog/LoginUser";
 
 export default function AnunciePage(): JSX.Element {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [imageSrc, setImageSrc] = useState("");
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImageSrc(event.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const DEFAULT_IMAGE_SRC = 'https://via.placeholder.com/450';
+
+
   return (
     <div className="container">
       <Header />
       <div className="content">
         <div className="anuncio">
-          <Flex
-            className="all-cards"
-            bg="white"
-          >
+          <Flex className="all-cards" bg="white">
             <Stack
               className="all"
               spacing={6}
@@ -35,23 +52,25 @@ export default function AnunciePage(): JSX.Element {
               <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
                 Preencha com suas características
               </Heading>
-                <FormControl id="userName">
-                  <Stack direction={["column"]} spacing={6}>
-                    <Center>
-                      <img
-                        src="http://www.caurn.org.br/wp-content/uploads/2017/03/IMG_7320.jpg"
-                        alt="imagem"
-                      />
-                    </Center>
-                    <Center>
-                      <Input
-                        type={"file"}
-                        placeholder="Digite o texto personalizado aqui"
-                        multiple
-                      />
-                    </Center>
-                  </Stack>
-                </FormControl>
+              <FormControl id="userName">
+                <Stack direction={["column"]} spacing={6}>
+                  <Center>
+                  <img src={imageSrc || DEFAULT_IMAGE_SRC} alt="imagem" />
+                  </Center>
+                  <Center>
+                    <Input
+                      type={"file"}
+                      placeholder="Digite o texto personalizado aqui"
+                      multiple
+                      onChange={handleImageChange}
+                    />
+                  </Center>
+                    <FormLabel>Fale sobre você</FormLabel>
+                  <Center>
+                    <Textarea />
+                  </Center>
+                </Stack>
+              </FormControl>
             </Stack>
             <Stack
               className="all"
@@ -62,53 +81,53 @@ export default function AnunciePage(): JSX.Element {
               p="12"
             >
               <FormControl id="userName" isRequired>
-                  <FormLabel>Nome</FormLabel>
-                  <Input
-                    placeholder="Nome"
-                    _placeholder={{ color: "gray.500" }}
-                    type="text"
-                  />
-                </FormControl>
-                <FormControl id="email" isRequired>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    placeholder="email@example.com"
-                    _placeholder={{ color: "gray.500" }}
-                    type="email"
-                  />
-                </FormControl>
-                <FormControl id="password" isRequired>
-                  <FormLabel>Contacto</FormLabel>
-                  <Input
-                    placeholder="Contacto"
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
-                <FormControl id="userName" isRequired>
-                  <FormLabel>Tipo</FormLabel>
-                  <Input
-                    placeholder="Loira, Morena..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="text"
-                  />
-                </FormControl>
-                <FormControl id="olhos" isRequired>
-                  <FormLabel>Olhos</FormLabel>
-                  <Input
-                    placeholder="Azuis, Castanhos..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="text"
-                  />
-                </FormControl>
-                <FormControl id="cintura" isRequired>
-                  <FormLabel>Cintura</FormLabel>
-                  <Input
-                    placeholder="60cm, 55cm..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
+                <FormLabel>Nome</FormLabel>
+                <Input
+                  placeholder="Nome"
+                  _placeholder={{ color: "gray.500" }}
+                  type="text"
+                />
+              </FormControl>
+              <FormControl id="email" isRequired>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  placeholder="email@example.com"
+                  _placeholder={{ color: "gray.500" }}
+                  type="email"
+                />
+              </FormControl>
+              <FormControl id="password" isRequired>
+                <FormLabel>Contacto</FormLabel>
+                <Input
+                  placeholder="Contacto"
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
+              <FormControl id="userName" isRequired>
+                <FormLabel>Tipo</FormLabel>
+                <Input
+                  placeholder="Loira, Morena..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="text"
+                />
+              </FormControl>
+              <FormControl id="olhos" isRequired>
+                <FormLabel>Olhos</FormLabel>
+                <Input
+                  placeholder="Azuis, Castanhos..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="text"
+                />
+              </FormControl>
+              <FormControl id="cintura" isRequired>
+                <FormLabel>Cintura</FormLabel>
+                <Input
+                  placeholder="60cm, 55cm..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
             </Stack>
             <Stack
               className="all"
@@ -119,55 +138,58 @@ export default function AnunciePage(): JSX.Element {
               p="12"
             >
               <FormControl id="manequim" isRequired>
-                  <FormLabel>Manequim</FormLabel>
-                  <Input
-                    placeholder="36, 40..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
+                <FormLabel>Manequim</FormLabel>
+                <Input
+                  placeholder="36, 40..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
               <FormControl id="pes" isRequired>
-                  <FormLabel>Pés</FormLabel>
-                  <Input
-                    placeholder="35, 38..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
+                <FormLabel>Pés</FormLabel>
+                <Input
+                  placeholder="35, 38..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
               <FormControl id="altura" isRequired>
-                  <FormLabel>Altura</FormLabel>
-                  <Input
-                    placeholder="1,65..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
-                <FormControl id="peso" isRequired>
-                  <FormLabel>Peso</FormLabel>
-                  <Input
-                    placeholder="58, 60..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
-                <FormControl id="quadril" isRequired>
-                  <FormLabel>Quadril</FormLabel>
-                  <Input
-                    placeholder="100cm..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
-                <FormControl id="idade" isRequired>
-                  <FormLabel>Idade</FormLabel>
-                  <Input
-                    placeholder="19, 25..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="tel"
-                  />
-                </FormControl>
+                <FormLabel>Altura</FormLabel>
+                <Input
+                  placeholder="1,65..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
+              <FormControl id="peso" isRequired>
+                <FormLabel>Peso</FormLabel>
+                <Input
+                  placeholder="58, 60..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
+              <FormControl id="quadril" isRequired>
+                <FormLabel>Quadril</FormLabel>
+                <Input
+                  placeholder="100cm..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
+              <FormControl id="idade" isRequired>
+                <FormLabel>Idade</FormLabel>
+                <Input
+                  placeholder="19, 25..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="tel"
+                />
+              </FormControl>
+              <LoginDialogUser isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
               <Stack spacing={6} direction={["column", "row"]}>
+                {isLoggedIn && (
                 <Button
+                  disabled={!isLoggedIn}
                   bg={"pink.400"}
                   color={"white"}
                   w="full"
@@ -177,6 +199,7 @@ export default function AnunciePage(): JSX.Element {
                 >
                   Concluir
                 </Button>
+                )}
               </Stack>
             </Stack>
           </Flex>

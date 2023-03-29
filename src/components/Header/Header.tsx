@@ -1,5 +1,5 @@
 import "./header.css";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import {
   Box,
   Flex,
@@ -12,7 +12,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import LoginDialog from "../LoginDialog/Login";
+import LoginDialogUser from "../LoginDialog/LoginUser";
 
 const Links = ["Início"];
 
@@ -33,6 +33,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
@@ -58,6 +59,7 @@ export default function Header() {
           </HStack>
           <Flex alignItems={"center"}>
             <Link
+              onClick={onOpen}
               href="/anunciar"
               size={"sm"}
               mx={2}
@@ -66,16 +68,6 @@ export default function Header() {
             >
               Anunciar
             </Link>
-              <LoginDialog />
-            <Button
-              variant={"solid"}
-              colorScheme={"red"}
-              size={"sm"}
-              mr={4}
-              leftIcon={<CloseIcon />}
-            >
-              Sair
-            </Button>
           </Flex>
         </Flex>
 
