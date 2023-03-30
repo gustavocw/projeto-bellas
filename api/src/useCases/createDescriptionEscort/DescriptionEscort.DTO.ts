@@ -17,9 +17,6 @@ export class IDescriptionEscortDTO {
   eyes:string;
 
   @IsNotEmpty()
-  waist:string;
-
-  @IsNotEmpty()
   tatoo:number;
 
   @IsNotEmpty()
@@ -33,9 +30,6 @@ export class IDescriptionEscortDTO {
   
   @IsNotEmpty()
   obsScheduling:string
-
-  @IsNotEmpty()    
-  hip:string;    
   
   @IsNotEmpty()
   age:number;

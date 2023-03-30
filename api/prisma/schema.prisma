@@ -48,13 +48,11 @@ model DataOfEscort {
   contact       String @unique
   type          String
   eyes          String
-  waist         String
   tatoo         Int
   piercing      Int
   weight        String
   height        String
   obsScheduling String
-  hip           String
   age           Int
 
   escort   Escort @relation(fields: [clientId], references: [id])
