@@ -36,7 +36,7 @@ const HomePage = () => {
   useEffect(() => {
     async function fetchAcompanhantes() {
       try {
-        const response = await api.get("/escort/acompanhante");
+        const response = await api.get("/");
         setAcompanhantes(response.data);
       } catch (error) {
         console.log(error);
