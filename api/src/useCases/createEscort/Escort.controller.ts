@@ -16,5 +16,5 @@ export class EscortController{
         } catch (error) {
             return response.json({ error:true, message: `${error}`});
         };
-    };
+    }
 };

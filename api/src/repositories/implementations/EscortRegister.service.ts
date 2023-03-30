@@ -20,7 +20,7 @@ export class EscortRegisterImplementation implements AEscortService{
 
         return findByClient;
     };
-    async saveTheUser({ email, name, password, sexo }:IEscortDTO, code:number, codeDate:number): Promise<Escort | Object> {
+    async saveTheUser({ email, name, password, sexo, city }:IEscortDTO, code:number, codeDate:number): Promise<Escort | Object> {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
         const clientRegisted = await this.prisma.escort.create({
@@ -31,6 +31,7 @@ export class EscortRegisterImplementation implements AEscortService{
                 sexo,
                 code,
                 codeDate,
+                city,
             },
         });
 

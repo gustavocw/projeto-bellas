@@ -20,10 +20,10 @@ export class IDescriptionEscortDTO {
   waist:string;
 
   @IsNotEmpty()
-  dummy:number;
+  tatoo:number;
 
   @IsNotEmpty()
-  feet:number;
+  piercing:number;
 
   @IsNotEmpty()
   weight:string;

@@ -12,4 +12,7 @@ export class IEscortDTO {
 
     @IsNotEmpty()
     sexo:string;
+
+    @IsNotEmpty()
+    city:string;
 };

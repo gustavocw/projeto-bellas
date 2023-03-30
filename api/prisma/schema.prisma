@@ -1,6 +1,6 @@
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["native"]
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -49,8 +49,8 @@ model DataOfEscort {
   type        String
   eyes        String
   waist       String
-  dummy       Int
-  feet        Int
+  tatoo       Int
+  piercing    Int
   weight      String
   hip         String
   age         Int
