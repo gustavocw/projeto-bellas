@@ -22,6 +22,8 @@ export class DescriptionEscortImplementation implements ADescription {
         userId,
         waist,
         weight,
+        height,
+        obsScheduling,
     }: IDescriptionEscortDTO): Promise<void> {
         const createDescription = await this.prisma.escort.update({
             where: { id:userId },
@@ -39,6 +41,8 @@ export class DescriptionEscortImplementation implements ADescription {
                         type,
                         waist,
                         weight,
+                        height,
+                        obsScheduling,
                     },
                 },
             },

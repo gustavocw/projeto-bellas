@@ -26,6 +26,8 @@ export class DescriptionController {
                     type:body.type,
                     waist:body.waist,
                     weight:body.weight,
+                    height:body.height,
+                    obsScheduling:body.obsScheduling,
                 });
             return { description:true };
         } catch (error) {

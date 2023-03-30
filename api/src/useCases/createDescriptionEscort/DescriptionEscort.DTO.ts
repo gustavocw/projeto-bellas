@@ -28,6 +28,12 @@ export class IDescriptionEscortDTO {
   @IsNotEmpty()
   weight:string;
 
+  @IsNotEmpty()
+  height:string;
+  
+  @IsNotEmpty()
+  obsScheduling:string
+
   @IsNotEmpty()    
   hip:string;    
   

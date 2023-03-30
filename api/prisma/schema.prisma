@@ -43,17 +43,19 @@ model Escort {
 model DataOfEscort {
   id String @id @default(uuid())
 
-  price       String
-  description String
-  contact     String @unique
-  type        String
-  eyes        String
-  waist       String
-  tatoo       Int
-  piercing    Int
-  weight      String
-  hip         String
-  age         Int
+  price         String
+  description   String
+  contact       String @unique
+  type          String
+  eyes          String
+  waist         String
+  tatoo         Int
+  piercing      Int
+  weight        String
+  height        String
+  obsScheduling String
+  hip           String
+  age           Int
 
   escort   Escort @relation(fields: [clientId], references: [id])
   clientId String
