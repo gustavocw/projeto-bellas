@@ -1,28 +1,37 @@
 import "./style/landing.css";
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
-import { Flex, Grid, Link, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import FirstQuestion from "../../components/Question/QuestionCard";
-import { useEffect } from "react";
-import React from "react";
+import { useEffect, useState } from "react";
+import Loading from "../../components/loading/loading";
 
 const LandingPage = () => {
-  
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
-    onOpen();
-  }, [onOpen]);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
+  useEffect(() => {
+    if (!isLoading) {
+      setShowModal(true);
+      onOpen();
+    }
+  }, [isLoading, onOpen]);
 
   return (
-    <div className="container">
-      <div className="content">
-        <div className="lugares">
+    <>
+      {isLoading && <Loading />}
+      <div className="container">
+        <div className="content">
+          <div className="lugares"></div>
         </div>
+        <FirstQuestion isOpen={isOpen} onClose={onClose} />
       </div>
-      <FirstQuestion isOpen={isOpen} onClose={onClose} />
-    </div>
+    </>
   );
 };
 

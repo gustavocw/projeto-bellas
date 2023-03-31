@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/loading/loading";
 
 interface Accompanhante {
   id: number;
@@ -28,6 +29,13 @@ interface Accompanhante {
 }
 
 const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
   const navigate = useNavigate();
   const [acompanhantes, setAcompanhantes] = useState<Accompanhante[]>([]);
 
@@ -45,6 +53,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
+      {isLoading && <Loading />}
       <Header />
       <div className="content">
         <div className="card-content">
