@@ -15,22 +15,20 @@ import {
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const data = {
-  isOnline: true,
-  imageURL: "http://www.caurn.org.br/wp-content/uploads/2017/03/IMG_7320.jpg",
-  idade: "19 anos",
-};
-
 interface Accompanhante {
   id: number;
   isOnline: boolean;
-  imageURL: string;
-  idade: string;
-  nome: string;
+  age: string;
+  name: string;
+  imagesEscort: {
+    id: string;
+    urlPhoto: string;
+    escortId: string;
+  }[];
 }
 
 const HomePage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [acompanhantes, setAcompanhantes] = useState<Accompanhante[]>([]);
 
   useEffect(() => {
@@ -67,7 +65,7 @@ const HomePage = () => {
                   shadow="lg"
                   position="relative"
                 >
-                  {data.isOnline && (
+                  {acompanhante.isOnline && (
                     <>
                       <Text style={{ margin: "0 0 0 20px" }}>Online</Text>
                       <Circle
@@ -80,21 +78,27 @@ const HomePage = () => {
                     </>
                   )}
                   <Image
-                    src={acompanhante.imageURL}
+                    width='60'
+                    src={
+                      acompanhante.imagesEscort &&
+                      acompanhante.imagesEscort.length > 0
+                        ? acompanhante.imagesEscort[0].urlPhoto
+                        : ""
+                    }
                     alt={"acompanhante"}
                     roundedTop="lg"
                   />
 
                   <Box p="6">
                     <Box display={"flex"} alignItems="baseline">
-                        <Badge
-                          rounded="full"
-                          px="2"
-                          fontSize="0.8em"
-                          colorScheme="red"
-                        >
-                          {acompanhante.nome}
-                        </Badge>
+                      <Badge
+                        rounded="full"
+                        px="2"
+                        fontSize="0.8em"
+                        colorScheme="red"
+                      >
+                        {acompanhante.name}
+                      </Badge>
                     </Box>
                     <Flex
                       mt="1"
@@ -108,7 +112,7 @@ const HomePage = () => {
                         lineHeight="tight"
                         isTruncated
                       >
-                        {data.idade}
+                        {acompanhante.age}
                       </Box>
                     </Flex>
                     <Flex justifyContent="space-between" alignContent="center">

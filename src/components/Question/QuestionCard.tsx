@@ -9,9 +9,11 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Select,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 interface Props {
   isOpen: boolean;
@@ -29,29 +31,36 @@ const FirstQuestion: React.FC<Props> = ({
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const navigate = useNavigate();
   const [answer, setAnswer] = useState("");
-  const [answerG, setAnswerG] = useState("");
+  const [city, setCity] = useState("");
+  const [genero, setGenero] = useState("");
+
 
   const handleYesClick = () => {
     setAnswer("sim");
-  };
-  const h = () => {
-    setAnswerG("homens");
-      navigate("/homens")
-  };
-  const m = () => {
-    setAnswerG("mulheres");
-  };
-  const t = () => {
-    setAnswerG("trans");
-  };
-  const c = () => {
-    setAnswerG("casais");
   };
 
   const handleNoClick = () => {
     setAnswer("nao");
     navigate("/naopermitido");
   };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  
+    try {
+      const response = await api.post("/escort/sex", {
+        city,
+        sex: genero,
+      });
+      console.log(response.data); // log the response data
+    } catch (error) {
+      console.error(error);
+    }
+  
+    onClose(); // Feche o modal após o envio
+  };
+  
+
 
   return (
     <>
@@ -62,12 +71,12 @@ const FirstQuestion: React.FC<Props> = ({
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent textAlign={'center'} >
           <ModalHeader>Responda para nós antes</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }} >
             <FormControl m={"2"}>
-              <FormLabel m={"2"}>Você é maior de 18 ?</FormLabel>
+              <FormLabel textAlign={'center'} m={"2"}>Você é maior de 18 ?</FormLabel>
               <Button
                 onClick={handleYesClick}
                 bg={"pink.500"}
@@ -88,55 +97,54 @@ const FirstQuestion: React.FC<Props> = ({
             </FormControl>
             {['sim'].includes(answer) && (
             <FormControl>
-              <FormLabel>Oque procura no site ?</FormLabel>
-              <Button
-                bg={"pink.500"}
-                color={"#fff"}
-                size={"sm"}
-                mx={"2"}
-                my={"2"}
-                onClick={h}
-                isLoading={answerG === "homens"}
-              >
-                HOMENS
-              </Button>
-              <Button
-                bg={"pink.500"}
-                color={"#fff"}
-                size={"sm"}
-                mx={"2"}
-                my={"2"}
-                onClick={m}
-                isLoading={answerG === "mulheres"}
-              >
-                MULHERES
-              </Button>
-              <Button
-                bg={"pink.500"}
-                color={"#fff"}
-                size={"sm"}
-                mx={"2"}
-                my={"2"}
-                onClick={t}
-                isLoading={answerG === "trans"}
-              >
-                TRANS
-              </Button>
-              <Button
-                bg={"pink.500"}
-                color={"#fff"}
-                size={"sm"}
-                mx={"2"}
-                my={"2"}
-                onClick={c}
-                isLoading={answerG === "casais"}
-              >
-                CASAIS
-              </Button>
+              <FormLabel textAlign={'center'} >Selecione o distrito</FormLabel>
+                <Select
+                placeholder="Distrito"
+                value={city}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCity(e.target.value)}
+                >
+                  <option value="Aveiro">Aveiro</option>
+                  <option value="Bragança">Bragança</option>
+                  <option value="Castelo Branco">Castelo Branco</option>
+                  <option value="Coimbra">Coimbra</option>
+                  <option value="Évora">Évora</option>
+                  <option value="Faro">Faro</option>
+                  <option value="Guarda">Guarda</option>
+                  <option value="Leiria">Leiria</option>
+                  <option value="Braga">Braga</option>
+                  <option value="Portalegre">Portalegre</option>
+                  <option value="Porto">Porto</option>
+                  <option value="Santarém">Santarém</option>
+                  <option value="Setúbal">Setúbal</option>
+                  <option value="Viana do Castelo">Viana do Castelo</option>
+                  <option value="Vila Real">Vila Real</option>
+                  <option value="Viseu">Viseu</option>
+                </Select>
+            </FormControl>
+            )}
+            {![''].includes(city) && (
+            <FormControl>
+              <FormLabel mt={4} textAlign={'center'} >Selecione o que procura</FormLabel>
+                <Select
+                value={genero}
+                placeholder="Oque procura ?"
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setGenero(e.target.value)}
+                >
+                  <option value="Mulheres">Mulheres</option>
+                  <option value="Homens">Homens</option>
+                  <option value="Trans">Trans</option>
+                  <option value="Casais">Casais</option>
+                </Select>
             </FormControl>
             )}
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          <ModalFooter>
+            {![''].includes(genero) && (
+            <Button style={{ margin: 'auto' }} onClick={handleSubmit} colorScheme="pink" mr={3}>
+              Confirmar
+            </Button>
+            )}
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
