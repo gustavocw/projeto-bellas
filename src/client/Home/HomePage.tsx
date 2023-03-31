@@ -19,7 +19,7 @@ import Loading from "../../components/loading/loading";
 interface Accompanhante {
   id: number;
   isOnline: boolean;
-  age: string;
+  city: string;
   name: string;
   imagesEscort: {
     id: string;
@@ -44,6 +44,7 @@ const HomePage = () => {
       try {
         const response = await api.get("/");
         setAcompanhantes(response.data);
+        console.log(response)
       } catch (error) {
         console.log(error);
       }
@@ -74,9 +75,9 @@ const HomePage = () => {
                   shadow="lg"
                   position="relative"
                 >
-                  {acompanhante.isOnline && (
+                  {acompanhante.city && (
                     <>
-                      <Text style={{ margin: "0 0 0 20px" }}>Online</Text>
+                      <Text style={{ margin: "0 0 0 20px" }}>Disponível</Text>
                       <Circle
                         size="10px"
                         position="absolute"
@@ -121,7 +122,7 @@ const HomePage = () => {
                         lineHeight="tight"
                         isTruncated
                       >
-                        {acompanhante.age}
+                        {acompanhante.city}
                       </Box>
                     </Flex>
                     <Flex justifyContent="space-between" alignContent="center">

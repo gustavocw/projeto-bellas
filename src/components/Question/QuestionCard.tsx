@@ -31,8 +31,7 @@ const FirstQuestion: React.FC<Props> = ({
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const navigate = useNavigate();
   const [answer, setAnswer] = useState("");
-  const [city, setCity] = useState("");
-  const [genero, setGenero] = useState("");
+  const [sex, setSex] = useState("");
 
 
   const handleYesClick = () => {
@@ -49,8 +48,7 @@ const FirstQuestion: React.FC<Props> = ({
   
     try {
       const response = await api.post("/escort/sex", {
-        city,
-        sex: genero,
+        sex,
       });
       console.log(response.data); // log the response data
     } catch (error) {
@@ -71,7 +69,7 @@ const FirstQuestion: React.FC<Props> = ({
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent textAlign={'center'} >
+        <ModalContent margin={'auto'} textAlign={'center'} >
           <ModalHeader>Responda para nós antes</ModalHeader>
           <ModalCloseButton />
           <ModalBody style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }} >
@@ -100,8 +98,6 @@ const FirstQuestion: React.FC<Props> = ({
               <FormLabel textAlign={'center'} >Selecione o distrito</FormLabel>
                 <Select
                 placeholder="Distrito"
-                value={city}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCity(e.target.value)}
                 >
                   <option value="Aveiro">Aveiro</option>
                   <option value="Bragança">Bragança</option>
@@ -122,13 +118,13 @@ const FirstQuestion: React.FC<Props> = ({
                 </Select>
             </FormControl>
             )}
-            {![''].includes(city) && (
+            {['sim'].includes(answer) && (
             <FormControl>
               <FormLabel mt={4} textAlign={'center'} >Selecione o que procura</FormLabel>
                 <Select
-                value={genero}
+                value={sex}
                 placeholder="Oque procura ?"
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setGenero(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSex(e.target.value)}
                 >
                   <option value="Mulheres">Mulheres</option>
                   <option value="Homens">Homens</option>
@@ -139,7 +135,7 @@ const FirstQuestion: React.FC<Props> = ({
             )}
           </ModalBody>
           <ModalFooter>
-            {![''].includes(genero) && (
+            {![''].includes(sex) && (
             <Button style={{ margin: 'auto' }} onClick={handleSubmit} colorScheme="pink" mr={3}>
               Confirmar
             </Button>

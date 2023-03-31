@@ -26,9 +26,6 @@ const LandingPage = () => {
     <>
       {isLoading && <Loading />}
       <div className="container">
-        <div className="content">
-          <div className="lugares"></div>
-        </div>
         <FirstQuestion isOpen={isOpen} onClose={onClose} />
       </div>
     </>

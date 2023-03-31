@@ -15,10 +15,11 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegisterDialogUser from "../../components/RegisterDialog/RegisterUser";
 import LoginDialogUser from "../../components/LoginDialog/LoginUser";
 import Cookies from "js-cookie";
+import Loading from "../../components/loading/loading";
 
 export default function AnunciePage(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,6 +37,7 @@ export default function AnunciePage(): JSX.Element {
   const toast = useToast();
 
   const handleSubmit = () => {
+    const token = Cookies.get('token');
     api
       .post(
         "/description/create",
@@ -51,33 +53,47 @@ export default function AnunciePage(): JSX.Element {
           age,
           height,
           obsScheduling,
+          userId: token,
         },
-        {}
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
       )
       .then((response) => {
         const token = response.data.token;
         if (token) {
+          setIsLoggedIn(true);
           Cookies.set("token", token, { expires: 1 });
         } else {
-          toast({
-            title: "Falha no registro",
-            description: "Digite um email e senha válidos.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
+          handleAnuncioToast("Usuário não encontrado.");
         }
       })
       .catch((error) => {
-        toast({
-          title: "Falha no registro",
-          description: "Digite um email e senha válidos.",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+        handleAnuncioToast("Erro no anuncio.");
       });
   };
+
+  const handleAnuncioToast = (message: string) => {
+    toast({
+      title: "Falha ao anunciar",
+      description: message,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+
 
   const [image, setImage] = useState<File | undefined>(undefined);
   const token = Cookies.get('token');
@@ -116,6 +132,7 @@ export default function AnunciePage(): JSX.Element {
 
   return (
     <div className="container">
+      {isLoading && <Loading />}
       <Header />
       <div className="content">
         <div className="anuncio">
@@ -172,7 +189,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="19, 25..."
                   _placeholder={{ color: "gray.500" }}
-                  type="tel"
+                  type="number"
                   value={age}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setAge(e.target.value)
@@ -184,7 +201,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="Ex:€100"
                   _placeholder={{ color: "gray.500" }}
-                  type="number"
+                  type="text"
                   value={price}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setPrice(e.target.value)
@@ -196,7 +213,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="Contacto"
                   _placeholder={{ color: "gray.500" }}
-                  type="tel"
+                  type="text"
                   value={contact}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setContact(e.target.value)
@@ -241,7 +258,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="0, 1, 2..."
                   _placeholder={{ color: "gray.500" }}
-                  type="tel"
+                  type="number"
                   value={tatoo}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setTatoo(e.target.value)
@@ -253,7 +270,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="0, 1, 2..."
                   _placeholder={{ color: "gray.500" }}
-                  type="tel"
+                  type="number"
                   value={piercing}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setPiercing(e.target.value)
@@ -265,7 +282,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="1,65..."
                   _placeholder={{ color: "gray.500" }}
-                  type="tel"
+                  type="text"
                   value={height}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setHeight(e.target.value)
@@ -277,7 +294,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="58, 60kg..."
                   _placeholder={{ color: "gray.500" }}
-                  type="tel"
+                  type="text"
                   value={weight}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setWeight(e.target.value)
@@ -289,7 +306,7 @@ export default function AnunciePage(): JSX.Element {
                 <Input
                   placeholder="Ex: Ap 123, somente a noite..."
                   _placeholder={{ color: "gray.500" }}
-                  type="tel"
+                  type="text"
                   value={obsScheduling}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setObsScheduling(e.target.value)
