@@ -28,7 +28,6 @@ export default function AnunciePage({ id }: AnunciePageProps): JSX.Element {
     api
       .post(`upload/${id}`, data, {
         headers: {
-          "Content-Type": `multipart/form-data; boundary=${FormData.prototype._boundary}`,
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
