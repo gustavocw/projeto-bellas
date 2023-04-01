@@ -80,6 +80,7 @@ export default function DetailsUser() {
       });
     }
   }, [id]);
+  
 
   if (!acompanhante) {
     return (

@@ -56,7 +56,7 @@ model DataOfEscort {
   age           Int
 
   escort   Escort @relation(fields: [clientId], references: [id])
-  clientId String
+  clientId String @unique
 }
 
 model ImagesForEscort {
