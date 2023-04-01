@@ -39,21 +39,30 @@ const settings = {
   slidesToScroll: 1,
 };
 
-type Companion = {
+type Acompanhante = {
   id: string;
   name: string;
-  price: string;
-  description: string;
-  images: string[];
-  contact: string;
-  type: string;
-  eyeColor: string;
-  tattoos: number;
-  piercings: number;
-  height: string;
-  weight: string;
-  age: number;
-  scheduleAndLocation: string;
+  dataEscort: {
+    id: string;
+    urlPhoto: string;
+    escortId: string;
+    price: string;
+    description: string;
+    contact: string;
+    type: string;
+    eyeColor: string;
+    tattoos: number;
+    piercings: number;
+    height: string;
+    weight: string;
+    age: number;
+    scheduleAndLocation: string;
+  }[];
+  imagesEscort: {
+    id: string;
+    urlPhoto: string;
+    escortId: string;
+  }[];
 };
 
 export default function DetailsUser() {
@@ -62,16 +71,17 @@ export default function DetailsUser() {
   const side = useBreakpointValue({ base: "30%", md: "40px" });
   const { id } = useParams();
 
-  const [companion, setCompanion] = React.useState<Companion | null>(null);
+  const [acompanhante, setAcompanhante] = React.useState<Acompanhante | null>(null);
+
   React.useEffect(() => {
     if (id) {
-      api.get(`/companions/${id}`).then((response) => {
-        setCompanion(response.data);
+      api.get(`/escort/${id}`).then((response) => {
+        setAcompanhante(response.data);
       });
     }
   }, [id]);
 
-  if (!companion) {
+  if (!acompanhante) {
     return (
       <div className="spinner" >
         <Spinner
@@ -142,7 +152,7 @@ export default function DetailsUser() {
             </IconButton>
             {/* Slider */}
             <Slider {...settings} ref={(slider: any) => setSlider(slider)}>
-              {companion.images.map((image, index) => (
+              {acompanhante.imagesEscort.map((image, index) => (
                 <Box
                   key={index}
                   height={"1xl"}
@@ -150,7 +160,7 @@ export default function DetailsUser() {
                   backgroundPosition="center"
                   backgroundRepeat="no-repeat"
                   backgroundSize="cover"
-                  backgroundImage={`url(${image})`}
+                  backgroundImage={`url(${image.urlPhoto})`}
                 >
                   {/* This is the block you need to change, to customize the caption */}
                   <Container
@@ -173,6 +183,7 @@ export default function DetailsUser() {
           </Box>
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
+        {acompanhante.dataEscort.map((escort) => (
           <Box as={"header"}>
             <Heading
               lineHeight={1.1}
@@ -180,12 +191,13 @@ export default function DetailsUser() {
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
               color="#fff"
             >
-              {companion.name}
+              {acompanhante.name}
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
-              {companion.price}
+              {escort.price}
             </Text>
           </Box>
+        ))}
 
           <Stack
             spacing={{ base: 4, sm: 6 }}
@@ -196,11 +208,13 @@ export default function DetailsUser() {
               />
             }
           >
+            {acompanhante.dataEscort.map((escort) => (
             <VStack spacing={{ base: 4, sm: 6 }}>
               <Text color="#fff" fontSize={"2xl"} fontWeight={"300"}>
-                {companion.description}
+                {escort.description}
               </Text>
             </VStack>
+            ))}
             <Box>
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
@@ -222,68 +236,73 @@ export default function DetailsUser() {
                   justifyContent: "space-around",
                 }}
               >
+                {acompanhante.dataEscort.map((escort) => (
                 <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Contacto:
                     </Text>{" "}
-                    {companion.contact}
+                    {escort.contact}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Tipo:
                     </Text>{" "}
-                    {companion.type}
+                    {escort.type}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Olhos:
                     </Text>{" "}
-                    {companion.eyeColor}
+                    {escort.eyeColor}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Qtd. tatuagens:
                     </Text>{" "}
-                    {companion.tattoos}
+                    {escort.tattoos}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Qtd. Piercings:
                     </Text>{" "}
-                    {companion.piercings}
+                    {escort.piercings}
                   </ListItem>
                 </div>
+                ))}
+                {acompanhante.dataEscort.map((escort) => (
                 <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Altura:
                     </Text>{" "}
-                    {companion.height}
+                    {escort.height}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Peso:
                     </Text>{" "}
-                    {companion.weight}
+                    {escort.weight}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Idade:
                     </Text>{" "}
-                    {companion.age}
+                    {escort.age}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}
-                    {companion.scheduleAndLocation}
+                    {escort.scheduleAndLocation}
                   </ListItem>
                 </div>
+                ))}
               </List>
             </Box>
           </Stack>
 
+          {acompanhante.dataEscort.map((escort) => (
           <Link
             style={{
               display: "flex",
@@ -301,7 +320,7 @@ export default function DetailsUser() {
               transform: "translateY(2px)",
               boxShadow: "lg",
             }}
-            href={`https://wa.me/${companion.contact}}`}
+            href={`https://wa.me/${escort.contact}}`}
             isExternal
           >
             <Text
@@ -315,6 +334,7 @@ export default function DetailsUser() {
               Contatar
             </Text>
           </Link>
+          ))}
         </Stack>
       </SimpleGrid>
     </Container>

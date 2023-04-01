@@ -107,15 +107,15 @@ import {
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Crie sua conta</ModalHeader>
+            <ModalHeader>Bem vinda${'(o)'} ao Bellas, preencha os campos para começar a anunciar</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
               <FormControl>
-                <FormLabel>Nome</FormLabel>
+                <FormLabel>Nome Fantasia</FormLabel>
                 <Input
                   type="name"
                   ref={initialRef}
-                  placeholder="Nome"
+                  placeholder="Ex: Natália Loirinha Fogosa"
                   value={name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                 />
@@ -126,22 +126,25 @@ import {
                 <Input
                   type="email"
                   ref={initialRef}
-                  placeholder="Email"
+                  placeholder="EX: natalia@gmail.com"
                   value={email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
               </FormControl>
   
-              <FormControl mt={4}>
-                <FormLabel>Opção</FormLabel>
-                <Input
-                  type="sexo"
-                  placeholder="Ex: Feminino, Masculino, Casal..."
-                  value={sexo}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSexo(e.target.value)}
-                />
+              <FormControl mt={4} id="sexo" isRequired>
+                <Select
+                placeholder="Opção Sexual"
+                value={sexo}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSexo(e.target.value)}
+                >
+                  <option value="Mulher">Mulher</option>
+                  <option value="Homem">Homem</option>
+                  <option value="Trans">Trans</option>
+                  <option value="Casal">Casal</option>
+                </Select>
               </FormControl>
-              <FormControl mt={4} id="userName" isRequired>
+              <FormControl mt={4} id="distrito" isRequired>
                 <Select
                 placeholder="Distrito"
                 value={city}

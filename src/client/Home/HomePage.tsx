@@ -66,7 +66,6 @@ const HomePage = () => {
               <Flex key={acompanhante.id} className="anuncio" w="full">
                 <Link
                   onClick={() => navigate(`/detalhes/${acompanhante.id}`)}
-                  href="/detalhes"
                   className="anunciante"
                   bg={useColorModeValue("gray.200", "gray.800")}
                   maxW="sm"

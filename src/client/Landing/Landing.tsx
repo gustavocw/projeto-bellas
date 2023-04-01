@@ -1,5 +1,5 @@
 import "./style/landing.css";
-import { useDisclosure } from "@chakra-ui/react";
+import { Flex, useDisclosure } from "@chakra-ui/react";
 import FirstQuestion from "../../components/Question/QuestionCard";
 import { useEffect, useState } from "react";
 import Loading from "../../components/loading/loading";
@@ -23,12 +23,12 @@ const LandingPage = () => {
   }, [isLoading, onOpen]);
 
   return (
-    <>
+    <Flex className="aa" >
       {isLoading && <Loading />}
       <div className="container">
         <FirstQuestion isOpen={isOpen} onClose={onClose} />
       </div>
-    </>
+    </Flex>
   );
 };
 

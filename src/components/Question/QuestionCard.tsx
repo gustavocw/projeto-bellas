@@ -31,6 +31,7 @@ const FirstQuestion: React.FC<Props> = ({
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const navigate = useNavigate();
   const [answer, setAnswer] = useState("");
+  const [opc, setOpc] = useState("");
   const [sex, setSex] = useState("");
 
 
@@ -42,6 +43,16 @@ const FirstQuestion: React.FC<Props> = ({
     setAnswer("nao");
     navigate("/naopermitido");
   };
+
+  const handleAnunciar = () => {
+    setOpc("anunciar");
+    navigate("/anunciar");
+  };
+
+  const handleAcompanhante = () => {
+    setOpc("acompanhante");
+  };
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -69,16 +80,16 @@ const FirstQuestion: React.FC<Props> = ({
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent margin={'auto'} textAlign={'center'} >
-          <ModalHeader>Responda para nós antes</ModalHeader>
+        <ModalContent color="#fff" bg={'#'} margin={'auto'} textAlign={'center'} >
+          <ModalHeader color="#fff" >Responda para nós antes</ModalHeader>
           <ModalCloseButton />
           <ModalBody style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }} >
             <FormControl m={"2"}>
-              <FormLabel textAlign={'center'} m={"2"}>Você é maior de 18 ?</FormLabel>
+              <FormLabel color="#fff" textAlign={'center'} m={"2"}>Você é maior de 18 ?</FormLabel>
               <Button
                 onClick={handleYesClick}
-                bg={"pink.500"}
-                color={"#fff"}
+                bg={"#fff"}
+                color={"pink.500"}
                 mx={"2"}
                 isLoading={answer === "sim"}
               >
@@ -86,14 +97,37 @@ const FirstQuestion: React.FC<Props> = ({
               </Button>
               <Button
                 onClick={handleNoClick}
-                bg={"pink.500"}
-                color={"#fff"}
+                bg={"#fff"}
+                color={"pink.500"}
                 mx={"2"}
               >
                 NÃO
               </Button>
             </FormControl>
             {['sim'].includes(answer) && (
+            <FormControl m={"2"}>
+              <FormLabel color="#fff" textAlign={'center'} m={"2"}>O que procura ?</FormLabel>
+              <Button
+                bg={"#fff"}
+                color={"pink.500"}
+                mx={"2"}
+                isLoading={opc === "anunciar"}
+                onClick={handleAnunciar}
+              >
+                Quero anunciar
+              </Button>
+              <Button
+                onClick={handleAcompanhante}
+                isLoading={opc === "acompanhante"}
+                bg={"#fff"}
+                color={"pink.500"}
+                mx={"2"}
+              >
+                Quero acompanhante
+              </Button>
+            </FormControl>
+            )}
+            {['acompanhante'].includes(opc) && (
             <FormControl>
               <FormLabel textAlign={'center'} >Selecione o distrito</FormLabel>
                 <Select
@@ -118,7 +152,7 @@ const FirstQuestion: React.FC<Props> = ({
                 </Select>
             </FormControl>
             )}
-            {['sim'].includes(answer) && (
+            {['acompanhante'].includes(opc) && (
             <FormControl>
               <FormLabel mt={4} textAlign={'center'} >Selecione o que procura</FormLabel>
                 <Select
