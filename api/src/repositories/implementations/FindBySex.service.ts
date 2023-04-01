@@ -12,7 +12,7 @@ export class FindBySexImplementation implements ABySex {
 
     async findBySex(data: IBySexDTO): Promise<Escort[]> {
         const search = await this.prisma.escort.findMany({
-            where:{ sexo:data.sexo, city:data.city },
+            where:{ sexo:data.sexo },
             include: { 
                 dataEscort:true,
                 imagesEscort:true,

@@ -10,7 +10,6 @@ import { EscortLoginModule } from './useCases/loginEscort/LoginEscort.module';
 import { RecoverModule } from './useCases/recoverPass/RecoverPass.module';
 import { UploadEscortModule } from './useCases/UploadEscort/UploadImage.module';
 import { ValidateCodeModule } from './useCases/validateAllCode/Validate.module';
-import { ResetPassModule } from './useCases/resetPass/ResetPass.module';
 
 @Module({
   imports: [
@@ -24,7 +23,6 @@ import { ResetPassModule } from './useCases/resetPass/ResetPass.module';
     UploadEscortModule,
     ListAllEscortModule,
     FindBySexModule,
-    ResetPassModule,
   ],
   controllers: [],
   providers: [],

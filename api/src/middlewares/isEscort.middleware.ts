@@ -12,6 +12,7 @@ interface Payload{
 @Injectable()
 export class isEscort implements NestMiddleware{
     async use(req: CustomRequest, res: Response, next:NextFunction) {
+        console.log("HAHA:",req.escort)
         if(!req.escort){
             return res.status(500).json({error:true, escort:false, message:'Vc não é acompanhante'});
         };

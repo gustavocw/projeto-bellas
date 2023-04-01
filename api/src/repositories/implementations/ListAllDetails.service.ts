@@ -16,7 +16,6 @@ export class ListDetailsOfEscortImplementation implements AListAll{
                 imagesEscort:true,
             },
         });
-        const filtred = await findAllEscortsWithDetails.filter(e => e.dataEscort.length !== 0);
-        return filtred;
+        return findAllEscortsWithDetails;
     };
 };

@@ -2,14 +2,12 @@ import { Injectable } from "@nestjs/common";
 import { MailClientImplementation } from "src/providers/Implementations/Mail.implementation";
 import { MailEscortImplementation } from "src/providers/Implementations/MailEscort.implementation";
 import { IRecoverDTO } from "./RecoverPass.DTO";
-import { RecoverPassImplementation } from "src/repositories/implementations/RecoverPass.service";
 
 @Injectable()
 export class RecoverPass{
     constructor(
         private clientImplementation:MailClientImplementation,
         private escortImplementation:MailEscortImplementation,
-        private escortRecover:RecoverPassImplementation,
     ){};
 
     async recover_client(data:IRecoverDTO){
@@ -38,13 +36,6 @@ export class RecoverPass{
         const new_hour = dateNow + 1;
 
         const findMail = await this.escortImplementation.findByEmail(data.email);
-        const saved_code = await this.escortRecover.updatedCode(
-            {
-                code:hash, 
-                hour:new_hour, 
-                email:data.email
-            },
-            );
         const sendMail = await this.escortImplementation.sendCodeForEmail({
             from:{
                 name:'Seja bem-vindo(a) a plataforma!',
