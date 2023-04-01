@@ -17,8 +17,6 @@ export class ValidateImplementation implements AValidateCode {
             },
         });
 
-        console.log(findByCodeAndDate)
-
         if(findByCodeAndDate.length === 0 || findByCodeAndDate[0].codeDate <= data.hour){
             throw new HttpException('Código inválido, ou inspirado!!', HttpStatus.BAD_REQUEST);
         };
@@ -27,10 +25,10 @@ export class ValidateImplementation implements AValidateCode {
     };
 
     async validateByCodeEscort(data: IValidateDTO): Promise<Object> {
-        const findByCodeAndDate = await this.prisma.client.findMany({
+        const findByCodeAndDate = await this.prisma.escort.findMany({
             where: {
                 code: data.code,
-                codeDate: data.hour,
+                codeDate: data.hour +1,
             },
         });
 

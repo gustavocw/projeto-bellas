@@ -4,6 +4,7 @@ import { MailClientImplementation } from "src/providers/Implementations/Mail.imp
 import { MailEscortImplementation } from "src/providers/Implementations/MailEscort.implementation";
 import { RecoverController } from "./RecoverPass.controller";
 import { RecoverPass } from "./RecoverPass.service";
+import { RecoverPassImplementation } from "src/repositories/implementations/RecoverPass.service";
 
 @Module({
     imports: [],
@@ -13,6 +14,7 @@ import { RecoverPass } from "./RecoverPass.service";
         RecoverPass,
         MailClientImplementation,
         MailEscortImplementation,
+        RecoverPassImplementation,
     ]
 })
 export class RecoverModule{};
