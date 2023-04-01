@@ -134,6 +134,7 @@ const FirstQuestion: React.FC<Props> = ({
               <FormLabel textAlign={'center'} >Selecione o distrito</FormLabel>
                 <Select
                 placeholder="Distrito"
+                color={'#000'}
                 >
                   <option value="Aveiro">Aveiro</option>
                   <option value="Bragança">Bragança</option>
@@ -158,6 +159,7 @@ const FirstQuestion: React.FC<Props> = ({
             <FormControl>
               <FormLabel mt={4} textAlign={'center'} >Selecione o que procura</FormLabel>
                 <Select
+                color={'#000'}
                 value={sex}
                 placeholder="Oque procura ?"
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSex(e.target.value)}
