@@ -1,6 +1,9 @@
 import { IsNotEmpty } from "class-validator";
 
 export class IDescriptionEscortDTO {
+
+  userId:string;
+
   @IsNotEmpty()
   price:string;
   
@@ -33,7 +36,4 @@ export class IDescriptionEscortDTO {
   
   @IsNotEmpty()
   age:number;
-
-  @IsNotEmpty()
-  userId:string;
 };
