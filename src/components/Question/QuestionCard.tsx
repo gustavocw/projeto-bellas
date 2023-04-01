@@ -111,6 +111,7 @@ const FirstQuestion: React.FC<Props> = ({
                 bg={"#fff"}
                 color={"pink.500"}
                 mx={"2"}
+                mt={"2"}
                 isLoading={opc === "anunciar"}
                 onClick={handleAnunciar}
               >
@@ -122,6 +123,7 @@ const FirstQuestion: React.FC<Props> = ({
                 bg={"#fff"}
                 color={"pink.500"}
                 mx={"2"}
+                mt={"2"}
               >
                 Quero acompanhante
               </Button>
