@@ -1,7 +1,8 @@
+import React, { useEffect, useState } from "react";
+import api from "../../services/api";
 import "./style/home.css";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import api from "../../services/api";
 import {
   Flex,
   Circle,
@@ -12,9 +13,6 @@ import {
   Text,
   Link,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Loading from "../../components/loading/loading";
 
 interface Accompanhante {
   id: number;
@@ -29,32 +27,19 @@ interface Accompanhante {
 }
 
 const HomePage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
-  const navigate = useNavigate();
   const [acompanhantes, setAcompanhantes] = useState<Accompanhante[]>([]);
 
   useEffect(() => {
-    async function fetchAcompanhantes() {
-      try {
-        const response = await api.get("/");
-        setAcompanhantes(response.data);
-        console.log(response)
-      } catch (error) {
-        console.log(error);
-      }
+    async function fetchData() {
+      const response = await api.get("/");
+      setAcompanhantes(response.data);
     }
-    fetchAcompanhantes();
+    fetchData();
   }, []);
+
 
   return (
     <div className="container">
-      {isLoading && <Loading />}
       <Header />
       <div className="content">
         <div className="card-content">
@@ -63,9 +48,8 @@ const HomePage = () => {
           </div>
           <div className="card">
             {acompanhantes.map((acompanhante) => (
-              <Flex key={acompanhante.id} className="anuncio" w="full">
+              <Flex className="anuncio" w="full" key={acompanhante.id}>
                 <Link
-                  onClick={() => navigate(`/detalhes/${acompanhante.id}`)}
                   className="anunciante"
                   bg={useColorModeValue("gray.200", "gray.800")}
                   maxW="sm"
@@ -74,27 +58,19 @@ const HomePage = () => {
                   shadow="lg"
                   position="relative"
                 >
-                  {acompanhante.city && (
-                    <>
-                      <Text style={{ margin: "0 0 0 20px" }}>Disponível</Text>
-                      <Circle
-                        size="10px"
-                        position="absolute"
-                        top={2}
-                        left={2}
-                        bg="green.400"
-                      />
-                    </>
+                  {acompanhante.isOnline && (
+                    <Circle
+                      size="10px"
+                      position="absolute"
+                      top={2}
+                      left={2}
+                      bg="green.400"
+                    />
                   )}
                   <Image
-                    width='60'
-                    src={
-                      acompanhante.imagesEscort &&
-                      acompanhante.imagesEscort.length > 0
-                        ? acompanhante.imagesEscort[0].urlPhoto
-                        : ""
-                    }
-                    alt={"acompanhante"}
+                    width="60"
+                    alt={acompanhante.name}
+                    src={acompanhante.imagesEscort[0].urlPhoto}
                     roundedTop="lg"
                   />
 
@@ -106,7 +82,7 @@ const HomePage = () => {
                         fontSize="0.8em"
                         colorScheme="red"
                       >
-                        {acompanhante.name}
+                        {acompanhante.city}
                       </Badge>
                     </Box>
                     <Flex
@@ -121,14 +97,8 @@ const HomePage = () => {
                         lineHeight="tight"
                         isTruncated
                       >
-                        {acompanhante.city}
+                        {acompanhante.name}
                       </Box>
-                    </Flex>
-                    <Flex justifyContent="space-between" alignContent="center">
-                      <Box
-                        fontSize="2xl"
-                        color={useColorModeValue("gray.800", "white")}
-                      ></Box>
                     </Flex>
                   </Box>
                 </Link>
