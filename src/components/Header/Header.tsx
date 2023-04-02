@@ -25,7 +25,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     _hover={{
       textDecoration: "none",
     }}
-    href={"/home"}
+    href={"/"}
   >
     {children}
   </Link>

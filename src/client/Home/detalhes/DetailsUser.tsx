@@ -1,4 +1,5 @@
-import "./dtls.css"
+import "./dtls.css";
+import { Escort } from "../HomePage";
 import {
   Box,
   chakra,
@@ -18,14 +19,17 @@ import {
   ListItem,
   IconButton,
   Link,
-  Spinner,
 } from "@chakra-ui/react";
 import { FaWhatsapp } from "react-icons/fa";
 import Slider from "react-slick";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
-import api from "../../../services/api";
-import { useParams } from "react-router-dom";
 import React from "react";
+import { CloseIcon } from "@chakra-ui/icons";
+
+interface DetailsUserProps {
+  acompanhante: Escort | null;
+  onClose: () => void;
+}
 
 const settings = {
   dots: true,
@@ -39,55 +43,22 @@ const settings = {
   slidesToScroll: 1,
 };
 
-type Companion = {
-  id: string;
-  name: string;
-  price: string;
-  description: string;
-  images: string[];
-  contact: string;
-  type: string;
-  eyeColor: string;
-  tattoos: number;
-  piercings: number;
-  height: string;
-  weight: string;
-  age: number;
-  scheduleAndLocation: string;
-};
+const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
+  if (!acompanhante) {
+    return null;
+  }
 
-export default function DetailsUser() {
   const [slider, setSlider] = React.useState<Slider | null>(null);
   const top = useBreakpointValue({ base: "90%", md: "50%" });
   const side = useBreakpointValue({ base: "30%", md: "40px" });
-  const { id } = useParams();
-
-  const [companion, setCompanion] = React.useState<Companion | null>(null);
-  React.useEffect(() => {
-    if (id) {
-      api.get(`/companions/${id}`).then((response) => {
-        setCompanion(response.data);
-      });
-    }
-  }, [id]);
-
-  if (!companion) {
-    return (
-      <div className="spinner" >
-        <Spinner
-          style={{ margin: 'auto' }}
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="pink.500"
-          size="xl"
-        />
-      </div>
-    );
-  }
 
   return (
     <Container maxW={"7xl"}>
+      <div className="btns-ctn">
+      <Button className='btns' onClick={onClose}>
+        <CloseIcon />
+      </Button> 
+      </div>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
@@ -114,7 +85,7 @@ export default function DetailsUser() {
             />
             {/* Left Icon */}
             <IconButton
-              color="#fff"
+              color="#f104f1"
               aria-label="left-arrow"
               variant="ghost"
               position="absolute"
@@ -128,7 +99,7 @@ export default function DetailsUser() {
             </IconButton>
             {/* Right Icon */}
             <IconButton
-              color="#fff"
+              color="#f104f1"
               aria-label="right-arrow"
               variant="ghost"
               position="absolute"
@@ -141,34 +112,33 @@ export default function DetailsUser() {
               <BiRightArrowAlt size="40px" />
             </IconButton>
             {/* Slider */}
+            <div className="btns">
+            </div>
             <Slider {...settings} ref={(slider: any) => setSlider(slider)}>
-              {companion.images.map((image, index) => (
-                <Box
-                  key={index}
-                  height={"1xl"}
+              <Box
+                height={"1xl"}
+                position="relative"
+                backgroundPosition="center"
+                backgroundRepeat="no-repeat"
+                backgroundSize="cover"
+                backgroundImage={`url(${acompanhante.imagesEscort[0]?.urlPhoto})`}
+              >
+                {/* This is the block you need to change, to customize the caption */}
+                <Container
+                  size="container.lg"
+                  height="500px"
                   position="relative"
-                  backgroundPosition="center"
-                  backgroundRepeat="no-repeat"
-                  backgroundSize="cover"
-                  backgroundImage={`url(${image})`}
                 >
-                  {/* This is the block you need to change, to customize the caption */}
-                  <Container
-                    size="container.lg"
-                    height="500px"
-                    position="relative"
-                  >
-                    <Stack
-                      spacing={6}
-                      w={"full"}
-                      maxW={"lg"}
-                      position="absolute"
-                      top="70%"
-                      transform="translate(0, -50%)"
-                    ></Stack>
-                  </Container>
-                </Box>
-              ))}
+                  <Stack
+                    spacing={6}
+                    w={"full"}
+                    maxW={"lg"}
+                    position="absolute"
+                    top="70%"
+                    transform="translate(0, -50%)"
+                  ></Stack>
+                </Container>
+              </Box>
             </Slider>
           </Box>
         </Flex>
@@ -180,10 +150,11 @@ export default function DetailsUser() {
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
               color="#fff"
             >
-              {companion.name}
+              {acompanhante.name}{" - "}
+              <span className="age">{acompanhante.dataEscort[0]?.age}</span>
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
-              {companion.price}
+              ¢{`100`}
             </Text>
           </Box>
 
@@ -198,7 +169,7 @@ export default function DetailsUser() {
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
               <Text color="#fff" fontSize={"2xl"} fontWeight={"300"}>
-                {companion.description}
+                {acompanhante.dataEscort[0]?.description}
               </Text>
             </VStack>
             <Box>
@@ -227,57 +198,51 @@ export default function DetailsUser() {
                     <Text as={"span"} fontWeight={"bold"}>
                       Contacto:
                     </Text>{" "}
-                    {companion.contact}
+                    {acompanhante.dataEscort[0]?.contact}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Tipo:
                     </Text>{" "}
-                    {companion.type}
+                    {acompanhante.dataEscort[0]?.type}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Olhos:
                     </Text>{" "}
-                    {companion.eyeColor}
+                    {acompanhante.dataEscort[0]?.eyes}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Qtd. tatuagens:
                     </Text>{" "}
-                    {companion.tattoos}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Qtd. Piercings:
-                    </Text>{" "}
-                    {companion.piercings}
+                    {acompanhante.dataEscort[0]?.tatoo}
                   </ListItem>
                 </div>
                 <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
+                      Qtd. Piercings:
+                    </Text>{" "}
+                    {acompanhante.dataEscort[0]?.piercing}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
                       Altura:
                     </Text>{" "}
-                    {companion.height}
+                    {acompanhante.dataEscort[0]?.height}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Peso:
                     </Text>{" "}
-                    {companion.weight}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Idade:
-                    </Text>{" "}
-                    {companion.age}
+                    {acompanhante.dataEscort[0]?.weight}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}
-                    {companion.scheduleAndLocation}
+                    {acompanhante.dataEscort[0]?.obsScheduling}
                   </ListItem>
                 </div>
               </List>
@@ -301,7 +266,7 @@ export default function DetailsUser() {
               transform: "translateY(2px)",
               boxShadow: "lg",
             }}
-            href={`https://wa.me/${companion.contact}}`}
+            href={`https://wa.me/${acompanhante.dataEscort[0]?.contact}}`}
             isExternal
           >
             <Text
@@ -319,4 +284,6 @@ export default function DetailsUser() {
       </SimpleGrid>
     </Container>
   );
-}
+};
+
+export default DetailsUser;

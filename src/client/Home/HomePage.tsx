@@ -12,9 +12,12 @@ import {
   useColorModeValue,
   Text,
   Link,
+  Spinner,
+  Button,
 } from "@chakra-ui/react";
+import DetailsUser from "./detalhes/DetailsUser";
 
-interface Accompanhante {
+export interface Escort {
   id: number;
   isOnline: boolean;
   city: string;
@@ -24,32 +27,66 @@ interface Accompanhante {
     urlPhoto: string;
     escortId: string;
   }[];
+  dataEscort: {
+    price: string;
+    description: string;
+    contact: string;
+    type: string;
+    eyes: string;
+    tatoo: number;
+    piercing: number;
+    weight: string;
+    height: string;
+    obsScheduling: string;
+    age: number;
+  }[];
 }
 
 const HomePage = () => {
-  const [acompanhantes, setAcompanhantes] = useState<Accompanhante[]>([]);
+  const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
+  const [selectedAcompanhante, setSelectedAcompanhante] =
+    useState<Escort | null>(null);
+  const [popup, setPopup] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const response = await api.get("/");
       setAcompanhantes(response.data);
+      console.log(response);
     }
     fetchData();
   }, []);
 
+  const click = (acompanhante: Escort) => {
+    setSelectedAcompanhante(acompanhante);
+    setPopup(true);
+  };
 
   return (
     <div className="container">
       <Header />
       <div className="content">
+        {popup && (
+          <DetailsUser
+            acompanhante={selectedAcompanhante}
+            onClose={() => setPopup(false)}
+          />
+        )}
         <div className="card-content">
           <div className="titulo">
             <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
           </div>
+          {/* <div className="msg">
+        <div className="spinner">
+        <Spinner />
+        </div>
+        Ainda não possui acompanhantes nesta região
+      </div> */}
           <div className="card">
             {acompanhantes.map((acompanhante) => (
               <Flex className="anuncio" w="full" key={acompanhante.id}>
                 <Link
+                  onClick={() => click(acompanhante)}
                   className="anunciante"
                   bg={useColorModeValue("gray.200", "gray.800")}
                   maxW="sm"
@@ -59,18 +96,21 @@ const HomePage = () => {
                   position="relative"
                 >
                   {acompanhante.isOnline && (
-                    <Circle
-                      size="10px"
-                      position="absolute"
-                      top={2}
-                      left={2}
-                      bg="green.400"
-                    />
+                    <div className="on">
+                      <Circle
+                        size="10px"
+                        position="absolute"
+                        top={2}
+                        left={2}
+                        bg="green.400"
+                      />
+                      <Text>Disponível</Text>
+                    </div>
                   )}
                   <Image
-                    width="60"
+                    width="70"
                     alt={acompanhante.name}
-                    src={acompanhante.imagesEscort[0].urlPhoto}
+                    src={acompanhante.imagesEscort[0]?.urlPhoto}
                     roundedTop="lg"
                   />
 

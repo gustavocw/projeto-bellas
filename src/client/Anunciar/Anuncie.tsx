@@ -37,7 +37,6 @@ export default function AnunciePage(): JSX.Element {
   const toast = useToast();
 
   const handleSubmit = () => {
-    const token = Cookies.get('token');
     api
       .post(
         "/description/create",
@@ -53,7 +52,6 @@ export default function AnunciePage(): JSX.Element {
           age,
           height,
           obsScheduling,
-          userId: token,
         },
         {
           headers: {
@@ -63,11 +61,10 @@ export default function AnunciePage(): JSX.Element {
       )
       .then((response) => {
         const token = response.data.token;
-        if (token) {
-          setIsLoggedIn(true);
-          Cookies.set("token", token, { expires: 1 });
+        if (token === true) {
+          console.log('AEEEEEEEEEEE')
         } else {
-          handleAnuncioToast("Usuário não encontrado.");
+          console.log('PORRA Q KRL')
         }
       })
       .catch((error) => {
@@ -97,7 +94,7 @@ export default function AnunciePage(): JSX.Element {
 
   const [image, setImage] = useState<File | undefined>(undefined);
   const token = Cookies.get('token');
-
+  
   function handle_image() {
     if (!image) {
       toast({
@@ -108,7 +105,7 @@ export default function AnunciePage(): JSX.Element {
       });
       return;
     }
-
+  
     const data = new FormData();
     data.append("file", image);
     api
@@ -119,7 +116,7 @@ export default function AnunciePage(): JSX.Element {
       })
       .then((response) => {
         const token = response.data.token;
-        if (token) {
+        if (token === true) {
           console.log('AEEEEEEEEEEE')
         } else {
           console.log('PORRA Q KRL')

@@ -157,6 +157,7 @@ import {
                   <option value="Évora">Évora</option>
                   <option value="Faro">Faro</option>
                   <option value="Guarda">Guarda</option>
+                  <option value="Lisboa">Lisboa</option>
                   <option value="Leiria">Leiria</option>
                   <option value="Braga">Braga</option>
                   <option value="Portalegre">Portalegre</option>
