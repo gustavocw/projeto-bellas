@@ -37,7 +37,7 @@ body{
 }
 
 .anuncio{
-    margin: 20px;
+    margin: 10px;
 }
 
 .anuncio:hover{
@@ -46,14 +46,24 @@ body{
 
 .card-content{
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
 }
-@media screen and (max-width: 768px) and (min-width: 200px)  {
-    .card{
+
+
+.card {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  @media screen and (max-width: 768px) and (min-width: 200px) {
+    .card {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-}
+
+  }
+  
 
 @media screen and (max-width: 768px) and (min-width: 200px)  {
     .msg {
@@ -67,10 +77,3 @@ body{
         padding: 45% 0;
     }
 }
-
-
-.card{
-    display: flex;
-    width: 40%;
-}
-

@@ -72,10 +72,10 @@ const HomePage = () => {
             onClose={() => setPopup(false)}
           />
         )}
-        <div className="card-content">
           <div className="titulo">
             <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
           </div>
+        <div className="card-content">
           {/* <div className="msg">
         <div className="spinner">
         <Spinner />
@@ -84,7 +84,7 @@ const HomePage = () => {
       </div> */}
           <div className="card">
             {acompanhantes.map((acompanhante) => (
-              <Flex className="anuncio" w="full" key={acompanhante.id}>
+              <Flex className="anuncio"key={acompanhante.id}>
                 <Link
                   onClick={() => click(acompanhante)}
                   className="anunciante"
@@ -113,7 +113,6 @@ const HomePage = () => {
                     width="70"
                     src={acompanhante.imagesEscort[0]?.urlPhoto}
                     roundedTop="lg"
-                    style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '70%' }}
                   />
 
                   <Box p="6">
@@ -133,7 +132,7 @@ const HomePage = () => {
                       alignContent="center"
                     >
                       <Box
-                        fontSize="2xl"
+                        fontSize="1xl"
                         fontWeight="semibold"
                         as="h4"
                         lineHeight="tight"

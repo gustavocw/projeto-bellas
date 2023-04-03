@@ -9,7 +9,9 @@ const DetalhesPage = () => {
       <Header />
       <div className="content">
         <div className="detalhes">
-          <DetailsUser />
+          <DetailsUser acompanhante={null} onClose={function (): void {
+            throw new Error("Function not implemented.");
+          } } />
         </div>
       </div>
       <Footer />
