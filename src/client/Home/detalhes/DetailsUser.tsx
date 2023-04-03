@@ -154,7 +154,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               <span className="age">{acompanhante.dataEscort[0]?.age} anos</span>
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
-              ¢{acompanhante.dataEscort[0].price}
+              ¢{acompanhante.dataEscort[0]?.price}
             </Text>
           </Box>
 
@@ -236,7 +236,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     <Text as={"span"} fontWeight={"bold"}>
                       Peso:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.weight}
+                    {acompanhante.dataEscort[0]?.weight} kg
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
@@ -266,7 +266,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               transform: "translateY(2px)",
               boxShadow: "lg",
             }}
-            href={`https://wa.me/${acompanhante.dataEscort[0]?.contact}}`}
+            href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort[0]?.contact}`}
             isExternal
           >
             <Text

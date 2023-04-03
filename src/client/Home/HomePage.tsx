@@ -95,7 +95,7 @@ const HomePage = () => {
                   shadow="lg"
                   position="relative"
                 >
-                  {acompanhante.isOnline && (
+                  {acompanhante.name && (
                     <div className="on">
                       <Circle
                         size="10px"
@@ -104,14 +104,16 @@ const HomePage = () => {
                         left={2}
                         bg="green.400"
                       />
-                      <Text>Disponível</Text>
+                      <Text mx="6" >
+                        Disponível
+                      </Text>
                     </div>
                   )}
                   <Image
                     width="70"
-                    alt={acompanhante.name}
                     src={acompanhante.imagesEscort[0]?.urlPhoto}
                     roundedTop="lg"
+                    style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '70%' }}
                   />
 
                   <Box p="6">

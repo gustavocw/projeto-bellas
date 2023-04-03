@@ -28,22 +28,18 @@ export default function AnunciePage(): JSX.Element {
   const [contact, setContact] = useState("");
   const [type, setType] = useState("");
   const [eyes, setEyes] = useState("");
-  const [tatoo, setTatoo] = useState("");
-  const [piercing, setPiercing] = useState("");
   const [weight, setWeight] = useState("");
-  const [age, setAge] = useState("");
   const [height, setHeight] = useState("");
   const [obsScheduling, setObsScheduling] = useState("");
-  const toast = useToast();
+  const [age, setAge] = useState(0);
+  const [tatoo, setTatoo] = useState(0);
+  const [piercing, setPiercing] = useState(0);
+  
 
+  const toast = useToast();
 
   const handleSubmit = () => {
     const token = Cookies.get("token");
-    if (!token) {
-      handleAnuncioToast("Você precisa estar logado para fazer um anúncio.");
-      return;
-    }
-  
     api
       .post("/description/create", {
         price,
@@ -54,25 +50,24 @@ export default function AnunciePage(): JSX.Element {
         tatoo,
         piercing,
         weight,
+        age,
         height,
         obsScheduling,
-        age,
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const token = response.data.token;
-        if (token) {
-          setIsLoggedIn(true);
-          Cookies.set("token", token, { expires: 1 });
-        } else {
-          handleAnuncioToast("Usuário não encontrado.");
-        }
+        toast({
+          title: "Anuncio feito com sucesso",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
       })
       .catch((error) => {
-        handleAnuncioToast("Erro ao anunciar.");
+        // trate o erro adequadamente
       });
   };
   
@@ -95,11 +90,9 @@ export default function AnunciePage(): JSX.Element {
     }, 1000);
   }, []);
 
-
-
   const [image, setImage] = useState<File | undefined>(undefined);
-  const token = Cookies.get('token');
-  
+  const token = Cookies.get("token");
+
   function handle_image() {
     if (!image) {
       toast({
@@ -110,21 +103,21 @@ export default function AnunciePage(): JSX.Element {
       });
       return;
     }
-  
+
     const data = new FormData();
     data.append("file", image);
     api
       .post(`/upload/images`, data, {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
         const token = response.data.token;
         if (token === true) {
-          console.log(token)
+          console.log("AEEEEEEEEEEE");
         } else {
-          console.log(token)
+          console.log("PORRA Q KRL");
         }
       })
       .catch((e) => {
@@ -193,9 +186,7 @@ export default function AnunciePage(): JSX.Element {
                   _placeholder={{ color: "gray.500" }}
                   type="number"
                   value={age}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setAge(e.target.value)
-                  }
+                  onChange={(event) => setAge(parseInt(event.target.value))}
                 />
               </FormControl>
               <FormControl id="userName" isRequired>
@@ -262,9 +253,7 @@ export default function AnunciePage(): JSX.Element {
                   _placeholder={{ color: "gray.500" }}
                   type="number"
                   value={tatoo}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setTatoo(e.target.value)
-                  }
+                  onChange={(event) => setTatoo(parseInt(event.target.value))}
                 />
               </FormControl>
               <FormControl id="manequim" isRequired>
@@ -274,9 +263,7 @@ export default function AnunciePage(): JSX.Element {
                   _placeholder={{ color: "gray.500" }}
                   type="number"
                   value={piercing}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setPiercing(e.target.value)
-                  }
+                  onChange={(event) => setPiercing(parseInt(event.target.value))}
                 />
               </FormControl>
               <FormControl id="altura" isRequired>
