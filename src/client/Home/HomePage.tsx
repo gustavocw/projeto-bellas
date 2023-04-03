@@ -44,12 +44,11 @@ export interface Escort {
 
 const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
-  const [genderFilter, setGenderFilter] = useState<GenderFilter>('');
   const [selectedAcompanhante, setSelectedAcompanhante] =
     useState<Escort | null>(null);
   const [popup, setPopup] = useState(false);
 
-  type GenderFilter = '' | 'Mulher' | 'Homem' | 'Trans' | 'Casal';
+
 
   useEffect(() => {
     async function fetchData() {
@@ -65,20 +64,6 @@ const HomePage = () => {
     setPopup(true);
   };
 
-  const filteredAcompanhantes = acompanhantes.filter((acompanhante) => {
-    if (genderFilter === '') {
-      return true;
-    } else if (genderFilter === 'Mulher') {
-      return acompanhante.dataEscort[0]?.type === 'Mulher';
-    } else if (genderFilter === 'Homem') {
-      return acompanhante.dataEscort[0]?.type === 'Homem';
-    } else if (genderFilter === 'Trans') {
-      return acompanhante.dataEscort[0]?.type === 'Trans';
-    } else if (genderFilter === 'Casal') {
-      return acompanhante.dataEscort[0]?.type === 'Casal';
-    }
-    return false;
-  });
 
   return (
     <div className="container">
@@ -93,19 +78,19 @@ const HomePage = () => {
         <div className="titulo">
           <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
           <div className="escolha">
-            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('')}>
+            <Button color={'#fff'} bg={'pink.300'} mx="2">
               Todos
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Mulher')}>
+            <Button color={'#fff'} bg={'pink.300'} mx="2">
               Mulheres
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Homem')}>
+            <Button color={'#fff'} bg={'pink.300'} mx="2">
               Homens
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Trans')}>
+            <Button color={'#fff'} bg={'pink.300'} mx="2">
               Trans
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Casal')}>
+            <Button color={'#fff'} bg={'pink.300'} mx="2">
               Casais
             </Button>
           </div>
