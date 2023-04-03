@@ -17,7 +17,9 @@ export function RoutesDefinided() {
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/anunciar" element={<AnunciePage />} />
-          <Route path="/detalhes" element={<DetailsUser />} />
+          <Route path="/detalhes" element={<DetailsUser acompanhante={null} onClose={function (): void {
+          throw new Error("Function not implemented.");
+        } } />} />
       </Routes>
     </BrowserRouter>
   );
