@@ -15,17 +15,16 @@
     display: flex;
     justify-content: center;
     margin: 10px;
-    background-color: #f104f1 !important;
+    background-color: #e47ce8 !important;
     color: #fff;
 }
 .btns:hover{
     background-color: #fff !important;
-    color: #f104f1;
+    color: #e47ce8;
 }
 
 
 .age{
     font-size: 45px;
-    background-color: #f104f1;
     color: #fff;
 }

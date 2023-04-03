@@ -85,7 +85,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             />
             {/* Left Icon */}
             <IconButton
-              color="#f104f1"
+              color="#e47ce8"
               aria-label="left-arrow"
               variant="ghost"
               position="absolute"
@@ -99,7 +99,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             </IconButton>
             {/* Right Icon */}
             <IconButton
-              color="#f104f1"
+              color="#e47ce8"
               aria-label="right-arrow"
               variant="ghost"
               position="absolute"
@@ -147,14 +147,14 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             <Heading
               lineHeight={1.1}
               fontWeight={600}
-              fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+              fontSize={{ base: "2xl", sm: "4xl", lg: "4xl" }}
               color="#fff"
             >
               {acompanhante.name}{" - "}
-              <span className="age">{acompanhante.dataEscort[0]?.age}</span>
+              <span className="age">{acompanhante.dataEscort[0]?.age} anos</span>
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
-              ¢{`100`}
+              ¢{acompanhante.dataEscort[0].price}
             </Text>
           </Box>
 
@@ -260,7 +260,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             size={"lg"}
             py={"7"}
             bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.50")}
-            color="#f700ff"
+            color="#e47ce8"
             textTransform={"uppercase"}
             _hover={{
               transform: "translateY(2px)",
@@ -276,7 +276,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                 alignItems: "center",
               }}
             >
-              <FaWhatsapp style={{ color: "#f700ff", marginRight: "10px" }} />
+              <FaWhatsapp style={{ color: "#e47ce8", marginRight: "10px" }} />
               Contatar
             </Text>
           </Link>

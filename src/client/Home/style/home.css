@@ -8,7 +8,7 @@ body{
     width: 20%;
     padding: 4%;
     margin: auto;
-    color: #f700ff;
+    color: #e47ce8;
     text-align: center;
     z-index: 999;
     padding: 11% 0;
@@ -33,7 +33,7 @@ body{
     text-align: center;
     font-size: 27px;
     color: #fff;
-    border-bottom: 2px solid #f700ff;
+    border-bottom: 2px solid #e47ce8;
 }
 
 .anuncio{
@@ -61,7 +61,7 @@ body{
         width: 50%;
         padding: 4%;
         margin: auto;
-        color: #f700ff;
+        color: #e47ce8;
         text-align: center;
         z-index: 999;
         padding: 45% 0;

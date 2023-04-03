@@ -2,18 +2,18 @@
     color: #fff !important;
 }
 .link-navbar:hover{
-    color: #f104f1 !important;
+    color: #e47ce8 !important;
     background-color: #fff !important;
 }
 
 .anunciar{
-    background-color: #f104f1;
-    border: 1px solid #f104f1;
+    background-color: #e47ce8;
+    border: 1px solid #e47ce8;
     padding: 2.5px 10px;
     border-radius: 5px;
 }
 .anunciar:hover{
     text-decoration: none !important;
     background-color: #fff;
-    color: #f104f1;
+    color: #e47ce8;
 }

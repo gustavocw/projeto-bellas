@@ -36,41 +36,46 @@ export default function AnunciePage(): JSX.Element {
   const [obsScheduling, setObsScheduling] = useState("");
   const toast = useToast();
 
+
   const handleSubmit = () => {
+    const token = Cookies.get("token");
+    if (!token) {
+      handleAnuncioToast("Você precisa estar logado para fazer um anúncio.");
+      return;
+    }
+  
     api
-      .post(
-        "/description/create",
-        {
-          price,
-          description,
-          contact,
-          type,
-          eyes,
-          tatoo,
-          piercing,
-          weight,
-          age,
-          height,
-          obsScheduling,
+      .post("/description/create", {
+        price,
+        description,
+        contact,
+        type,
+        eyes,
+        tatoo,
+        piercing,
+        weight,
+        height,
+        obsScheduling,
+        age,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
+      })
       .then((response) => {
         const token = response.data.token;
-        if (token === true) {
-          console.log('AEEEEEEEEEEE')
+        if (token) {
+          setIsLoggedIn(true);
+          Cookies.set("token", token, { expires: 1 });
         } else {
-          console.log('PORRA Q KRL')
+          handleAnuncioToast("Usuário não encontrado.");
         }
       })
       .catch((error) => {
-        handleAnuncioToast("Erro no anuncio.");
+        handleAnuncioToast("Erro ao anunciar.");
       });
   };
+  
 
   const handleAnuncioToast = (message: string) => {
     toast({
@@ -117,9 +122,9 @@ export default function AnunciePage(): JSX.Element {
       .then((response) => {
         const token = response.data.token;
         if (token === true) {
-          console.log('AEEEEEEEEEEE')
+          console.log(token)
         } else {
-          console.log('PORRA Q KRL')
+          console.log(token)
         }
       })
       .catch((e) => {
