@@ -72,85 +72,89 @@ const HomePage = () => {
             onClose={() => setPopup(false)}
           />
         )}
-          <div className="titulo">
-            <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
-          </div>
-        <div className="card-content">
-          {/* <div className="msg">
-        <div className="spinner">
-        <Spinner />
+        <div className="titulo">
+          <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
         </div>
-        Ainda não possui acompanhantes nesta região
-      </div> */}
-          <div className="card">
-            {acompanhantes.map((acompanhante) => (
-              <Flex className="anuncio"key={acompanhante.id}>
-                <Link
-                  onClick={() => click(acompanhante)}
-                  className="anunciante"
-                  bg={useColorModeValue("gray.200", "gray.800")}
-                  maxW="sm"
-                  borderWidth="1px"
-                  rounded="lg"
-                  shadow="lg"
-                  position="relative"
-                >
-                  {acompanhante.name && (
-                    <div className="on">
-                      <Circle
-                        size="10px"
-                        position="absolute"
-                        top={2}
-                        left={2}
-                        bg="green.400"
-                      />
-                      <Text mx="6" >
-                        Disponível
-                      </Text>
-                    </div>
-                  )}
-                  <Image
-                    width="70"
-                    src={acompanhante.imagesEscort[0]?.urlPhoto}
-                    roundedTop="lg"
-                  />
-
-                  <Box p="6">
-                    <Box display={"flex"} alignItems="baseline">
-                      <Badge
-                        rounded="full"
-                        px="2"
-                        fontSize="0.8em"
-                        colorScheme="red"
-                      >
-                        {acompanhante.city}
-                      </Badge>
-                    </Box>
-                    <Flex
-                      mt="1"
-                      justifyContent="space-between"
-                      alignContent="center"
-                    >
-                      <Box
-                        fontSize="1xl"
-                        fontWeight="semibold"
-                        as="h4"
-                        lineHeight="tight"
-                        isTruncated
-                      >
-                        {acompanhante.name}
+        <div className="card-content">
+          {acompanhantes.length === 0 ? (
+            <div className="msg">
+              <div className="spinner">
+                <Spinner />
+              </div>
+              Ainda não possui acompanhantes nesta região
+            </div>
+          ) : (
+            <div className="card">
+              {acompanhantes.map((acompanhante) => (
+                <Flex className="anuncio"key={acompanhante.id}>
+                  <Link
+                    onClick={() => click(acompanhante)}
+                    className="anunciante"
+                    bg={useColorModeValue("gray.200", "gray.800")}
+                    maxW="sm"
+                    borderWidth="1px"
+                    rounded="lg"
+                    shadow="lg"
+                    position="relative"
+                  >
+                    {acompanhante.name && (
+                      <div className="on">
+                        <Circle
+                          size="10px"
+                          position="absolute"
+                          top={2}
+                          left={2}
+                          bg="green.400"
+                        />
+                        <Text mx="6" >
+                          Disponível
+                        </Text>
+                      </div>
+                    )}
+                    <Image
+                      width="70"
+                      src={acompanhante.imagesEscort[0]?.urlPhoto}
+                      roundedTop="lg"
+                    />
+  
+                    <Box p="6">
+                      <Box display={"flex"} alignItems="baseline">
+                        <Badge
+                          rounded="full"
+                          px="2"
+                          fontSize="0.8em"
+                          colorScheme="red"
+                        >
+                          {acompanhante.city}
+                        </Badge>
                       </Box>
-                    </Flex>
-                  </Box>
-                </Link>
-              </Flex>
-            ))}
-          </div>
+                      <Flex
+                        mt="1"
+                        justifyContent="space-between"
+                        alignContent="center"
+                      >
+                        <Box
+                          fontSize="1xl"
+                          fontWeight="semibold"
+                          as="h4"
+                          lineHeight="tight"
+                          isTruncated
+                        >
+                          {acompanhante.name}
+                        </Box>
+                      </Flex>
+                    </Box>
+                  </Link>
+                </Flex>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <Footer />
     </div>
   );
+  
 };
 
 export default HomePage;

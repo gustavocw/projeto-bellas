@@ -55,9 +55,9 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
   return (
     <Container maxW={"7xl"}>
       <div className="btns-ctn">
-      <Button className='btns' onClick={onClose}>
-        <CloseIcon />
-      </Button> 
+        <Button className="btns" onClick={onClose}>
+          <CloseIcon />
+        </Button>
       </div>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
@@ -112,33 +112,34 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               <BiRightArrowAlt size="40px" />
             </IconButton>
             {/* Slider */}
-            <div className="btns">
-            </div>
             <Slider {...settings} ref={(slider: any) => setSlider(slider)}>
-              <Box
-                height={"1xl"}
-                position="relative"
-                backgroundPosition="center"
-                backgroundRepeat="no-repeat"
-                backgroundSize="cover"
-                backgroundImage={`url(${acompanhante.imagesEscort[0]?.urlPhoto})`}
-              >
-                {/* This is the block you need to change, to customize the caption */}
-                <Container
-                  size="container.lg"
-                  height="500px"
+              {acompanhante.imagesEscort.map((imagem, index) => (
+                <Box
+                  key={index}
+                  height={"1xl"}
                   position="relative"
+                  backgroundPosition="center"
+                  backgroundRepeat="no-repeat"
+                  backgroundSize="contain"
+                  backgroundImage={`url(${imagem.urlPhoto})`}
                 >
-                  <Stack
-                    spacing={6}
-                    w={"full"}
-                    maxW={"lg"}
-                    position="absolute"
-                    top="70%"
-                    transform="translate(0, -50%)"
-                  ></Stack>
-                </Container>
-              </Box>
+                  {/* This is the block you need to change, to customize the caption */}
+                  <Container
+                    size="container.lg"
+                    height="500px"
+                    position="relative"
+                  >
+                    <Stack
+                      spacing={6}
+                      w={"full"}
+                      maxW={"lg"}
+                      position="absolute"
+                      top="70%"
+                      transform="translate(0, -50%)"
+                    ></Stack>
+                  </Container>
+                </Box>
+              ))}
             </Slider>
           </Box>
         </Flex>
@@ -150,8 +151,11 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               fontSize={{ base: "2xl", sm: "4xl", lg: "4xl" }}
               color="#fff"
             >
-              {acompanhante.name}{" - "}
-              <span className="age">{acompanhante.dataEscort[0]?.age} anos</span>
+              {acompanhante.name}
+              {" - "}
+              <span className="age">
+                {acompanhante.dataEscort[0]?.age} anos
+              </span>
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
               ¢{acompanhante.dataEscort[0]?.price}
