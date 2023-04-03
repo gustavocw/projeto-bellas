@@ -10,7 +10,6 @@ export class loginEscortService {
     async handle_loginEscort(data:IEscortLoginDTO){
         try {
             const handle_login = await this.escortLoginImplementation.login(data);
-            console.log("Aqui", handle_login)
             return handle_login;
         } catch (error) {
             return error;
