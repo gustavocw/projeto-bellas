@@ -44,9 +44,12 @@ export interface Escort {
 
 const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
+  const [genderFilter, setGenderFilter] = useState<GenderFilter>('');
   const [selectedAcompanhante, setSelectedAcompanhante] =
     useState<Escort | null>(null);
   const [popup, setPopup] = useState(false);
+
+  type GenderFilter = '' | 'Mulher' | 'Homem' | 'Trans' | 'Casal';
 
   useEffect(() => {
     async function fetchData() {
@@ -62,6 +65,21 @@ const HomePage = () => {
     setPopup(true);
   };
 
+  const filteredAcompanhantes = acompanhantes.filter((acompanhante) => {
+    if (genderFilter === '') {
+      return true;
+    } else if (genderFilter === 'Mulher') {
+      return acompanhante.dataEscort[0]?.type === 'Mulher';
+    } else if (genderFilter === 'Homem') {
+      return acompanhante.dataEscort[0]?.type === 'Homem';
+    } else if (genderFilter === 'Trans') {
+      return acompanhante.dataEscort[0]?.type === 'Trans';
+    } else if (genderFilter === 'Casal') {
+      return acompanhante.dataEscort[0]?.type === 'Casal';
+    }
+    return false;
+  });
+
   return (
     <div className="container">
       <Header />
@@ -74,6 +92,23 @@ const HomePage = () => {
         )}
         <div className="titulo">
           <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
+          <div className="escolha">
+            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('')}>
+              Todos
+            </Button>
+            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Mulher')}>
+              Mulheres
+            </Button>
+            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Homem')}>
+              Homens
+            </Button>
+            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Trans')}>
+              Trans
+            </Button>
+            <Button color={'#fff'} bg={'pink.300'} mx="2" onClick={() => setGenderFilter('Casal')}>
+              Casais
+            </Button>
+          </div>
         </div>
         <div className="card-content">
           {acompanhantes.length === 0 ? (
@@ -86,7 +121,7 @@ const HomePage = () => {
           ) : (
             <div className="card">
               {acompanhantes.map((acompanhante) => (
-                <Flex className="anuncio"key={acompanhante.id}>
+                <Flex maxWidth={'200px'} className="anuncio"key={acompanhante.id}>
                   <Link
                     onClick={() => click(acompanhante)}
                     className="anunciante"
@@ -112,7 +147,7 @@ const HomePage = () => {
                       </div>
                     )}
                     <Image
-                      width="70"
+                      maxWidth={'100%'}
                       src={acompanhante.imagesEscort[0]?.urlPhoto}
                       roundedTop="lg"
                     />

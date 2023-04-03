@@ -204,7 +204,7 @@ export default function AnunciePage(): JSX.Element {
               <FormControl id="password" isRequired>
                 <FormLabel>Contacto</FormLabel>
                 <Input
-                  placeholder="Contacto"
+                  placeholder="Ex: 932123123"
                   _placeholder={{ color: "gray.500" }}
                   type="text"
                   value={contact}

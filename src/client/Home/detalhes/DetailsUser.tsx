@@ -135,7 +135,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                       maxW={"lg"}
                       position="absolute"
                       top="70%"
-                      transform="translate(0, -50%)"
+                      transform="translate(0, -30%)"
                     ></Stack>
                   </Container>
                 </Box>

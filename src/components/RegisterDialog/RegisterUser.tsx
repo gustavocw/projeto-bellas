@@ -107,7 +107,7 @@ import {
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Bem vinda${'(o)'} ao Bellas, preencha os campos para começar a anunciar</ModalHeader>
+            <ModalHeader>Bem vinda{'(o)'} ao Bellas, preencha os campos para começar a anunciar</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
               <FormControl>

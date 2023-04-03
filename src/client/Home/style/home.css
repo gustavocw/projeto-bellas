@@ -2,6 +2,10 @@ body{
     background-color: #131313 !important;
 }
 
+.escolha {
+    margin: 10px;
+}
+
 
 .msg {
     display: block;
