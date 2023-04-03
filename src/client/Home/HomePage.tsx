@@ -21,6 +21,7 @@ export interface Escort {
   id: number;
   isOnline: boolean;
   city: string;
+  sexo: string;
   name: string;
   imagesEscort: {
     id: string;
@@ -44,17 +45,14 @@ export interface Escort {
 
 const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
-  const [selectedAcompanhante, setSelectedAcompanhante] =
-    useState<Escort | null>(null);
+  const [selectedAcompanhante, setSelectedAcompanhante] = useState<Escort | null>(null);
   const [popup, setPopup] = useState(false);
-
-
+  const [generoSelecionado, setGeneroSelecionado] = useState<string>("Todos");
 
   useEffect(() => {
     async function fetchData() {
       const response = await api.get("/");
       setAcompanhantes(response.data);
-      console.log(response);
     }
     fetchData();
   }, []);
@@ -62,6 +60,16 @@ const HomePage = () => {
   const click = (acompanhante: Escort) => {
     setSelectedAcompanhante(acompanhante);
     setPopup(true);
+  };
+
+  const filterAcompanhantes = () => {
+    if (generoSelecionado === "Todos") {
+      return acompanhantes;
+    } else {
+      return acompanhantes.filter(
+        (acompanhante) => acompanhante.sexo === generoSelecionado
+      );
+    }
   };
 
 
@@ -78,25 +86,50 @@ const HomePage = () => {
         <div className="titulo">
           <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
           <div className="escolha">
-            <Button color={'#fff'} bg={'pink.300'} mx="2">
+            <Button
+              color={"#fff"}
+              bg={"pink.300"}
+              mx="2"
+              onClick={() => setGeneroSelecionado("Todos")}
+            >
               Todos
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2">
+            <Button
+              color={"#fff"}
+              bg={"pink.300"}
+              mx="2"
+              onClick={() => setGeneroSelecionado("Mulher")}
+            >
               Mulheres
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2">
+            <Button
+              color={"#fff"}
+              bg={"pink.300"}
+              mx="2"
+              onClick={() => setGeneroSelecionado("Homem")}
+            >
               Homens
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2">
+            <Button
+              color={"#fff"}
+              bg={"pink.300"}
+              mx="2"
+              onClick={() => setGeneroSelecionado("Trans")}
+            >
               Trans
             </Button>
-            <Button color={'#fff'} bg={'pink.300'} mx="2">
+            <Button
+              color={"#fff"}
+              bg={"pink.300"}
+              mx="2"
+              onClick={() => setGeneroSelecionado("Casal")}
+            >
               Casais
             </Button>
           </div>
         </div>
         <div className="card-content">
-          {acompanhantes.length === 0 ? (
+          {filterAcompanhantes().length === 0 ? (
             <div className="msg">
               <div className="spinner">
                 <Spinner />
@@ -105,8 +138,8 @@ const HomePage = () => {
             </div>
           ) : (
             <div className="card">
-              {acompanhantes.map((acompanhante) => (
-                <Flex maxWidth={'200px'} className="anuncio"key={acompanhante.id}>
+              {filterAcompanhantes().map((acompanhante) => (
+                <Flex maxWidth={"200px"} className="anuncio" key={acompanhante.id}>
                   <Link
                     onClick={() => click(acompanhante)}
                     className="anunciante"
