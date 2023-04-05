@@ -90,8 +90,6 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
         })
       .then((response) => {
         console.log('rejeitada')
-        console.log(acompanhante.id)
-        console.log(response)
       })
       .catch((error) => {
         console.log('erro na req')

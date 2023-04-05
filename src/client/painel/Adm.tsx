@@ -186,7 +186,7 @@ const PainelAdm = () => {
                     )}
                     <Image
                       className="image-card-adm"
-                      maxWidth={'100%'}
+                      width={'100%'}
                       maxHeight={'250px'}
                       src={acompanhante.imagesEscort[0]?.urlPhoto}
                       roundedTop="lg"

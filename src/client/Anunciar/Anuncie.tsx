@@ -38,6 +38,7 @@ export default function AnunciePage(): JSX.Element {
   const toast = useToast();
 
   const handleSubmit = () => {
+    uploadImages();
     const token = Cookies.get("token");
     api
       .post(
@@ -199,7 +200,14 @@ export default function AnunciePage(): JSX.Element {
                     ) : null}
                   </Center>
                   {isLoggedIn && (
-                    <Center>
+                    <Center display={'block'} >
+                      <Heading
+                        style={{ textAlign: 'center', color: '#e47ce8' }}
+                        lineHeight={1.1}
+                        fontSize={{ base: "2x1", sm: "12xl" }}
+                      >
+                        Selecione as imagens que quer no anuncio
+                      </Heading>
                       <input
                         type="file"
                         multiple
@@ -209,20 +217,6 @@ export default function AnunciePage(): JSX.Element {
                           }
                         }}
                       />
-                    </Center>
-                  )}
-                  {isLoggedIn && (
-                    <Center>
-                      <Button
-                        onClick={uploadImages}
-                        style={{
-                          width: "100%",
-                          backgroundColor: "#e048e0",
-                          color: "#fff",
-                        }}
-                      >
-                        Enviar imagens
-                      </Button>
                     </Center>
                   )}
                 </Stack>
