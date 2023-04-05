@@ -175,12 +175,12 @@ export default function AnunciePage(): JSX.Element {
                   Preencha os campos abaixo com suas características.
                   <br></br>
                   <br></br>
-                  <span className="informe" >
+                  <span className="informe">
                     Seram estas características que iram paarecer no anuncio
                   </span>
                 </Heading>
               )}
-              <Center>
+              <Center className="campos-images">
                 {images.length > 0 &&
                   images.map((image, index) => (
                     <img
