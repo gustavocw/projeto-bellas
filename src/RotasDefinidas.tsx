@@ -19,7 +19,9 @@ export function RoutesDefinided() {
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/anunciar" element={<AnunciePage />} />
-          <Route path="/login-adm" element={<LoginAdm />} />
+          <Route path="/login-adm" element={<LoginAdm isLoggedIn={false} setIsLoggedIn={function (value: React.SetStateAction<boolean>): void {
+          throw new Error("Function not implemented.");
+        } } />} />
           <Route path="/administracao" element={<PainelAdm />} />
           <Route path="/detalhes" element={<DetailsUser acompanhante={null} onClose={function (): void {
           throw new Error("Function not implemented.");
