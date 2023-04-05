@@ -34,30 +34,33 @@ export default function AnunciePage(): JSX.Element {
   const [age, setAge] = useState(0);
   const [tatoo, setTatoo] = useState(0);
   const [piercing, setPiercing] = useState(0);
-  
 
   const toast = useToast();
 
   const handleSubmit = () => {
     const token = Cookies.get("token");
     api
-      .post("/description/create", {
-        price,
-        description,
-        contact,
-        type,
-        eyes,
-        tatoo,
-        piercing,
-        weight,
-        age,
-        height,
-        obsScheduling,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .post(
+        "/description/create",
+        {
+          price,
+          description,
+          contact,
+          type,
+          eyes,
+          tatoo,
+          piercing,
+          weight,
+          age,
+          height,
+          obsScheduling,
         },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         toast({
           title: "Anuncio feito com sucesso",
@@ -67,19 +70,14 @@ export default function AnunciePage(): JSX.Element {
         });
       })
       .catch((error) => {
-        // trate o erro adequadamente
+        toast({
+          title: "Falha ao anunciar",
+          description: "verifique seu login",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       });
-  };
-  
-
-  const handleAnuncioToast = (message: string) => {
-    toast({
-      title: "Falha ao anunciar",
-      description: message,
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-    });
   };
 
   const [isLoading, setIsLoading] = useState(true);
@@ -90,40 +88,47 @@ export default function AnunciePage(): JSX.Element {
     }, 1000);
   }, []);
 
-  const [image, setImage] = useState<File | undefined>(undefined);
   const token = Cookies.get("token");
 
-  function handle_image() {
-    if (!image) {
+  const [images, setImages] = useState<File[]>([]);
+  const [sendingImages, setSendingImages] = useState(false);
+
+  const uploadImages = async () => {
+    if (images.length === 0) {
       toast({
         title: "Nenhuma imagem selecionada",
+        description: "Selecione pelo menos uma imagem para enviar",
         status: "warning",
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
       });
       return;
     }
 
-    const data = new FormData();
-    data.append("file", image);
-    api
-      .post(`/upload/images`, data, {
+    const token = Cookies.get("token");
+
+    setSendingImages(true);
+    for (let i = 0; i < images.length; i++) {
+      const data = new FormData();
+      data.append("file", images[i]);
+      const response = await api.post("/upload/images", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-      .then((response) => {
-        const token = response.data.token;
-        if (token === true) {
-          console.log("AEEEEEEEEEEE");
-        } else {
-          console.log("PORRA Q KRL");
-        }
-      })
-      .catch((e) => {
-        console.log("Erro! -> ", e);
       });
-  }
+      console.log(response);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+    setSendingImages(false);
+
+    toast({
+      title: "Envio bem sucedido",
+      description: "As imagens foram enviadas com sucesso",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
 
   return (
     <div className="container">
@@ -140,25 +145,75 @@ export default function AnunciePage(): JSX.Element {
               rounded={"xl"}
               p="12"
             >
+              {!isLoggedIn && (
+                <Heading
+                  color="red"
+                  lineHeight={1.1}
+                  fontSize={{ base: "2xl", sm: "3xl" }}
+                >
+                  Registre-se no site ou entre com sua conta antes de anunciar.
+                </Heading>
+              )}
               <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
                 Preencha com suas características
               </Heading>
+              <Center>
+                {images.length > 0 &&
+                  images.map((image, index) => (
+                    <img
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        width: "120px",
+                        height: "150px",
+                        margin: "1px",
+                      }}
+                      key={index}
+                      src={URL.createObjectURL(image)}
+                      alt={`Imagem ${index}`}
+                    />
+                  ))}
+              </Center>
               <FormControl id="userName">
                 <Stack direction={["column"]} spacing={6}>
+                  <Center></Center>
                   <Center>
-                    <img src="s" alt="imagem" />
+                    {sendingImages ? (
+                      <div>Enviando...</div>
+                    ) : images.length > 0 ? (
+                      <div>
+                        Enviando {images.length} foto
+                        {images.length > 1 ? "s" : ""}...
+                      </div>
+                    ) : null}
                   </Center>
-                  <Center>
-                    <Input
-                      onChange={(e) => setImage(e.target.files?.[0])}
-                      type="file"
-                      name=""
-                      id=""
-                    />
-                  </Center>
-                  <Center>
-                    <Button onClick={handle_image}>Enviar imagens</Button>
-                  </Center>
+                  {isLoggedIn && (
+                    <Center>
+                      <input
+                        type="file"
+                        multiple
+                        onChange={(event) => {
+                          if (event.target.files) {
+                            setImages([...event.target.files]);
+                          }
+                        }}
+                      />
+                    </Center>
+                  )}
+                  {isLoggedIn && (
+                    <Center>
+                      <Button
+                        onClick={uploadImages}
+                        style={{
+                          width: "100%",
+                          backgroundColor: "#e048e0",
+                          color: "#fff",
+                        }}
+                      >
+                        Enviar imagens
+                      </Button>
+                    </Center>
+                  )}
                 </Stack>
               </FormControl>
             </Stack>
@@ -263,7 +318,9 @@ export default function AnunciePage(): JSX.Element {
                   _placeholder={{ color: "gray.500" }}
                   type="number"
                   value={piercing}
-                  onChange={(event) => setPiercing(parseInt(event.target.value))}
+                  onChange={(event) =>
+                    setPiercing(parseInt(event.target.value))
+                  }
                 />
               </FormControl>
               <FormControl id="altura" isRequired>
