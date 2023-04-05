@@ -149,6 +149,7 @@ export default function AnunciePage(): JSX.Element {
             >
               {!isLoggedIn && (
                 <Heading
+                  textAlign={"center"}
                   color="red"
                   lineHeight={1.1}
                   fontSize={{ base: "2xl", sm: "3xl" }}
@@ -165,8 +166,18 @@ export default function AnunciePage(): JSX.Element {
                 setIsLoggedIn={setIsLoggedIn}
               />
               {isLoggedIn && (
-                <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
-                  Preencha com suas características
+                <Heading
+                  color="#e47ce8"
+                  textAlign={"center"}
+                  lineHeight={1.1}
+                  fontSize={{ base: "2xl", sm: "3xl" }}
+                >
+                  Preencha os campos abaixo com suas características.
+                  <br></br>
+                  <br></br>
+                  <span className="informe" >
+                    Seram estas características que iram paarecer no anuncio
+                  </span>
                 </Heading>
               )}
               <Center>
@@ -200,9 +211,9 @@ export default function AnunciePage(): JSX.Element {
                     ) : null}
                   </Center>
                   {isLoggedIn && (
-                    <Center display={'block'} >
+                    <Center display={"block"}>
                       <Heading
-                        style={{ textAlign: 'center', color: '#e47ce8' }}
+                        style={{ textAlign: "center", color: "#e47ce8" }}
                         lineHeight={1.1}
                         fontSize={{ base: "2x1", sm: "12xl" }}
                       >
