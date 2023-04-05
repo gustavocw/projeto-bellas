@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import "./style/home.css";
+import "./style/painel.css";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import {
@@ -16,6 +16,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import DetailsUser from "./detalhes/DetailsUser";
+import LoginDialogAdm from "./LoginAdm";
+import Cookies from "js-cookie";
 
 export interface Escort {
   id: number;
@@ -43,19 +45,28 @@ export interface Escort {
   }[];
 }
 
-const HomePage = () => {
+const PainelAdm = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
-  const [selectedAcompanhante, setSelectedAcompanhante] = useState<Escort | null>(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedAcompanhante, setSelectedAcompanhante] =
+    useState<Escort | null>(null);
   const [popup, setPopup] = useState(false);
   const [generoSelecionado, setGeneroSelecionado] = useState<string>("Todos");
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await api.get("/");
-      setAcompanhantes(response.data);
-    }
-    fetchData();
-  }, []);
+  const token = Cookies.get('token');
+  if (token) {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+      api.get('/escorts/all', config)
+      .then(response => setAcompanhantes(response.data))
+      .catch(error => console.error(error));
+
+  } else {
+    console.log('Token not found!');
+  }
+  
+  
 
   const click = (acompanhante: Escort) => {
     setSelectedAcompanhante(acompanhante);
@@ -72,7 +83,6 @@ const HomePage = () => {
     }
   };
 
-
   return (
     <div className="container">
       <Header />
@@ -84,7 +94,11 @@ const HomePage = () => {
           />
         )}
         <div className="titulo">
-          <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
+          <h1 className="apresentacao">ANUNCIOS PARA AUTORIZAR</h1>
+          <LoginDialogAdm
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+          />
           <div className="escolha">
             <Button
               color={"#fff"}
@@ -95,6 +109,7 @@ const HomePage = () => {
               Todos
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -103,6 +118,7 @@ const HomePage = () => {
               Mulheres
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -111,6 +127,7 @@ const HomePage = () => {
               Homens
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -119,6 +136,7 @@ const HomePage = () => {
               Trans
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -139,7 +157,11 @@ const HomePage = () => {
           ) : (
             <div className="card">
               {filterAcompanhantes().map((acompanhante) => (
-                <Flex maxWidth={"200px"} className="anuncio" key={acompanhante.id}>
+                <Flex
+                  maxWidth={"200px"}
+                  className="anuncio"
+                  key={acompanhante.id}
+                >
                   <Link
                     onClick={() => click(acompanhante)}
                     className="anunciante"
@@ -157,21 +179,19 @@ const HomePage = () => {
                           position="absolute"
                           top={2}
                           left={2}
-                          bg="green.400"
+                          bg="orange.400"
                         />
-                        <Text mx="6" >
-                          Disponível
-                        </Text>
+                        <Text mx="6">Aguardando autorização</Text>
                       </div>
                     )}
                     <Image
-                      className='img-card-home'
+                      className="image-card-adm"
                       maxWidth={'100%'}
                       maxHeight={'250px'}
                       src={acompanhante.imagesEscort[0]?.urlPhoto}
                       roundedTop="lg"
                     />
-  
+
                     <Box p="6">
                       <Box display={"flex"} alignItems="baseline">
                         <Badge
@@ -209,7 +229,6 @@ const HomePage = () => {
       <Footer />
     </div>
   );
-  
 };
 
-export default HomePage;
+export default PainelAdm;

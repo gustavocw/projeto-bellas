@@ -63,8 +63,9 @@ export default function AnunciePage(): JSX.Element {
       )
       .then((response) => {
         toast({
-          title: "Anuncio feito com sucesso",
-          status: "success",
+          title: "ANUNCIO ENVIADO PARA ANÁLISE",
+          description: "Verifique sua caixa de email",
+          status: "warning",
           duration: 3000,
           isClosable: true,
         });

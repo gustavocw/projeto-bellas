@@ -4,7 +4,10 @@ body{
 
 .escolha {
     margin: 10px;
+    display: flex;
+    justify-content: center;
 }
+
 
 
 .msg {
@@ -53,9 +56,10 @@ body{
     justify-content: space-around;
 }
 
-.img-card-home{
-    object-fit: cover !important; 
+.image-card-adm{
+    object-fit: cover;
 }
+
 
 
 .card {
