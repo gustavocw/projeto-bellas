@@ -154,9 +154,19 @@ export default function AnunciePage(): JSX.Element {
                   Registre-se no site ou entre com sua conta antes de anunciar.
                 </Heading>
               )}
-              <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
-                Preencha com suas características
-              </Heading>
+              <RegisterDialogUser
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+              <LoginDialogUser
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+              {isLoggedIn && (
+                <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
+                  Preencha com suas características
+                </Heading>
+              )}
               <Center>
                 {images.length > 0 &&
                   images.map((image, index) => (
@@ -359,14 +369,6 @@ export default function AnunciePage(): JSX.Element {
                   }
                 />
               </FormControl>
-              <RegisterDialogUser
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-              <LoginDialogUser
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
               <Stack spacing={6} direction={["column", "row"]}>
                 {isLoggedIn && (
                   <Button
