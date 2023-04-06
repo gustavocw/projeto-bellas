@@ -87,6 +87,7 @@ const HomePage = () => {
           <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
           <div className="escolha">
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -95,6 +96,7 @@ const HomePage = () => {
               Todos
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -103,6 +105,7 @@ const HomePage = () => {
               Mulheres
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -111,6 +114,7 @@ const HomePage = () => {
               Homens
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"
@@ -119,6 +123,7 @@ const HomePage = () => {
               Trans
             </Button>
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"

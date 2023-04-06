@@ -189,6 +189,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               </Text>
 
               <List
+                className="toda-lista"
                 spacing={2}
                 style={{
                   color: "#fff",
@@ -242,7 +243,9 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     </Text>{" "}
                     {acompanhante.dataEscort[0]?.weight} kg
                   </ListItem>
-                  <ListItem>
+                </div>
+                <div className="separado">
+                <ListItem className="textos-hl" >
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}

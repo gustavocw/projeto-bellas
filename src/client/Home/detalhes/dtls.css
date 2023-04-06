@@ -28,3 +28,17 @@
     font-size: 45px;
     color: #fff;
 }
+
+@media screen and (max-width: 768px) and (min-width: 200px)  {
+    .separado{
+        display: flex;
+        text-align: center;
+    }
+
+    .toda-lista{
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center !important;
+    }
+
+}

@@ -291,7 +291,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                 </div>
                 </div>
                 <div className="separado">
-                <ListItem>
+                <ListItem className="textos-hl" >
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}

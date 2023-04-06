@@ -46,4 +46,22 @@
         padding: 20px 50px !important;
     }
 
+    .detalhes-escort{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        flex-wrap: wrap;
+    }
+
+    .separado{
+        text-align: center !important;
+    }
+
+    .textos-hl{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+
 }
