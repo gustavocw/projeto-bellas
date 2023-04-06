@@ -242,6 +242,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                   justifyContent: "space-around",
                 }}
               >
+                <div className="listas">
                 <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
@@ -267,14 +268,14 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     </Text>{" "}
                     {acompanhante.dataEscort[0]?.tatoo}
                   </ListItem>
-                </div>
-                <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Qtd. Piercings:
                     </Text>{" "}
                     {acompanhante.dataEscort[0]?.piercing}
                   </ListItem>
+                </div>
+                <div className="list">
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Altura:
@@ -287,7 +288,10 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     </Text>{" "}
                     {acompanhante.dataEscort[0]?.weight} kg
                   </ListItem>
-                  <ListItem>
+                </div>
+                </div>
+                <div className="separado">
+                <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}
