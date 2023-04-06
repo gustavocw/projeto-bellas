@@ -101,6 +101,7 @@ const PainelAdm = () => {
           />
           <div className="escolha">
             <Button
+              className="btnse"
               color={"#fff"}
               bg={"pink.300"}
               mx="2"

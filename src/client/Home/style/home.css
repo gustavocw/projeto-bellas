@@ -70,6 +70,15 @@ body{
         justify-content: center;
     }
 
+    .escolha{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .btnse{
+        margin: 2px;
+    }
+
   }
   
 
