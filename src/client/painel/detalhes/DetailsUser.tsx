@@ -309,6 +309,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               borderRadius: "10px",
             }}
             w={"20%"}
+            className="adm-btns"
             mt={8}
             size={"lg"}
             py={"7"}
@@ -338,6 +339,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               justifyContent: "center",
               borderRadius: "10px",
             }}
+            className="adm-btns"
             w={"20%"}
             mt={8}
             size={"lg"}
@@ -369,6 +371,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               borderRadius: "10px",
             }}
             w={"20%"}
+            className="adm-btns"
             mt={8}
             size={"lg"}
             py={"7"}
