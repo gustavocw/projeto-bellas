@@ -82,7 +82,11 @@ body{
     .btnse{
         margin: 2px;
     }
-
+    .anuncio{
+        background-color: red;
+        max-width: 160px !important;
+    }
+    
   }
   
 

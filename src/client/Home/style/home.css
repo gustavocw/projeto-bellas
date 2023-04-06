@@ -76,7 +76,13 @@ body{
     }
 
     .btnse{
-        margin: 2px;
+        margin: 3px !important;
+    }
+
+    .image-card-adm{
+        object-fit: fill!important;
+        max-height: 250px !important;
+        margin: auto;
     }
 
   }
