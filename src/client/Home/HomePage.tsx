@@ -139,10 +139,10 @@ const HomePage = () => {
           ) : (
             <div className="card">
               {filterAcompanhantes().map((acompanhante) => (
-                <Flex maxWidth={"200px"} className="anuncio" key={acompanhante.id}>
+                <Flex className="anuncio" key={acompanhante.id}>
                   <Link
                     onClick={() => click(acompanhante)}
-                    className="anunciante"
+                    className="anunciante-card"
                     bg={useColorModeValue("gray.200", "gray.800")}
                     maxW="sm"
                     borderWidth="1px"

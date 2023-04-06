@@ -64,10 +64,18 @@ body{
   }
   
   @media screen and (max-width: 768px) and (min-width: 200px) {
-    .card {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+    .card{
+        display: flex !important;
+    }
+
+    .anunciante-card{
+        width: 180px;
+    }
+
+    .img-card-home{
+        width: 175px;
+        margin: auto;
+        object-fit: cover !important;
     }
 
     .escolha{

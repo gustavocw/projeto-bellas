@@ -221,7 +221,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                 {acompanhante.dataEscort[0]?.description}
               </Text>
             </VStack>
-            <Box>
+            <Box className="detalhes-escort" >
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
                 color={useColorModeValue("pink.500", "pink.300")}

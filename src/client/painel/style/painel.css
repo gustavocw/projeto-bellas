@@ -97,4 +97,10 @@ body{
         z-index: 999;
         padding: 45% 0;
     }
+
+    .image-card-adm{
+        width: 175px;
+        margin: auto;
+        object-fit: cover !important;
+    }
 }
