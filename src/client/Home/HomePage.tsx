@@ -14,6 +14,7 @@ import {
   Link,
   Spinner,
   Button,
+  Select,
 } from "@chakra-ui/react";
 import DetailsUser from "./detalhes/DetailsUser";
 
@@ -45,9 +46,12 @@ export interface Escort {
 
 const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
-  const [selectedAcompanhante, setSelectedAcompanhante] = useState<Escort | null>(null);
+  const [selectedAcompanhante, setSelectedAcompanhante] =
+    useState<Escort | null>(null);
   const [popup, setPopup] = useState(false);
   const [generoSelecionado, setGeneroSelecionado] = useState<string>("Todos");
+  const [localizacaoSelecionada, setLocalizacaoSelecionada] =
+    useState<string>("Todos");
 
   useEffect(() => {
     async function fetchData() {
@@ -63,15 +67,24 @@ const HomePage = () => {
   };
 
   const filterAcompanhantes = () => {
-    if (generoSelecionado === "Todos") {
+    if (generoSelecionado === "Todos" && localizacaoSelecionada === "Todos") {
       return acompanhantes;
+    } else if (
+      generoSelecionado === "Todos" &&
+      localizacaoSelecionada !== "Todos"
+    ) {
+      return acompanhantes.filter(
+        (acompanhante) => acompanhante.city === localizacaoSelecionada
+      );
     } else {
       return acompanhantes.filter(
-        (acompanhante) => acompanhante.sexo === generoSelecionado
+        (acompanhante) =>
+          acompanhante.sexo === generoSelecionado &&
+          (localizacaoSelecionada === "Todos" ||
+            acompanhante.city === localizacaoSelecionada)
       );
     }
   };
-
 
   return (
     <div className="container">
@@ -85,6 +98,35 @@ const HomePage = () => {
         )}
         <div className="titulo">
           <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
+          <div className="escolha-local">
+            <Select
+              className="local"
+              value={localizacaoSelecionada}
+              onChange={(event) =>
+                setLocalizacaoSelecionada(event.target.value)
+              }
+            >
+              <option className="valores-local" value="Todos">Localização</option>
+              <option className="valores-local" value="Aveiro">Aveiro</option>
+              <option className="valores-local" value="Bragança">Bragança</option>
+              <option className="valores-local" value="Castelo Branco">Castelo Branco</option>
+              <option className="valores-local" value="Coimbra">Coimbra</option>
+              <option className="valores-local" value="Évora">Évora</option>
+              <option className="valores-local" value="Faro">Faro</option>
+              <option className="valores-local" value="Guarda">Guarda</option>
+              <option className="valores-local" value="Lisboa">Lisboa</option>
+              <option className="valores-local" value="Leiria">Leiria</option>
+              <option className="valores-local" value="Braga">Braga</option>
+              <option className="valores-local" value="Portalegre">Portalegre</option>
+              <option className="valores-local" value="Porto">Porto</option>
+              <option className="valores-local" value="Santarém">Santarém</option>
+              <option className="valores-local" value="Setúbal">Setúbal</option>
+              <option className="valores-local" value="Viana do Castelo">Viana do Castelo</option>
+              <option className="valores-local" value="Vila Real">Vila Real</option>
+              <option className="valores-local" value="Viseu">Viseu</option>
+              {/* Adicione outras opções para outras localizações */}
+            </Select>
+          </div>
           <div className="escolha">
             <Button
               className="btnse"
@@ -164,19 +206,17 @@ const HomePage = () => {
                           left={2}
                           bg="green.400"
                         />
-                        <Text mx="6" >
-                          Disponível
-                        </Text>
+                        <Text mx="6">Disponível</Text>
                       </div>
                     )}
                     <Image
-                      className='img-card-home'
-                      maxWidth={'200px'}
-                      maxHeight={'250px'}
+                      className="img-card-home"
+                      maxWidth={"200px"}
+                      maxHeight={"250px"}
                       src={acompanhante.imagesEscort[0]?.urlPhoto}
                       roundedTop="lg"
                     />
-  
+
                     <Box p="6">
                       <Box display={"flex"} alignItems="baseline">
                         <Badge
@@ -214,7 +254,6 @@ const HomePage = () => {
       <Footer />
     </div>
   );
-  
 };
 
 export default HomePage;
