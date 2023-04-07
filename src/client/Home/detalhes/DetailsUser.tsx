@@ -23,7 +23,7 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import Slider from "react-slick";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
-import React from "react";
+import React, { useEffect } from "react";
 import { CloseIcon } from "@chakra-ui/icons";
 
 interface DetailsUserProps {

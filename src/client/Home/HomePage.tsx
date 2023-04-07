@@ -106,25 +106,63 @@ const HomePage = () => {
                 setLocalizacaoSelecionada(event.target.value)
               }
             >
-              <option className="valores-local" value="Todos">Localização</option>
-              <option className="valores-local" value="Todos">Todos</option>
-              <option className="valores-local" value="Aveiro">Aveiro</option>
-              <option className="valores-local" value="Bragança">Bragança</option>
-              <option className="valores-local" value="Castelo Branco">Castelo Branco</option>
-              <option className="valores-local" value="Coimbra">Coimbra</option>
-              <option className="valores-local" value="Évora">Évora</option>
-              <option className="valores-local" value="Faro">Faro</option>
-              <option className="valores-local" value="Guarda">Guarda</option>
-              <option className="valores-local" value="Lisboa">Lisboa</option>
-              <option className="valores-local" value="Leiria">Leiria</option>
-              <option className="valores-local" value="Braga">Braga</option>
-              <option className="valores-local" value="Portalegre">Portalegre</option>
-              <option className="valores-local" value="Porto">Porto</option>
-              <option className="valores-local" value="Santarém">Santarém</option>
-              <option className="valores-local" value="Setúbal">Setúbal</option>
-              <option className="valores-local" value="Viana do Castelo">Viana do Castelo</option>
-              <option className="valores-local" value="Vila Real">Vila Real</option>
-              <option className="valores-local" value="Viseu">Viseu</option>
+              <option className="valores-local" value="Todos">
+                Localização
+              </option>
+              <option className="valores-local" value="Todos">
+                Todos
+              </option>
+              <option className="valores-local" value="Aveiro">
+                Aveiro
+              </option>
+              <option className="valores-local" value="Bragança">
+                Bragança
+              </option>
+              <option className="valores-local" value="Castelo Branco">
+                Castelo Branco
+              </option>
+              <option className="valores-local" value="Coimbra">
+                Coimbra
+              </option>
+              <option className="valores-local" value="Évora">
+                Évora
+              </option>
+              <option className="valores-local" value="Faro">
+                Faro
+              </option>
+              <option className="valores-local" value="Guarda">
+                Guarda
+              </option>
+              <option className="valores-local" value="Lisboa">
+                Lisboa
+              </option>
+              <option className="valores-local" value="Leiria">
+                Leiria
+              </option>
+              <option className="valores-local" value="Braga">
+                Braga
+              </option>
+              <option className="valores-local" value="Portalegre">
+                Portalegre
+              </option>
+              <option className="valores-local" value="Porto">
+                Porto
+              </option>
+              <option className="valores-local" value="Santarém">
+                Santarém
+              </option>
+              <option className="valores-local" value="Setúbal">
+                Setúbal
+              </option>
+              <option className="valores-local" value="Viana do Castelo">
+                Viana do Castelo
+              </option>
+              <option className="valores-local" value="Vila Real">
+                Vila Real
+              </option>
+              <option className="valores-local" value="Viseu">
+                Viseu
+              </option>
               {/* Adicione outras opções para outras localizações */}
             </Select>
           </div>
@@ -189,7 +227,10 @@ const HomePage = () => {
               {filterAcompanhantes().map((acompanhante) => (
                 <Flex className="anuncio" key={acompanhante.id}>
                   <Link
-                    onClick={() => click(acompanhante)}
+                    onClick={() => {
+                      click(acompanhante);
+                      window.scrollTo({ top: 0, behavior: "auto" });
+                    }}
                     className="anunciante-card"
                     bg={useColorModeValue("gray.200", "gray.800")}
                     maxW="sm"
