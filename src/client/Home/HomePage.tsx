@@ -107,6 +107,7 @@ const HomePage = () => {
               }
             >
               <option className="valores-local" value="Todos">Localização</option>
+              <option className="valores-local" value="Todos">Todos</option>
               <option className="valores-local" value="Aveiro">Aveiro</option>
               <option className="valores-local" value="Bragança">Bragança</option>
               <option className="valores-local" value="Castelo Branco">Castelo Branco</option>
