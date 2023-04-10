@@ -17,3 +17,9 @@
     background-color: #fff;
     color: #e47ce8;
 }
+
+.navbar{
+    display: flex !important;
+    justify-content: end !important;
+    width: 90%;
+}

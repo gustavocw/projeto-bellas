@@ -13,6 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import LoginDialogUser from "../LoginDialog/LoginUser";
+import Cookies from "js-cookie";
+import RegistyerDialogUser from "../RegisterDialog/RegisterUser";
 
 const Links = ["Início"];
 
@@ -34,20 +36,16 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    Cookies.remove("token");
+  };
 
   return (
     <>
-      <Box bg={useColorModeValue("blackAlpha.900", "gray.900")} px={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <HStack spacing={8} alignItems={"center"}>
+      <Box display={'flex'} justifyContent={'space-between'} bg={useColorModeValue("blackAlpha.900", "gray.900")} px={4}>
+      <HStack spacing={8} alignItems={"center"}>
             <HStack
               as={"nav"}
               spacing={4}
@@ -58,19 +56,33 @@ export default function Header() {
               ))}
             </HStack>
           </HStack>
-              <Link
-                onClick={onOpen}
-                href="/anunciar"
-                size={"sm"}
-                mx={2}
-                color="#fff"
-                className="anunciar"
-              >
-                Anunciar
-              </Link>
+        <Flex
+          className="navbar"
+          h={16}
+          alignItems={"center"}
+          justifyContent={"end"}
+        >
+          <IconButton
+            size={"md"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <Link
+            onClick={onOpen}
+            href="/anunciar"
+            size={"sm"}
+            mx={2}
+            color="#fff"
+            className="anunciar"
+          >
+            Anunciar
+          </Link>
           {isLoggedIn ? (
-            <Flex alignItems={"center"}>
+            <Flex>
               <Link
+                fontSize={"17"}
                 onClick={onOpen}
                 href="/profile"
                 size={"sm"}
@@ -80,14 +92,33 @@ export default function Header() {
               >
                 Minha conta
               </Link>
+              <Button
+                size={"sm"}
+                fontSize={"17"}
+                style={{
+                  backgroundColor: "#e048e0",
+                  color: "#fff",
+                }}
+                onClick={handleLogout}
+              >
+                Sair
+              </Button>
             </Flex>
           ) : (
-            <div className="login-button">
-              <LoginDialogUser
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-            />
-            </div>
+            <>
+              <div className="login-button">
+                <LoginDialogUser
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              </div>
+              <div className="login-button">
+                <RegistyerDialogUser
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              </div>
+            </>
           )}
         </Flex>
 

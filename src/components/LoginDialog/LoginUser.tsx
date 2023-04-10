@@ -53,6 +53,12 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
       });
   };
 
+  const token = Cookies.get("token");
+
+  if (token) {
+    setIsLoggedIn(true);
+  }
+
   const handleLoginSuccessToast = () => {
     toast({
       title: "Login realizado com sucesso!",
@@ -76,7 +82,7 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
     <>
       {!isLoggedIn && (
         <Button
-          size={"md"}
+          size={"sm"}
           px={"6"}
           fontSize={"12"}
           style={{
@@ -125,17 +131,17 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
               />
             </FormControl>
           </ModalBody>
-  
-            <ModalFooter>
-              <Button onClick={handleLogin} colorScheme="pink" mr={3}>
-                Entrar
-              </Button>
-              <Button onClick={onClose}>Cancelar</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </>
-    );
-  }
-  
-  export default LoginDialogUser;
+
+          <ModalFooter>
+            <Button onClick={handleLogin} colorScheme="pink" mr={3}>
+              Entrar
+            </Button>
+            <Button onClick={onClose}>Cancelar</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default LoginDialogUser;

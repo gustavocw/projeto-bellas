@@ -148,23 +148,17 @@ export default function AnunciePage(): JSX.Element {
               p="12"
             >
               {!isLoggedIn && (
-                <Heading
-                  textAlign={"center"}
-                  color="red"
-                  lineHeight={1.1}
-                  fontSize={{ base: "2xl", sm: "3xl" }}
-                >
-                  Registre-se no site ou entre com sua conta antes de anunciar.
-                </Heading>
+                <div className="centralizar">
+                  <RegisterDialogUser
+                    isLoggedIn={isLoggedIn}
+                    setIsLoggedIn={setIsLoggedIn}
+                  />
+                  <LoginDialogUser
+                    isLoggedIn={isLoggedIn}
+                    setIsLoggedIn={setIsLoggedIn}
+                  />
+                </div>
               )}
-              <RegisterDialogUser
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-              <LoginDialogUser
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
               {isLoggedIn && (
                 <Heading
                   color="#e47ce8"

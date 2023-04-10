@@ -85,7 +85,8 @@ import {
       <>
         {!isLoggedIn && (
           <Button
-            size={"md"}
+            size={"sm"}
+            mx="2"
             px={'6'}
             fontSize={'12'}
             style={{
@@ -95,7 +96,7 @@ import {
             }}
             onClick={onOpen}
           >
-            Antes de anunciar, registre-se no site!
+            Criar conta
           </Button>
         )}
   
