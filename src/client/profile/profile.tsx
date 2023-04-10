@@ -36,8 +36,9 @@ export default function ProfilePage(): JSX.Element {
   const [piercing, setPiercing] = useState(0);
 
   const toast = useToast();
+  const token = Cookies.get("token");
 
-  const handleSubmit = () => {
+  const handleEditar = () => {
     uploadImages();
     const token = Cookies.get("token");
     api
@@ -89,8 +90,6 @@ export default function ProfilePage(): JSX.Element {
       setIsLoading(false);
     }, 1000);
   }, []);
-
-  const token = Cookies.get("token");
 
   const [images, setImages] = useState<File[]>([]);
   const [sendingImages, setSendingImages] = useState(false);
@@ -147,37 +146,17 @@ export default function ProfilePage(): JSX.Element {
               rounded={"xl"}
               p="12"
             >
-              {isLoggedIn && (
-                <Heading
-                  color="#e47ce8"
-                  textAlign={"center"}
-                  lineHeight={1.1}
-                  fontSize={{ base: "2xl", sm: "3xl" }}
-                >
-                  Preencha os campos abaixo com suas características.
-                  <br></br>
-                  <br></br>
-                  <span className="informe">
-                    Seram estas características que iram paarecer no anuncio
-                  </span>
-                </Heading>
-              )}
               <Center className="campos-images">
-                {images.length > 0 &&
-                  images.map((image, index) => (
-                    <img
-                      style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        width: "120px",
-                        height: "150px",
-                        margin: "1px",
-                      }}
-                      key={index}
-                      src={URL.createObjectURL(image)}
-                      alt={`Imagem ${index}`}
-                    />
-                  ))}
+                <img
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    width: "220px",
+                    height: "250px",
+                    margin: "1px",
+                  }}
+                  src={"url"}
+                />
               </Center>
               <FormControl id="userName">
                 <Stack direction={["column"]} spacing={6}>
@@ -215,165 +194,167 @@ export default function ProfilePage(): JSX.Element {
                 </Stack>
               </FormControl>
             </Stack>
-            <Stack
-              className="all"
-              spacing={6}
-              maxW={"lg"}
-              bg={useColorModeValue("white", "gray.700")}
-              rounded={"xl"}
-              p="12"
-            >
-              <FormLabel>Fale um pouco de sí (*)</FormLabel>
-              <Center>
-                <Textarea
-                  value={description}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setDescription(e.target.value)
-                  }
-                />
-              </Center>
-              <FormControl id="idade" isRequired>
-                <FormLabel>Idade</FormLabel>
-                <Input
-                  placeholder="19, 25..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="number"
-                  value={age}
-                  onChange={(event) => setAge(parseInt(event.target.value))}
-                />
-              </FormControl>
-              <FormControl id="userName" isRequired>
-                <FormLabel>Preço</FormLabel>
-                <Input
-                  placeholder="Ex:€100"
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={price}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setPrice(e.target.value)
-                  }
-                />
-              </FormControl>
-              <FormControl id="password" isRequired>
-                <FormLabel>Contacto</FormLabel>
-                <Input
-                  placeholder="Ex: 932123123"
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={contact}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setContact(e.target.value)
-                  }
-                />
-              </FormControl>
-              <FormControl id="userName" isRequired>
-                <FormLabel>Tipo</FormLabel>
-                <Input
-                  placeholder="Loira, Morena..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={type}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setType(e.target.value)
-                  }
-                />
-              </FormControl>
-              <FormControl id="olhos" isRequired>
-                <FormLabel>Olhos</FormLabel>
-                <Input
-                  placeholder="Azuis, Castanhos..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={eyes}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setEyes(e.target.value)
-                  }
-                />
-              </FormControl>
-            </Stack>
-            <Stack
-              className="all"
-              spacing={6}
-              maxW={"lg"}
-              bg={useColorModeValue("white", "gray.700")}
-              rounded={"xl"}
-              p="12"
-            >
-              <FormControl id="tatoo" isRequired>
-                <FormLabel>Qtd. Tatuagens</FormLabel>
-                <Input
-                  placeholder="0, 1, 2..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="number"
-                  value={tatoo}
-                  onChange={(event) => setTatoo(parseInt(event.target.value))}
-                />
-              </FormControl>
-              <FormControl id="manequim" isRequired>
-                <FormLabel>Qtd. Piercings</FormLabel>
-                <Input
-                  placeholder="0, 1, 2..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="number"
-                  value={piercing}
-                  onChange={(event) =>
-                    setPiercing(parseInt(event.target.value))
-                  }
-                />
-              </FormControl>
-              <FormControl id="altura" isRequired>
-                <FormLabel>Altura</FormLabel>
-                <Input
-                  placeholder="1,65..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={height}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setHeight(e.target.value)
-                  }
-                />
-              </FormControl>
-              <FormControl id="peso" isRequired>
-                <FormLabel>Peso</FormLabel>
-                <Input
-                  placeholder="58, 60kg..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={weight}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setWeight(e.target.value)
-                  }
-                />
-              </FormControl>
-              <FormControl id="peso" isRequired>
-                <FormLabel>Informe Horário e Local em que atende</FormLabel>
-                <Input
-                  placeholder="Ex: Ap 123, somente a noite..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={obsScheduling}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setObsScheduling(e.target.value)
-                  }
-                />
-              </FormControl>
-              <Stack spacing={6} direction={["column", "row"]}>
-                {isLoggedIn && (
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!isLoggedIn}
-                    bg={"pink.400"}
-                    color={"white"}
-                    w="full"
-                    _hover={{
-                      bg: "pink.500",
-                    }}
-                  >
-                    Concluir
-                  </Button>
-                )}
+            <div className="formularios">
+              <Stack
+                className="all"
+                spacing={6}
+                maxW={"lg"}
+                bg={useColorModeValue("white", "gray.700")}
+                rounded={"xl"}
+                p="12"
+              >
+                <FormLabel>Fale um pouco de sí (*)</FormLabel>
+                <Center>
+                  <Textarea
+                    value={description}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      setDescription(e.target.value)
+                    }
+                  />
+                </Center>
+                <FormControl id="idade" isRequired>
+                  <FormLabel>Idade</FormLabel>
+                  <Input
+                    placeholder="19, 25..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="number"
+                    value={age}
+                    onChange={(event) => setAge(parseInt(event.target.value))}
+                  />
+                </FormControl>
+                <FormControl id="userName" isRequired>
+                  <FormLabel>Preço</FormLabel>
+                  <Input
+                    placeholder="Ex:€100"
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    value={price}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setPrice(e.target.value)
+                    }
+                  />
+                </FormControl>
+                <FormControl id="password" isRequired>
+                  <FormLabel>Contacto</FormLabel>
+                  <Input
+                    placeholder="Ex: 932123123"
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    value={contact}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setContact(e.target.value)
+                    }
+                  />
+                </FormControl>
+                <FormControl id="userName" isRequired>
+                  <FormLabel>Tipo</FormLabel>
+                  <Input
+                    placeholder="Loira, Morena..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    value={type}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setType(e.target.value)
+                    }
+                  />
+                </FormControl>
+                <FormControl id="olhos" isRequired>
+                  <FormLabel>Olhos</FormLabel>
+                  <Input
+                    placeholder="Azuis, Castanhos..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    value={eyes}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEyes(e.target.value)
+                    }
+                  />
+                </FormControl>
               </Stack>
-            </Stack>
+              <Stack
+                className="all"
+                spacing={6}
+                maxW={"lg"}
+                bg={useColorModeValue("white", "gray.700")}
+                rounded={"xl"}
+                p="12"
+              >
+                <FormControl id="tatoo" isRequired>
+                  <FormLabel>Qtd. Tatuagens</FormLabel>
+                  <Input
+                    placeholder="0, 1, 2..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="number"
+                    value={tatoo}
+                    onChange={(event) => setTatoo(parseInt(event.target.value))}
+                  />
+                </FormControl>
+                <FormControl id="manequim" isRequired>
+                  <FormLabel>Qtd. Piercings</FormLabel>
+                  <Input
+                    placeholder="0, 1, 2..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="number"
+                    value={piercing}
+                    onChange={(event) =>
+                      setPiercing(parseInt(event.target.value))
+                    }
+                  />
+                </FormControl>
+                <FormControl id="altura" isRequired>
+                  <FormLabel>Altura</FormLabel>
+                  <Input
+                    placeholder="1,65..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    value={height}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setHeight(e.target.value)
+                    }
+                  />
+                </FormControl>
+                <FormControl id="peso" isRequired>
+                  <FormLabel>Peso</FormLabel>
+                  <Input
+                    placeholder="58, 60kg..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    value={weight}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setWeight(e.target.value)
+                    }
+                  />
+                </FormControl>
+                <FormControl id="peso" isRequired>
+                  <FormLabel>Informe Horário e Local em que atende</FormLabel>
+                  <Input
+                    placeholder="Ex: Ap 123, somente a noite..."
+                    _placeholder={{ color: "gray.500" }}
+                    type="text"
+                    value={obsScheduling}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setObsScheduling(e.target.value)
+                    }
+                  />
+                </FormControl>
+                <Stack spacing={6} direction={["column", "row"]}>
+                  {isLoggedIn && (
+                    <Button
+                      onClick={handleEditar}
+                      disabled={!isLoggedIn}
+                      bg={"pink.400"}
+                      color={"white"}
+                      w="full"
+                      _hover={{
+                        bg: "pink.500",
+                      }}
+                    >
+                      Concluir
+                    </Button>
+                  )}
+                </Stack>
+              </Stack>
+            </div>
           </Flex>
         </div>
       </div>

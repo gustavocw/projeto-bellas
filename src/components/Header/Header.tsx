@@ -44,7 +44,7 @@ export default function Header() {
 
   return (
     <>
-      <Box display={'flex'} justifyContent={'space-between'} bg={useColorModeValue("blackAlpha.900", "gray.900")} px={4}>
+      <Box className="display" justifyContent={'space-between'} bg={useColorModeValue("blackAlpha.900", "gray.900")} px={4}>
       <HStack spacing={8} alignItems={"center"}>
             <HStack
               as={"nav"}
@@ -70,10 +70,10 @@ export default function Header() {
             onClick={isOpen ? onClose : onOpen}
           />
           <Link
+            mx='2'
             onClick={onOpen}
             href="/anunciar"
             size={"sm"}
-            mx={2}
             color="#fff"
             className="anunciar"
           >
@@ -93,11 +93,13 @@ export default function Header() {
                 Minha conta
               </Link>
               <Button
+                className="sair"
                 size={"sm"}
                 fontSize={"17"}
                 style={{
                   backgroundColor: "#e048e0",
                   color: "#fff",
+                  fontWeight: 'normal'
                 }}
                 onClick={handleLogout}
               >
