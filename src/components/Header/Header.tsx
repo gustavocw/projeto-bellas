@@ -12,7 +12,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import LoginDialogUser from "../RegisterDialog/RegisterUser";
+import LoginDialogUser from "../LoginDialog/LoginUser";
 
 const Links = ["Início"];
 
@@ -34,6 +34,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   return (
     <>
@@ -57,18 +58,37 @@ export default function Header() {
               ))}
             </HStack>
           </HStack>
-          <Flex alignItems={"center"}>
-            <Link
-              onClick={onOpen}
-              href="/anunciar"
-              size={"sm"}
-              mx={2}
-              color="#fff"
-              className="anunciar"
-            >
-              Anunciar
-            </Link>
-          </Flex>
+              <Link
+                onClick={onOpen}
+                href="/anunciar"
+                size={"sm"}
+                mx={2}
+                color="#fff"
+                className="anunciar"
+              >
+                Anunciar
+              </Link>
+          {isLoggedIn ? (
+            <Flex alignItems={"center"}>
+              <Link
+                onClick={onOpen}
+                href="/profile"
+                size={"sm"}
+                mx={2}
+                color="#fff"
+                className="anunciar"
+              >
+                Minha conta
+              </Link>
+            </Flex>
+          ) : (
+            <div className="login-button">
+              <LoginDialogUser
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+            </div>
+          )}
         </Flex>
 
         {isOpen ? (

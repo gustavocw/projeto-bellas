@@ -1,0 +1,36 @@
+.foto{
+    background-color: #e47ce8;
+    color: #fff;
+}
+
+.informe{
+    color: #e47ce8;
+}
+
+.all{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.campos-images{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) and (min-width: 200px)  {
+    .all-cards{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        margin: 10px;
+        flex-wrap: wrap;
+        margin: auto;
+    }
+
+    .all{
+        margin: auto;
+    }
+}

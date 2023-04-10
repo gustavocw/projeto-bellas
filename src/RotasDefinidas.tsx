@@ -5,6 +5,7 @@ import AnunciePage from "./client/Anunciar/Anuncie";
 import DetailsUser from "./client/Home/detalhes/DetailsUser";
 import PainelAdm from "./client/painel/Adm";
 import LoginAdm from "./client/painel/LoginAdm";
+import ProfilePage from "./client/profile/profile";
 
 // @ts-ignore
 // const PrivateRoute = ({ children, redirectTo }) => {
@@ -19,6 +20,7 @@ export function RoutesDefinided() {
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/anunciar" element={<AnunciePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/login-adm" element={<LoginAdm isLoggedIn={false} setIsLoggedIn={function (value: React.SetStateAction<boolean>): void {
           throw new Error("Function not implemented.");
         } } />} />

@@ -86,7 +86,7 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
           }}
           onClick={onOpen}
         >
-          Já possui conta ? Entre!
+          Entrar na minha conta
         </Button>
       )}
 
