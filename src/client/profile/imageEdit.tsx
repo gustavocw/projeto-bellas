@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useToast } from "@chakra-ui/react";
+import { Button, Flex, useToast } from "@chakra-ui/react";
 import "./style/imageEdit.css";
 import api from "../../services/api";
+
+interface EscortImage {
+  id: string;
+  filename: string;
+  urlPhoto: string;
+  escortId: string;
+}
+
+interface User {
+  imagesEscort: EscortImage[];
+}
 
 const EditImage: React.FC = () => {
   const [user, setUser] = useState<User>({
     imagesEscort: [
       {
         id: "",
+        filename: "",
         urlPhoto: "",
         escortId: "",
       },
     ],
   });
 
-  interface EscortImages {
-    id: string;
-    urlPhoto: string;
-    escortId: string;
-  }
+  const [selectedImage, setSelectedImage] = useState<File>();
 
-  interface User {
-    imagesEscort: EscortImages[];
-  }
+  const toast = useToast();
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -33,8 +39,14 @@ const EditImage: React.FC = () => {
         .get("/escort/list", config)
         .then((response) => {
           const userData = response.data;
-          console.log(userData);
-          setUser(userData);
+          const imagesWithIds = userData.imagesEscort.map((image: any) => {
+            return {
+              ...image,
+              id: image.id,
+              filename: image.filename,
+            };
+          });
+          setUser({ imagesEscort: imagesWithIds });
         })
         .catch((error) => console.error(error));
     } else {
@@ -42,59 +54,87 @@ const EditImage: React.FC = () => {
     }
   }, []);
 
-  const [images, setImages] = useState<File[]>([]);
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    setSelectedImage(selectedFile);
+  };
 
-
-  const handleImageEdit = async (index: number) => {
-    const selectedImage = images[index];
-    const newImage = await selectImageFromDevice();
-    if (newImage) {
-      images[index] = newImage;
-      setImages([...images]);
-      setUser((prevState) => {
-        const updatedImages = [...prevState.imagesEscort];
-        updatedImages[index].urlPhoto = URL.createObjectURL(newImage);
-        return { ...prevState, imagesEscort: updatedImages };
-      });
+  const handleImageSubmit = (oldImageId: string, oldImageFilename: string) => {
+    const token = Cookies.get("token");
+    if (!token) {
+      console.log("Token not found!");
+      return;
     }
+
+    const formData = new FormData();
+    if (selectedImage) {
+      formData.append("file", selectedImage);
+    }
+    formData.append("filename", oldImageFilename);
+    formData.append("imageId", oldImageId);
+
+    console.log("Campos enviados para a API:");
+    console.log("imageId:", oldImageId);
+    console.log("filename:", oldImageFilename);
+    console.log("file:", selectedImage);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    api
+      .post("/update/images", formData, config)
+      .then(() => {
+        toast({
+          title: "Imagem alterada com sucesso",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      })
+      .catch((error) => {
+        toast({
+          title: "Erro ao alterar imagem",
+          description: error.message,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
   };
-  
-  const selectImageFromDevice = (): Promise<File | null> => {
-    return new Promise((resolve) => {
-      const input = document.createElement("input");
-      input.type = "file";
-      input.accept = "image/*";
-      input.onchange = (event: Event) => {
-        const files = (event.target as HTMLInputElement).files;
-        if (files && files.length > 0) {
-          resolve(files[0]);
-        } else {
-          resolve(null);
-        }
-      };
-      input.click();
-    });
-  };
-  
 
   return (
-    <div className="images-render">
-      {user.imagesEscort.map((imagem, index) => (
-        <img
-          key={index}
-          className="imagens-profile"
-          style={{
-            flexWrap: "wrap",
-            width: "220px",
-            height: "250px",
-            margin: "1px",
-          }}
-          src={imagem.urlPhoto}
-          alt={`Imagem ${index + 1}`}
-          onClick={() => handleImageEdit(index)}
-        />
+    <Flex className="images-render">
+      {user.imagesEscort.map((image) => (
+        <div key={image.id} className="image-container">
+          <img
+            className="image-profile"
+            src={image.urlPhoto}
+            alt="Foto da acompanhante"
+          />
+          <label className="btn-change">
+            Nova Imagem
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+            />
+          </label>
+          <Button
+            bg="#eb72ef"
+            color="#fff"
+            _hover={{ color: '#eb72ef', backgroundColor: '#fff' }}
+            className="btn-save"
+            onClick={() => handleImageSubmit(image.id, image.filename)}
+          >
+            Confirmar
+          </Button>
+        </div>
       ))}
-    </div>
+    </Flex>
   );
 };
 
