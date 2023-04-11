@@ -16,10 +16,9 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import RegisterDialogUser from "../../components/RegisterDialog/RegisterUser";
-import LoginDialogUser from "../../components/LoginDialog/LoginUser";
 import Cookies from "js-cookie";
 import Loading from "../../components/loading/loading";
+import EditImage from "./imageEdit";
 
 export default function ProfilePage(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,45 +35,40 @@ export default function ProfilePage(): JSX.Element {
   const [piercing, setPiercing] = useState(0);
 
   const toast = useToast();
-  const token = Cookies.get("token");
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleEditar = () => {
-    uploadImages();
     const token = Cookies.get("token");
+    const dataToSend = {
+      price: price || user.dataEscort[0].price,
+      description: description || user.dataEscort[0].description,
+      contact: contact || user.dataEscort[0].contact,
+      type: type || user.dataEscort[0].type,
+      eyes: eyes || user.dataEscort[0].eyes,
+      tatoo: tatoo || user.dataEscort[0].tatoo,
+      piercing: piercing || user.dataEscort[0].piercing,
+      weight: weight || user.dataEscort[0].weight,
+      age: age || user.dataEscort[0].age,
+      height: height || user.dataEscort[0].height,
+      obsScheduling: obsScheduling || user.dataEscort[0].obsScheduling,
+    };
     api
-      .post(
-        "/description/create",
-        {
-          price,
-          description,
-          contact,
-          type,
-          eyes,
-          tatoo,
-          piercing,
-          weight,
-          age,
-          height,
-          obsScheduling,
+      .post("/update/description", dataToSend, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      })
       .then((response) => {
         toast({
-          title: "ANUNCIO ENVIADO PARA ANÁLISE",
-          description: "Verifique sua caixa de email",
-          status: "warning",
+          title: "ANUNCIO EDITADO COM SUCESSO",
+          status: "success",
           duration: 3000,
           isClosable: true,
         });
       })
       .catch((error) => {
         toast({
-          title: "Falha ao anunciar",
+          title: "Falha ao editar",
           description: "verifique seu login",
           status: "error",
           duration: 5000,
@@ -82,8 +76,6 @@ export default function ProfilePage(): JSX.Element {
         });
       });
   };
-
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -112,12 +104,11 @@ export default function ProfilePage(): JSX.Element {
     for (let i = 0; i < images.length; i++) {
       const data = new FormData();
       data.append("file", images[i]);
-      const response = await api.post("/upload/images", data, {
+      const response = await api.post("/update/images", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response);
       await new Promise((resolve) => setTimeout(resolve, 2000));
     }
     setSendingImages(false);
@@ -131,33 +122,97 @@ export default function ProfilePage(): JSX.Element {
     });
   };
 
+  interface EscortData {
+    price: string;
+    description: string;
+    contact: string;
+    type: string;
+    eyes: string;
+    weight: string;
+    height: string;
+    obsScheduling: string;
+    age: number;
+    tatoo: number;
+    piercing: number;
+  }
+
+  interface EscortImages {
+    id: string;
+    urlPhoto: string;
+    escortId: string;
+  }
+
+  interface User {
+    city: string;
+    sexo: string;
+    name: string;
+    imagesEscort: EscortImages[];
+    dataEscort: EscortData[];
+  }
+
+  const [user, setUser] = useState<User>({
+    city: "",
+    sexo: "",
+    name: "",
+    dataEscort: [
+      {
+        price: "",
+        description: "",
+        contact: "",
+        type: "",
+        eyes: "",
+        weight: "",
+        height: "",
+        obsScheduling: "",
+        age: 0,
+        tatoo: 0,
+        piercing: 0,
+      },
+    ],
+    imagesEscort: [
+      {
+        id: "",
+        urlPhoto: "",
+        escortId: "",
+      },
+    ],
+  });
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      api
+        .get("/escort/list", config)
+        .then((response) => {
+          const userData = response.data;
+          console.log(userData);
+          setUser(userData);
+        })
+        .catch((error) => console.error(error));
+    } else {
+      console.log("Token not found!");
+    }
+  }, []);
+
   return (
-    <div className="container">
+    <div className="container-profile">
       {isLoading && <Loading />}
       <Header />
-      <div className="content">
-        <div className="anuncio">
-          <Flex className="all-cards" bg="white">
+      <div className="content-profile">
+        <div className="anuncio-profile">
+          <Flex className="all-cards-profile" bg="white">
             <Stack
-              className="all"
+              className="all-profile"
               spacing={6}
               maxW={"lg"}
               bg={useColorModeValue("white", "gray.700")}
               rounded={"xl"}
               p="12"
             >
-              <Center className="campos-images">
-                <img
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    width: "220px",
-                    height: "250px",
-                    margin: "1px",
-                  }}
-                  src={"url"}
-                />
-              </Center>
+              <Flex className="campos-images-profile">
+                <EditImage />
+              </Flex>
               <FormControl id="userName">
                 <Stack direction={["column"]} spacing={6}>
                   <Center></Center>
@@ -194,9 +249,9 @@ export default function ProfilePage(): JSX.Element {
                 </Stack>
               </FormControl>
             </Stack>
-            <div className="formularios">
+            <div className="formularios-profile">
               <Stack
-                className="all"
+                className="all-profile"
                 spacing={6}
                 maxW={"lg"}
                 bg={useColorModeValue("white", "gray.700")}
@@ -206,39 +261,68 @@ export default function ProfilePage(): JSX.Element {
                 <FormLabel>Fale um pouco de sí (*)</FormLabel>
                 <Center>
                   <Textarea
+                    _placeholder={{ color: "black" }}
+                    placeholder={user.dataEscort[0].description}
                     value={description}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                       setDescription(e.target.value)
                     }
                   />
                 </Center>
+                {/* <FormControl id="city" isRequired>
+                  <FormLabel>City</FormLabel>
+                  <Input
+                    placeholder={user.city}
+                    _placeholder={{ color: "black" }}
+                    type="text"
+                    value={city}
+                    onChange={(e) => setUser({ ...user, city: e.target.value })}
+                  />
+                </FormControl> */}
                 <FormControl id="idade" isRequired>
                   <FormLabel>Idade</FormLabel>
                   <Input
-                    placeholder="19, 25..."
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={String(user.dataEscort[0].age)}
                     type="number"
                     value={age}
                     onChange={(event) => setAge(parseInt(event.target.value))}
                   />
                 </FormControl>
+                <FormControl id="olhos" isRequired>
+                  <FormLabel>Olhos</FormLabel>
+                  <Input
+                    placeholder={user.dataEscort[0].eyes}
+                    _placeholder={{ color: "black" }}
+                    type="text"
+                    value={eyes}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEyes(e.target.value)
+                    }
+                  />
+                </FormControl>
+              </Stack>
+              <Stack
+                className="all-profile"
+                spacing={6}
+                maxW={"lg"}
+                bg={useColorModeValue("white", "gray.700")}
+                rounded={"xl"}
+                p="12"
+              >
                 <FormControl id="userName" isRequired>
                   <FormLabel>Preço</FormLabel>
                   <Input
-                    placeholder="Ex:€100"
-                    _placeholder={{ color: "gray.500" }}
-                    type="text"
-                    value={price}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setPrice(e.target.value)
-                    }
+                    _placeholder={{ color: "black" }}
+                    type="number"
+                    placeholder={user.dataEscort[0].price}
+                    onChange={(event) => setPrice(event.target.value)}
                   />
                 </FormControl>
                 <FormControl id="password" isRequired>
                   <FormLabel>Contacto</FormLabel>
                   <Input
-                    placeholder="Ex: 932123123"
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={user.dataEscort[0].contact}
+                    _placeholder={{ color: "black" }}
                     type="text"
                     value={contact}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -249,8 +333,8 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="userName" isRequired>
                   <FormLabel>Tipo</FormLabel>
                   <Input
-                    placeholder="Loira, Morena..."
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={user.dataEscort[0].type}
+                    _placeholder={{ color: "black" }}
                     type="text"
                     value={type}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -258,32 +342,11 @@ export default function ProfilePage(): JSX.Element {
                     }
                   />
                 </FormControl>
-                <FormControl id="olhos" isRequired>
-                  <FormLabel>Olhos</FormLabel>
-                  <Input
-                    placeholder="Azuis, Castanhos..."
-                    _placeholder={{ color: "gray.500" }}
-                    type="text"
-                    value={eyes}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setEyes(e.target.value)
-                    }
-                  />
-                </FormControl>
-              </Stack>
-              <Stack
-                className="all"
-                spacing={6}
-                maxW={"lg"}
-                bg={useColorModeValue("white", "gray.700")}
-                rounded={"xl"}
-                p="12"
-              >
                 <FormControl id="tatoo" isRequired>
                   <FormLabel>Qtd. Tatuagens</FormLabel>
                   <Input
-                    placeholder="0, 1, 2..."
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={user.dataEscort[0].tatoo.toString()}
+                    _placeholder={{ color: "black" }}
                     type="number"
                     value={tatoo}
                     onChange={(event) => setTatoo(parseInt(event.target.value))}
@@ -292,8 +355,8 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="manequim" isRequired>
                   <FormLabel>Qtd. Piercings</FormLabel>
                   <Input
-                    placeholder="0, 1, 2..."
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={user.dataEscort[0].piercing.toString()}
+                    _placeholder={{ color: "black" }}
                     type="number"
                     value={piercing}
                     onChange={(event) =>
@@ -301,11 +364,20 @@ export default function ProfilePage(): JSX.Element {
                     }
                   />
                 </FormControl>
+              </Stack>
+              <Stack
+                className="all-profile"
+                spacing={6}
+                maxW={"lg"}
+                bg={useColorModeValue("white", "gray.700")}
+                rounded={"xl"}
+                p="12"
+              >
                 <FormControl id="altura" isRequired>
                   <FormLabel>Altura</FormLabel>
                   <Input
-                    placeholder="1,65..."
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={user.dataEscort[0].height}
+                    _placeholder={{ color: "black" }}
                     type="text"
                     value={height}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -316,8 +388,8 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="peso" isRequired>
                   <FormLabel>Peso</FormLabel>
                   <Input
-                    placeholder="58, 60kg..."
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={user.dataEscort[0].weight}
+                    _placeholder={{ color: "black" }}
                     type="text"
                     value={weight}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -328,8 +400,8 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="peso" isRequired>
                   <FormLabel>Informe Horário e Local em que atende</FormLabel>
                   <Input
-                    placeholder="Ex: Ap 123, somente a noite..."
-                    _placeholder={{ color: "gray.500" }}
+                    placeholder={user.dataEscort[0].obsScheduling}
+                    _placeholder={{ color: "black" }}
                     type="text"
                     value={obsScheduling}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -337,22 +409,17 @@ export default function ProfilePage(): JSX.Element {
                     }
                   />
                 </FormControl>
-                <Stack spacing={6} direction={["column", "row"]}>
-                  {isLoggedIn && (
-                    <Button
-                      onClick={handleEditar}
-                      disabled={!isLoggedIn}
-                      bg={"pink.400"}
-                      color={"white"}
-                      w="full"
-                      _hover={{
-                        bg: "pink.500",
-                      }}
-                    >
-                      Concluir
-                    </Button>
-                  )}
-                </Stack>
+                <Button
+                  onClick={handleEditar}
+                  bg={"pink.400"}
+                  color={"white"}
+                  w="full"
+                  _hover={{
+                    bg: "pink.500",
+                  }}
+                >
+                  Editar dados
+                </Button>
               </Stack>
             </div>
           </Flex>

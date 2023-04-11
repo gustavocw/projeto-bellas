@@ -1,0 +1,10 @@
+.images-render{
+    display: flex !important;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 768px) and (min-width: 200px)  {
+    .images-render{
+        display: block !important;
+    }
+}

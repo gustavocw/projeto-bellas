@@ -1,42 +1,44 @@
-.foto{
+.foto-profile{
     background-color: #e47ce8;
     color: #fff;
 }
 
-.informe{
+.informe-profile{
     color: #e47ce8;
 }
 
-.all{
+
+.all-profile{
     width: 100%;
     height: 100%;
     display: flex;
 }
 
-.all-cards{
+.all-cards-profile{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center !important;
 }
 
-.formularios{
+.formularios-profile{
     display: flex !important;
+    width: 100%;
 }
 
-.campos-images{
-    display: flex;
-    flex-wrap: wrap;
-}
 
 @media screen and (max-width: 768px) and (min-width: 200px)  {
-    .all-cards{
+    .all-cards-profile{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center !important;
     }
-    .formularios{
+    .formularios-profile{
         display: block !important;
     }
+}
+
+.imagens-profile{
+    display: flex !important;
 }
