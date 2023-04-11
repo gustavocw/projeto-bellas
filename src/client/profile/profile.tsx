@@ -204,11 +204,11 @@ export default function ProfilePage(): JSX.Element {
           <Flex className="all-cards-profile" bg="white">
             <Stack
               className="all-profile"
-              spacing={6}
-              maxW={"lg"}
+              spacing={15}
+              maxW={"xxl"}
               bg={useColorModeValue("white", "gray.700")}
               rounded={"xl"}
-              p="12"
+              p="30"
             >
               <Flex className="campos-images-profile">
                 <EditImage />
