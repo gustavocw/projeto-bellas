@@ -86,6 +86,97 @@ const HomePage = () => {
     }
   };
 
+  async function fetchData() {
+    const response = await api.get("/");
+    setAcompanhantes(response.data);
+  
+    const countCoimbra = response.data.filter(
+      (acompanhante: { city: string }) => acompanhante.city === "Coimbra"
+    ).length;
+    setQuantidadeCoimbra(countCoimbra);
+  
+    const countLisboa = response.data.filter(
+      (acompanhante: { city: string }) => acompanhante.city === "Lisboa"
+    ).length;
+    setQuantidadeLisboa(countLisboa);
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await api.get("/");
+      setAcompanhantes(response.data);
+  
+      const countCoimbra = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Coimbra"
+      ).length;
+      setQuantidadeCoimbra(countCoimbra);
+  
+      const countLisboa = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Lisboa"
+      ).length;
+      setQuantidadeLisboa(countLisboa);
+      const countAveiro = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Aveiro"
+      ).length;
+      setQuantidadeAveiro(countAveiro);
+    
+      const countBraganca = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Bragança"
+      ).length;
+      setQuantidadeBraganca(countBraganca);
+    
+      const countCasteloBranco = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Castelo Branco"
+      ).length;
+      setQuantidadeCasteloBranco(countCasteloBranco);
+    
+      const countEvora = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Évora"
+      ).length;
+      setQuantidadeEvora(countEvora);
+    
+      const countFaro = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Faro"
+      ).length;
+      setQuantidadeFaro(countFaro);
+    
+      const countGuarda = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Guarda"
+      ).length;
+      setQuantidadeGuarda(countGuarda);
+    
+      const countLeiria = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Leiria"
+      ).length;
+      setQuantidadeLeiria(countLeiria);
+    
+      const countBraga = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Braga"
+      ).length;
+      setQuantidadeBraga(countBraga);
+    
+      const countPorto = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Porto"
+      ).length;
+      setQuantidadePorto(countPorto);
+    }
+    fetchData();
+  }, []);
+  
+  
+
+  const [quantidadeCoimbra, setQuantidadeCoimbra] = useState<number>(0);
+  const [quantidadeLisboa, setQuantidadeLisboa] = useState<number>(0);
+  const [quantidadeAveiro, setQuantidadeAveiro] = useState<number>(0);
+  const [quantidadeBraganca, setQuantidadeBraganca] = useState<number>(0);
+  const [quantidadeCasteloBranco, setQuantidadeCasteloBranco] = useState<number>(0);
+  const [quantidadeEvora, setQuantidadeEvora] = useState<number>(0);
+  const [quantidadeFaro, setQuantidadeFaro] = useState<number>(0);
+  const [quantidadeGuarda, setQuantidadeGuarda] = useState<number>(0);
+  const [quantidadeLeiria, setQuantidadeLeiria] = useState<number>(0);
+  const [quantidadeBraga, setQuantidadeBraga] = useState<number>(0);
+  const [quantidadePorto, setQuantidadePorto] = useState<number>(0);
+
   return (
     <div className="container">
       <Header />
@@ -116,54 +207,35 @@ const HomePage = () => {
                 Aveiro
               </option>
               <option className="valores-local" value="Bragança">
-                Bragança
+                Bragança ({quantidadeBraganca})
               </option>
               <option className="valores-local" value="Castelo Branco">
-                Castelo Branco
+                Castelo Branco ({quantidadeCasteloBranco})
               </option>
               <option className="valores-local" value="Coimbra">
-                Coimbra
+                Coimbra ({quantidadeCoimbra})
               </option>
               <option className="valores-local" value="Évora">
-                Évora
+                Évora ({quantidadeEvora})
               </option>
               <option className="valores-local" value="Faro">
-                Faro
+                Faro ({quantidadeFaro})
               </option>
               <option className="valores-local" value="Guarda">
-                Guarda
+                Guarda ({quantidadeGuarda})
               </option>
               <option className="valores-local" value="Lisboa">
-                Lisboa
+                Lisboa ({quantidadeLisboa})
               </option>
               <option className="valores-local" value="Leiria">
-                Leiria
+                Leiria ({quantidadeLeiria})
               </option>
               <option className="valores-local" value="Braga">
-                Braga
-              </option>
-              <option className="valores-local" value="Portalegre">
-                Portalegre
+                Braga ({quantidadeBraga})
               </option>
               <option className="valores-local" value="Porto">
-                Porto
+                Porto ({quantidadePorto})
               </option>
-              <option className="valores-local" value="Santarém">
-                Santarém
-              </option>
-              <option className="valores-local" value="Setúbal">
-                Setúbal
-              </option>
-              <option className="valores-local" value="Viana do Castelo">
-                Viana do Castelo
-              </option>
-              <option className="valores-local" value="Vila Real">
-                Vila Real
-              </option>
-              <option className="valores-local" value="Viseu">
-                Viseu
-              </option>
-              {/* Adicione outras opções para outras localizações */}
             </Select>
           </div>
           <div className="escolha">
