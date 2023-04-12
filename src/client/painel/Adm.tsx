@@ -62,7 +62,6 @@ const PainelAdm = () => {
       api.get('/escorts/all', config)
       .then(response => setAcompanhantes(response.data))
       .catch(error => console.error(error));
-
   } else {
     console.log('Token not found!');
   }

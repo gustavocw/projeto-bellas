@@ -44,18 +44,19 @@ export default function Header() {
 
   return (
     <>
-      <Box className="display" justifyContent={'space-between'} bg={useColorModeValue("blackAlpha.900", "gray.900")} px={4}>
-      <HStack spacing={8} alignItems={"center"}>
-            <HStack
-              as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
-            </HStack>
+      <Box
+        className="display"
+        justifyContent={"space-between"}
+        bg={useColorModeValue("blackAlpha.900", "gray.900")}
+        px={4}
+      >
+        <HStack spacing={8} alignItems={"center"}>
+          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+            {Links.map((link) => (
+              <NavLink key={link}>{link}</NavLink>
+            ))}
           </HStack>
+        </HStack>
         <Flex
           className="navbar"
           h={16}
@@ -69,18 +70,18 @@ export default function Header() {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <Link
-            mx='2'
-            onClick={onOpen}
-            href="/anunciar"
-            size={"sm"}
-            color="#fff"
-            className="anunciar"
-          >
-            Anunciar
-          </Link>
           {isLoggedIn ? (
             <Flex>
+              <Link
+                mx="2"
+                onClick={onOpen}
+                href="/anunciar"
+                size={"sm"}
+                color="#fff"
+                className="anunciar"
+              >
+                Anunciar
+              </Link>
               <Link
                 fontSize={"14"}
                 onClick={onOpen}
@@ -99,7 +100,7 @@ export default function Header() {
                 style={{
                   backgroundColor: "#e048e0",
                   color: "#fff",
-                  fontWeight: 'normal'
+                  fontWeight: "normal",
                 }}
                 onClick={handleLogout}
               >

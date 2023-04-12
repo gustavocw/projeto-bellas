@@ -58,7 +58,6 @@ const HomePage = () => {
     async function fetchData() {
       const response = await api.get("/");
       setAcompanhantes(response.data);
-      console.log(response)
     }
     fetchData();
   }, []);
