@@ -87,7 +87,7 @@ import {
           <Button
             size={"sm"}
             mx="2"
-            px={'6'}
+            px={'1'}
             fontSize={'12'}
             style={{
               width: "100%",

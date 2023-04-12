@@ -83,7 +83,7 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
       {!isLoggedIn && (
         <Button
           size={"sm"}
-          px={"6"}
+          px={"2"}
           fontSize={"12"}
           style={{
             width: "100%",
@@ -92,7 +92,7 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
           }}
           onClick={onOpen}
         >
-          Entrar na minha conta
+          Entrar
         </Button>
       )}
 

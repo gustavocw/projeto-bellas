@@ -82,7 +82,7 @@ export default function Header() {
           {isLoggedIn ? (
             <Flex>
               <Link
-                fontSize={"17"}
+                fontSize={"14"}
                 onClick={onOpen}
                 href="/profile"
                 size={"sm"}
@@ -95,7 +95,7 @@ export default function Header() {
               <Button
                 className="sair"
                 size={"sm"}
-                fontSize={"17"}
+                fontSize={"14"}
                 style={{
                   backgroundColor: "#e048e0",
                   color: "#fff",
