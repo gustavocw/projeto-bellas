@@ -65,7 +65,7 @@ export default function AnunciePage(): JSX.Element {
       .then((response) => {
         toast({
           title: "ANUNCIO ENVIADO PARA ANÁLISE",
-          description: "Verifique sua caixa de email",
+          description: "Uma mensagem chegará no seu whatsapp quando for aprovado ou rejeitado",
           status: "warning",
           duration: 3000,
           isClosable: true,

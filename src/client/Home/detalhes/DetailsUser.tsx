@@ -154,11 +154,11 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               {acompanhante.name}
               {" - "}
               <span className="age">
-                {acompanhante.dataEscort[0]?.age} anos
+                {acompanhante.dataEscort?.age} anos
               </span>
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
-              ¢{acompanhante.dataEscort[0]?.price}
+              ¢{acompanhante.dataEscort?.price}
             </Text>
           </Box>
 
@@ -173,7 +173,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
               <Text color="#fff" fontSize={"2xl"} fontWeight={"300"}>
-                {acompanhante.dataEscort[0]?.description}
+                {acompanhante.dataEscort?.description}
               </Text>
             </VStack>
             <Box>
@@ -203,25 +203,25 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     <Text as={"span"} fontWeight={"bold"}>
                       Contacto:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.contact}
+                    {acompanhante.dataEscort?.contact}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Tipo:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.type}
+                    {acompanhante.dataEscort?.type}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Olhos:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.eyes}
+                    {acompanhante.dataEscort?.eyes}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Qtd. tatuagens:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.tatoo}
+                    {acompanhante.dataEscort?.tatoo}
                   </ListItem>
                 </div>
                 <div className="list">
@@ -229,19 +229,19 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     <Text as={"span"} fontWeight={"bold"}>
                       Qtd. Piercings:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.piercing}
+                    {acompanhante.dataEscort?.piercing}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Altura:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.height}
+                    {acompanhante.dataEscort?.height}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Peso:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.weight} kg
+                    {acompanhante.dataEscort?.weight} kg
                   </ListItem>
                 </div>
                 <div className="separado">
@@ -249,7 +249,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}
-                    {acompanhante.dataEscort[0]?.obsScheduling}
+                    {acompanhante.dataEscort?.obsScheduling}
                   </ListItem>
                 </div>
               </List>
@@ -273,7 +273,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               transform: "translateY(2px)",
               boxShadow: "lg",
             }}
-            href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort[0]?.contact}`}
+            href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}
             isExternal
           >
             <Text

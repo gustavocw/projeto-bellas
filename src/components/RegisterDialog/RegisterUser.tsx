@@ -123,11 +123,11 @@ import {
               </FormControl>
 
               <FormControl>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Tel</FormLabel>
                 <Input
-                  type="email"
+                  type="text"
                   ref={initialRef}
-                  placeholder="EX: natalia@gmail.com"
+                  placeholder="EX: 932136875"
                   value={email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />

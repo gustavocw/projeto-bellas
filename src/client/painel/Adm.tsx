@@ -42,8 +42,9 @@ export interface Escort {
     height: string;
     obsScheduling: string;
     age: number;
-  }[];
+  };
 }
+
 
 const PainelAdm = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);

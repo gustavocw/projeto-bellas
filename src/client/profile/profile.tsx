@@ -40,17 +40,17 @@ export default function ProfilePage(): JSX.Element {
   const handleEditar = () => {
     const token = Cookies.get("token");
     const dataToSend = {
-      price: price || user.dataEscort[0].price,
-      description: description || user.dataEscort[0].description,
-      contact: contact || user.dataEscort[0].contact,
-      type: type || user.dataEscort[0].type,
-      eyes: eyes || user.dataEscort[0].eyes,
-      tatoo: tatoo || user.dataEscort[0].tatoo,
-      piercing: piercing || user.dataEscort[0].piercing,
-      weight: weight || user.dataEscort[0].weight,
-      age: age || user.dataEscort[0].age,
-      height: height || user.dataEscort[0].height,
-      obsScheduling: obsScheduling || user.dataEscort[0].obsScheduling,
+      price: price || user.dataEscort?.price,
+      description: description || user.dataEscort?.description,
+      contact: contact || user.dataEscort?.contact,
+      type: type || user.dataEscort?.type,
+      eyes: eyes || user.dataEscort?.eyes,
+      tatoo: tatoo || user.dataEscort?.tatoo,
+      piercing: piercing || user.dataEscort?.piercing,
+      weight: weight || user.dataEscort?.weight,
+      age: age || user.dataEscort?.age,
+      height: height || user.dataEscort?.height,
+      obsScheduling: obsScheduling || user.dataEscort?.obsScheduling,
     };
     api
       .post("/update/description", dataToSend, {
@@ -147,14 +147,14 @@ export default function ProfilePage(): JSX.Element {
     sexo: string;
     name: string;
     imagesEscort: EscortImages[];
-    dataEscort: EscortData[];
+    dataEscort: EscortData;
   }
 
   const [user, setUser] = useState<User>({
     city: "",
     sexo: "",
     name: "",
-    dataEscort: [
+    dataEscort:
       {
         price: "",
         description: "",
@@ -168,7 +168,6 @@ export default function ProfilePage(): JSX.Element {
         tatoo: 0,
         piercing: 0,
       },
-    ],
     imagesEscort: [
       {
         id: "",
@@ -262,7 +261,7 @@ export default function ProfilePage(): JSX.Element {
                 <Center>
                   <Textarea
                     _placeholder={{ color: "black" }}
-                    placeholder={user.dataEscort[0].description}
+                    placeholder={user.dataEscort?.description}
                     value={description}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                       setDescription(e.target.value)
@@ -282,7 +281,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="idade" isRequired>
                   <FormLabel>Idade</FormLabel>
                   <Input
-                    placeholder={String(user.dataEscort[0].age)}
+                    placeholder={String(user.dataEscort?.age)}
                     type="number"
                     value={age}
                     onChange={(event) => setAge(parseInt(event.target.value))}
@@ -291,7 +290,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="olhos" isRequired>
                   <FormLabel>Olhos</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].eyes}
+                    placeholder={user.dataEscort?.eyes}
                     _placeholder={{ color: "black" }}
                     type="text"
                     value={eyes}
@@ -314,14 +313,14 @@ export default function ProfilePage(): JSX.Element {
                   <Input
                     _placeholder={{ color: "black" }}
                     type="number"
-                    placeholder={user.dataEscort[0].price}
+                    placeholder={user.dataEscort?.price}
                     onChange={(event) => setPrice(event.target.value)}
                   />
                 </FormControl>
                 <FormControl id="password" isRequired>
                   <FormLabel>Contacto</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].contact}
+                    placeholder={user.dataEscort?.contact}
                     _placeholder={{ color: "black" }}
                     type="text"
                     value={contact}
@@ -333,7 +332,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="userName" isRequired>
                   <FormLabel>Tipo</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].type}
+                    placeholder={user.dataEscort?.type}
                     _placeholder={{ color: "black" }}
                     type="text"
                     value={type}
@@ -345,7 +344,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="tatoo" isRequired>
                   <FormLabel>Qtd. Tatuagens</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].tatoo.toString()}
+                    placeholder={user.dataEscort?.tatoo.toString()}
                     _placeholder={{ color: "black" }}
                     type="number"
                     value={tatoo}
@@ -355,7 +354,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="manequim" isRequired>
                   <FormLabel>Qtd. Piercings</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].piercing.toString()}
+                    placeholder={user.dataEscort?.piercing.toString()}
                     _placeholder={{ color: "black" }}
                     type="number"
                     value={piercing}
@@ -376,7 +375,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="altura" isRequired>
                   <FormLabel>Altura</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].height}
+                    placeholder={user.dataEscort?.height}
                     _placeholder={{ color: "black" }}
                     type="text"
                     value={height}
@@ -388,7 +387,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="peso" isRequired>
                   <FormLabel>Peso</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].weight}
+                    placeholder={user.dataEscort?.weight}
                     _placeholder={{ color: "black" }}
                     type="text"
                     value={weight}
@@ -400,7 +399,7 @@ export default function ProfilePage(): JSX.Element {
                 <FormControl id="peso" isRequired>
                   <FormLabel>Informe Horário e Local em que atende</FormLabel>
                   <Input
-                    placeholder={user.dataEscort[0].obsScheduling}
+                    placeholder={user.dataEscort?.obsScheduling}
                     _placeholder={{ color: "black" }}
                     type="text"
                     value={obsScheduling}

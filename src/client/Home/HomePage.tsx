@@ -41,8 +41,9 @@ export interface Escort {
     height: string;
     obsScheduling: string;
     age: number;
-  }[];
+  };
 }
+
 
 const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
@@ -57,6 +58,7 @@ const HomePage = () => {
     async function fetchData() {
       const response = await api.get("/");
       setAcompanhantes(response.data);
+      console.log(response)
     }
     fetchData();
   }, []);
@@ -317,7 +319,7 @@ const HomePage = () => {
           ) : (
             <div className="card">
               {filterAcompanhantes().map((acompanhante) => (
-                <Flex className="anuncio" key={acompanhante.id}>
+                <Flex className="anuncio" key={acompanhante?.id}>
                   <Link
                     onClick={() => {
                       click(acompanhante);
@@ -331,7 +333,7 @@ const HomePage = () => {
                     shadow="lg"
                     position="relative"
                   >
-                    {acompanhante.name && (
+                    {acompanhante?.name && (
                       <div className="on">
                         <Circle
                           size="10px"
@@ -347,7 +349,7 @@ const HomePage = () => {
                       className="img-card-home"
                       maxWidth={"220px"}
                       maxHeight={"280px"}
-                      src={acompanhante.imagesEscort[0]?.urlPhoto}
+                      src={acompanhante?.imagesEscort[0]?.urlPhoto}
                       roundedTop="lg"
                     />
 
@@ -359,7 +361,7 @@ const HomePage = () => {
                           fontSize="0.8em"
                           colorScheme="red"
                         >
-                          {acompanhante.city}
+                          {acompanhante?.city}
                         </Badge>
                       </Box>
                       <Flex
@@ -374,7 +376,7 @@ const HomePage = () => {
                           lineHeight="tight"
                           isTruncated
                         >
-                          {acompanhante.name}
+                          {acompanhante?.name}
                         </Box>
                       </Flex>
                     </Box>
