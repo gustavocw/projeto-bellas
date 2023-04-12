@@ -62,6 +62,7 @@ import {
             <Link href={'#'}>Início</Link>
             <Link href={'#'}>Contato</Link>
             <Link href={'#'}>Sobre</Link>
+            <Link href={'/administracao'}>Administração</Link>
           </Stack>
         </Container>
   
