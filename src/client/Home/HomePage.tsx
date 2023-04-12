@@ -89,12 +89,12 @@ const HomePage = () => {
   async function fetchData() {
     const response = await api.get("/");
     setAcompanhantes(response.data);
-  
+
     const countCoimbra = response.data.filter(
       (acompanhante: { city: string }) => acompanhante.city === "Coimbra"
     ).length;
     setQuantidadeCoimbra(countCoimbra);
-  
+
     const countLisboa = response.data.filter(
       (acompanhante: { city: string }) => acompanhante.city === "Lisboa"
     ).length;
@@ -105,56 +105,58 @@ const HomePage = () => {
     async function fetchData() {
       const response = await api.get("/");
       setAcompanhantes(response.data);
-  
+
       const countCoimbra = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Coimbra"
       ).length;
       setQuantidadeCoimbra(countCoimbra);
-  
+
       const countLisboa = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Lisboa"
       ).length;
       setQuantidadeLisboa(countLisboa);
+
       const countAveiro = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Aveiro"
       ).length;
       setQuantidadeAveiro(countAveiro);
-    
+
       const countBraganca = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Bragança"
       ).length;
       setQuantidadeBraganca(countBraganca);
-    
+
       const countCasteloBranco = response.data.filter(
-        (acompanhante: { city: string }) => acompanhante.city === "Castelo Branco"
+        (acompanhante: { city: string }) =>
+          acompanhante.city === "Castelo Branco"
       ).length;
       setQuantidadeCasteloBranco(countCasteloBranco);
-    
+
       const countEvora = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Évora"
       ).length;
       setQuantidadeEvora(countEvora);
-    
+
       const countFaro = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Faro"
       ).length;
       setQuantidadeFaro(countFaro);
-    
+
       const countGuarda = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Guarda"
       ).length;
       setQuantidadeGuarda(countGuarda);
-    
+
       const countLeiria = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Leiria"
       ).length;
       setQuantidadeLeiria(countLeiria);
-    
+
       const countBraga = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Braga"
       ).length;
       setQuantidadeBraga(countBraga);
-    
+
       const countPorto = response.data.filter(
         (acompanhante: { city: string }) => acompanhante.city === "Porto"
       ).length;
@@ -162,14 +164,13 @@ const HomePage = () => {
     }
     fetchData();
   }, []);
-  
-  
 
   const [quantidadeCoimbra, setQuantidadeCoimbra] = useState<number>(0);
   const [quantidadeLisboa, setQuantidadeLisboa] = useState<number>(0);
   const [quantidadeAveiro, setQuantidadeAveiro] = useState<number>(0);
   const [quantidadeBraganca, setQuantidadeBraganca] = useState<number>(0);
-  const [quantidadeCasteloBranco, setQuantidadeCasteloBranco] = useState<number>(0);
+  const [quantidadeCasteloBranco, setQuantidadeCasteloBranco] =
+    useState<number>(0);
   const [quantidadeEvora, setQuantidadeEvora] = useState<number>(0);
   const [quantidadeFaro, setQuantidadeFaro] = useState<number>(0);
   const [quantidadeGuarda, setQuantidadeGuarda] = useState<number>(0);
@@ -200,39 +201,61 @@ const HomePage = () => {
               <option className="valores-local" value="Todos">
                 Localização
               </option>
-              <option className="valores-local" value="Aveiro">
-                Aveiro ({quantidadeAveiro})
-              </option>
-              <option className="valores-local" value="Bragança">
-                Bragança ({quantidadeBraganca})
-              </option>
-              <option className="valores-local" value="Castelo Branco">
-                Castelo Branco ({quantidadeCasteloBranco})
-              </option>
-              <option className="valores-local" value="Coimbra">
-                Coimbra ({quantidadeCoimbra})
-              </option>
-              <option className="valores-local" value="Évora">
-                Évora ({quantidadeEvora})
-              </option>
-              <option className="valores-local" value="Faro">
-                Faro ({quantidadeFaro})
-              </option>
-              <option className="valores-local" value="Guarda">
-                Guarda ({quantidadeGuarda})
-              </option>
-              <option className="valores-local" value="Lisboa">
-                Lisboa ({quantidadeLisboa})
-              </option>
-              <option className="valores-local" value="Leiria">
-                Leiria ({quantidadeLeiria})
-              </option>
-              <option className="valores-local" value="Braga">
-                Braga ({quantidadeBraga})
-              </option>
-              <option className="valores-local" value="Porto">
-                Porto ({quantidadePorto})
-              </option>
+              {![0].includes(quantidadeAveiro) && (
+                <option className="valores-local" value="Aveiro">
+                  Aveiro ({quantidadeAveiro})
+                </option>
+              )}
+              {![0].includes(quantidadeBraganca) && (
+                <option className="valores-local" value="Bragança">
+                  Bragança ({quantidadeBraganca})
+                </option>
+              )}
+              {![0].includes(quantidadeCasteloBranco) && (
+                <option className="valores-local" value="Castelo Branco">
+                  Castelo Branco ({quantidadeCasteloBranco})
+                </option>
+              )}
+              {![0].includes(quantidadeCoimbra) && (
+                <option className="valores-local" value="Coimbra">
+                  Coimbra ({quantidadeCoimbra})
+                </option>
+              )}
+              {![0].includes(quantidadeEvora) && (
+                <option className="valores-local" value="Évora">
+                  Évora ({quantidadeEvora})
+                </option>
+              )}
+              {![0].includes(quantidadeFaro) && (
+                <option className="valores-local" value="Faro">
+                  Faro ({quantidadeFaro})
+                </option>
+              )}
+              {![0].includes(quantidadeGuarda) && (
+                <option className="valores-local" value="Guarda">
+                  Guarda ({quantidadeGuarda})
+                </option>
+              )}
+              {![0].includes(quantidadeLisboa) && (
+                <option className="valores-local" value="Lisboa">
+                  Lisboa ({quantidadeLisboa})
+                </option>
+              )}
+              {![0].includes(quantidadeLeiria) && (
+                <option className="valores-local" value="Leiria">
+                  Leiria ({quantidadeLeiria})
+                </option>
+              )}
+              {![0].includes(quantidadeBraga) && (
+                <option className="valores-local" value="Braga">
+                  Braga ({quantidadeBraga})
+                </option>
+              )}
+              {![0].includes(quantidadePorto) && (
+                <option className="valores-local" value="Porto">
+                  Porto ({quantidadePorto})
+                </option>
+              )}
             </Select>
           </div>
           <div className="escolha">
