@@ -200,11 +200,8 @@ const HomePage = () => {
               <option className="valores-local" value="Todos">
                 Localização
               </option>
-              <option className="valores-local" value="Todos">
-                Todos
-              </option>
               <option className="valores-local" value="Aveiro">
-                Aveiro
+                Aveiro ({quantidadeAveiro})
               </option>
               <option className="valores-local" value="Bragança">
                 Bragança ({quantidadeBraganca})
