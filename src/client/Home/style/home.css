@@ -33,6 +33,10 @@ body {
     background-color: #fff !important;
 }
 
+.anunciante-card{
+    text-decoration: none !important;
+}
+
 .apresentacao {
     text-align: center;
     font-size: 27px;
@@ -55,6 +59,7 @@ body {
 
 .img-card-home {
     object-fit: cover !important;
+    margin: auto;
 }
 
 

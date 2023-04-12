@@ -253,8 +253,8 @@ const HomePage = () => {
                     )}
                     <Image
                       className="img-card-home"
-                      maxWidth={"200px"}
-                      maxHeight={"250px"}
+                      maxWidth={"220px"}
+                      maxHeight={"280px"}
                       src={acompanhante.imagesEscort[0]?.urlPhoto}
                       roundedTop="lg"
                     />
