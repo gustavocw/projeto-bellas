@@ -32,6 +32,58 @@
 .listas{
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contatar{
+    background-color: #e47ce8;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid #e47ce8;
+}
+.contatar:hover{
+    background-color: #fff;
+    color: #e47ce8 !important;
+    text-decoration: none !important;
+}
+
+
+.ajustes{
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+}
+
+.rejeitar{
+    background-color: #d93232;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid #d93232;
+}
+.rejeitar:hover{
+    background-color: #fff;
+    color: #f03232 !important;
+    text-decoration: none !important;
+}
+
+.autorizar{
+    background-color: #3bd624;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid #3bd624;
+}
+.autorizar:hover{
+    background-color: #fff;
+    color: #5edb28 !important;
+    text-decoration: none !important;
 }
 
 @media screen and (max-width: 768px) and (min-width: 200px)  {

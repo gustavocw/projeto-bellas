@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import "./style/painel.css";
 import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
 import {
   Flex,
   Circle,
@@ -18,6 +17,7 @@ import {
 import DetailsUser from "./detalhes/DetailsUser";
 import LoginDialogAdm from "./LoginAdm";
 import Cookies from "js-cookie";
+import HeaderAdm from "../../components/HeaderAdm/HeaderAdm";
 
 export interface Escort {
   id: number;
@@ -49,28 +49,26 @@ export interface Escort {
   };
 }
 
-
 const PainelAdm = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedAcompanhante, setSelectedAcompanhante] =
     useState<Escort | null>(null);
   const [popup, setPopup] = useState(false);
   const [generoSelecionado, setGeneroSelecionado] = useState<string>("Todos");
 
-  const token = Cookies.get('token');
+  const token = Cookies.get("token");
   if (token) {
     const config = {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     };
-      api.get('/escorts/all', config)
-      .then(response => setAcompanhantes(response.data))
-      .catch(error => console.error(error));
+    api
+      .get("/escorts/all", config)
+      .then((response) => setAcompanhantes(response.data))
+      .catch((error) => console.error(error));
   } else {
-    console.log('Token not found!');
+    console.log("Token not found!");
   }
-  
-  
 
   const click = (acompanhante: Escort) => {
     setSelectedAcompanhante(acompanhante);
@@ -89,7 +87,7 @@ const PainelAdm = () => {
 
   return (
     <div className="container">
-      <Header />
+      <HeaderAdm />
       <div className="content">
         {popup && (
           <DetailsUser
@@ -151,84 +149,86 @@ const PainelAdm = () => {
             </Button>
           </div>
         </div>
-        <div className="card-content">
-          {filterAcompanhantes().length === 0 ? (
-            <div className="msg">
-              <div className="spinner">
-                <Spinner />
+        <div className="para-autorizar">
+          <div className="card-content">
+            {filterAcompanhantes().length === 0 ? (
+              <div className="msg">
+                <div className="spinner">
+                  <Spinner />
+                </div>
+                Ainda não possui acompanhantes nesta região
               </div>
-              Ainda não possui acompanhantes nesta região
-            </div>
-          ) : (
-            <div className="card">
-              {filterAcompanhantes().map((acompanhante) => (
-                <Flex
-                  maxWidth={"200px"}
-                  className="anuncio"
-                  key={acompanhante.id}
-                >
-                  <Link
-                    onClick={() => click(acompanhante)}
-                    className="anunciante"
-                    bg={useColorModeValue("gray.200", "gray.800")}
-                    maxW="sm"
-                    borderWidth="1px"
-                    rounded="lg"
-                    shadow="lg"
-                    position="relative"
+            ) : (
+              <div className="card">
+                {filterAcompanhantes().map((acompanhante) => (
+                  <Flex
+                    maxWidth={"200px"}
+                    className="anuncio"
+                    key={acompanhante.id}
                   >
-                    {acompanhante.name && (
-                      <div className="on">
-                        <Circle
-                          size="10px"
-                          position="absolute"
-                          top={2}
-                          left={2}
-                          bg="orange.400"
-                        />
-                        <Text mx="6">Aguardando autorização</Text>
-                      </div>
-                    )}
-                    <Image
-                      className="image-card-adm"
-                      width={'100%'}
-                      maxHeight={'250px'}
-                      src={acompanhante.imagesEscort[0]?.urlPhoto}
-                      roundedTop="lg"
-                    />
+                    <Link
+                      onClick={() => click(acompanhante)}
+                      className="anunciante"
+                      bg={useColorModeValue("gray.200", "gray.800")}
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      {acompanhante.name && (
+                        <div className="on">
+                          <Circle
+                            size="10px"
+                            position="absolute"
+                            top={2}
+                            left={2}
+                            bg="orange.400"
+                          />
+                          <Text mx="6">Aguardando autorização</Text>
+                        </div>
+                      )}
+                      <Image
+                        className="image-card-adm"
+                        width={"100%"}
+                        maxHeight={"250px"}
+                        src={acompanhante.imagesEscort[0]?.urlPhoto}
+                        roundedTop="lg"
+                      />
 
-                    <Box p="6">
-                      <Box display={"flex"} alignItems="baseline">
-                        <Badge
-                          rounded="full"
-                          px="2"
-                          fontSize="0.8em"
-                          colorScheme="red"
-                        >
-                          {acompanhante.city}
-                        </Badge>
-                      </Box>
-                      <Flex
-                        mt="1"
-                        justifyContent="space-between"
-                        alignContent="center"
-                      >
-                        <Box
-                          fontSize="1xl"
-                          fontWeight="semibold"
-                          as="h4"
-                          lineHeight="tight"
-                          isTruncated
-                        >
-                          {acompanhante.name}
+                      <Box p="6">
+                        <Box display={"flex"} alignItems="baseline">
+                          <Badge
+                            rounded="full"
+                            px="2"
+                            fontSize="0.8em"
+                            colorScheme="red"
+                          >
+                            {acompanhante.city}
+                          </Badge>
                         </Box>
-                      </Flex>
-                    </Box>
-                  </Link>
-                </Flex>
-              ))}
-            </div>
-          )}
+                        <Flex
+                          mt="1"
+                          justifyContent="space-between"
+                          alignContent="center"
+                        >
+                          <Box
+                            fontSize="1xl"
+                            fontWeight="semibold"
+                            as="h4"
+                            lineHeight="tight"
+                            isTruncated
+                          >
+                            {acompanhante.name}
+                          </Box>
+                        </Flex>
+                      </Box>
+                    </Link>
+                  </Flex>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <Footer />

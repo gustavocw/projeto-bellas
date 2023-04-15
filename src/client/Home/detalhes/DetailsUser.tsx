@@ -20,6 +20,7 @@ import {
   IconButton,
   Link,
   Center,
+  UnorderedList,
 } from "@chakra-ui/react";
 import { FaWhatsapp } from "react-icons/fa";
 import Slider from "react-slick";
@@ -159,7 +160,11 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
               ¢{acompanhante.dataEscort?.price}
             </Text>
-              <Link className="contatar" href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}>Contatar</Link>
+            <Flex className="centrando" >
+              <Link className="contatar" href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}>
+              <FaWhatsapp style={{ marginRight: "2px" }} /> <span>Contatar</span>
+              </Link>
+            </Flex>
           </Box>
 
           <Stack
@@ -198,81 +203,89 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                   justifyContent: "space-around",
                 }}
               >
-                <div className="list">
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Contacto:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.contact}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Tipo:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.type}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Olhos:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.eyes}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Qtd. tatuagens:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.tatoo}
-                  </ListItem>
-                </div>
-                <div className="list">
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Qtd. Piercings:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.piercing}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Altura:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.height}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Peso:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.weight} kg
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Local:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.location}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Sexo anal:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.isSexAnal ? "Sim" : "Não"}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Linguagens:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.languages}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Nacionalidade:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.nationality}
-                  </ListItem>
-                  <ListItem className="textos-hl">
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Horario e Local:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.obsScheduling}
-                  </ListItem>
+                <div className="listas">
+                  <div className="list">
+                    <Box bg="gray.900" p={4}>
+                      <UnorderedList
+                        display="flex"
+                        flexWrap="wrap"
+                        justifyContent="space-between"
+                      >
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Altura:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.height}
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Contacto:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.contact}
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Peso:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.weight} kg
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Tipo:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.type}
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Local:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.location}
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Olhos:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.eyes}
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Sexo anal:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.isSexAnal ? "Sim" : "Não"}
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Qtd. tatuagens:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.tatoo}
+                        </ListItem>
+                        <ListItem flexBasis="45%">
+                          <Text as="span" fontWeight="bold">
+                            Qtd. Piercings:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.piercing}
+                        </ListItem>
+                        <ListItem flexBasis="100%">
+                          <Text as="span" fontWeight="bold">
+                            Linguagens:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.languages}
+                        </ListItem>
+                        <ListItem flexBasis="100%" mt={2}>
+                          <Text as="span" fontWeight="bold">
+                            Nacionalidade:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.nationality}
+                        </ListItem>
+                        <ListItem flexBasis="100%" mt={2}>
+                          <Text as="span" fontWeight="bold">
+                            Horário e Local:
+                          </Text>{" "}
+                          {acompanhante.dataEscort?.obsScheduling}
+                        </ListItem>
+                      </UnorderedList>
+                    </Box>
+                  </div>
                 </div>
               </List>
             </Box>
