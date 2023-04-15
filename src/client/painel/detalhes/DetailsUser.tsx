@@ -215,12 +215,11 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               <Link className="rejeitar" onClick={handleRegeitar}>
                 Rejeitar
               </Link>
-              <Link
-                className="contatar"
-                href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}
-              >
-                Contatar
+              <Flex className="centrando" >
+              <Link className="contatar" href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}>
+              <FaWhatsapp style={{ marginRight: "2px" }} /> <span>Contatar</span>
               </Link>
+            </Flex>
             </Flex>
           </Box>
 
@@ -234,7 +233,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             }
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
-              <Text color="#fff" fontSize={"2xl"} fontWeight={"300"}>
+              <Text textAlign="center" color="#fff" fontSize={"2xl"} fontWeight={"300"}>
                 {acompanhante.dataEscort?.description}
               </Text>
             </VStack>
