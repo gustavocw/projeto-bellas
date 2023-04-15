@@ -14,6 +14,7 @@ import {
   Center,
   Textarea,
   useToast,
+  Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -30,6 +31,10 @@ export default function ProfilePage(): JSX.Element {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [obsScheduling, setObsScheduling] = useState("");
+  const [nationality, setNationality] = useState("");
+  const [location, setLocation] = useState("");
+  const [languages, setLanguages] = useState("");
+  const [isSexAnal, setIsSexAnal] = useState(false);
   const [age, setAge] = useState(0);
   const [tatoo, setTatoo] = useState(0);
   const [piercing, setPiercing] = useState(0);
@@ -51,6 +56,10 @@ export default function ProfilePage(): JSX.Element {
       age: age || user.dataEscort?.age,
       height: height || user.dataEscort?.height,
       obsScheduling: obsScheduling || user.dataEscort?.obsScheduling,
+      nationality: nationality || user.dataEscort?.nationality,
+      isSexAnal: isSexAnal || user.dataEscort?.isSexAnal,
+      languages: languages || user.dataEscort?.languages,
+      location: location || user.dataEscort?.location,
     };
     api
       .post("/update/description", dataToSend, {
@@ -75,6 +84,14 @@ export default function ProfilePage(): JSX.Element {
           isClosable: true,
         });
       });
+  };
+
+  const handleSexAnalChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    if (event.target.value === "sim") {
+      setIsSexAnal(true);
+    } else {
+      setIsSexAnal(false);
+    }
   };
 
   useEffect(() => {
@@ -134,6 +151,10 @@ export default function ProfilePage(): JSX.Element {
     age: number;
     tatoo: number;
     piercing: number;
+    isSexAnal: boolean;
+    languages: string;
+    location: string;
+    nationality: string;
   }
 
   interface EscortImages {
@@ -154,20 +175,23 @@ export default function ProfilePage(): JSX.Element {
     city: "",
     sexo: "",
     name: "",
-    dataEscort:
-      {
-        price: "",
-        description: "",
-        contact: "",
-        type: "",
-        eyes: "",
-        weight: "",
-        height: "",
-        obsScheduling: "",
-        age: 0,
-        tatoo: 0,
-        piercing: 0,
-      },
+    dataEscort: {
+      price: "",
+      description: "",
+      contact: "",
+      type: "",
+      eyes: "",
+      weight: "",
+      height: "",
+      obsScheduling: "",
+      age: 0,
+      tatoo: 0,
+      piercing: 0,
+      isSexAnal: false,
+      location: "",
+      languages: "",
+      nationality: "",
+    },
     imagesEscort: [
       {
         id: "",
@@ -299,6 +323,18 @@ export default function ProfilePage(): JSX.Element {
                     }
                   />
                 </FormControl>
+                <FormControl id="olhos" isRequired>
+                  <FormLabel>Nacionalidade</FormLabel>
+                  <Input
+                    placeholder={user.dataEscort?.nationality}
+                    _placeholder={{ color: "black" }}
+                    type="text"
+                    value={nationality}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setNationality(e.target.value)
+                    }
+                  />
+                </FormControl>
               </Stack>
               <Stack
                 className="all-profile"
@@ -363,6 +399,18 @@ export default function ProfilePage(): JSX.Element {
                     }
                   />
                 </FormControl>
+                <FormControl id="olhos" isRequired>
+                  <FormLabel>Linguagens</FormLabel>
+                  <Input
+                    placeholder={user.dataEscort?.languages}
+                    _placeholder={{ color: "black" }}
+                    type="text"
+                    value={languages}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setLanguages(e.target.value)
+                    }
+                  />
+                </FormControl>
               </Stack>
               <Stack
                 className="all-profile"
@@ -395,6 +443,25 @@ export default function ProfilePage(): JSX.Element {
                       setWeight(e.target.value)
                     }
                   />
+                </FormControl>
+                <FormControl id="local" isRequired>
+                  <FormLabel>Localidade</FormLabel>
+                  <Input
+                    placeholder={user.dataEscort?.location}
+                    _placeholder={{ color: "black" }}
+                    type="text"
+                    value={location}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setLocation(e.target.value)
+                    }
+                  />
+                </FormControl>
+                <FormControl id="olhos" isRequired>
+                  <FormLabel>Sexo Anal</FormLabel>
+                  <Select onChange={handleSexAnalChange}>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                  </Select>
                 </FormControl>
                 <FormControl id="peso" isRequired>
                   <FormLabel>Informe Horário e Local em que atende</FormLabel>

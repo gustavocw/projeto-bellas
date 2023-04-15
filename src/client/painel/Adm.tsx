@@ -98,51 +98,53 @@ const PainelAdm = () => {
         <div className="titulo">
           <h1 className="apresentacao">ANUNCIOS PARA AUTORIZAR</h1>
           <div className="escolha">
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Todos")}
-            >
-              Todos
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Mulher")}
-            >
-              Mulheres
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Homem")}
-            >
-              Homens
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Trans")}
-            >
-              Trans
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Casal")}
-            >
-              Casais
-            </Button>
+            <div className="escolha-sexo">
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Todos")}
+              >
+                Todos
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Mulher")}
+              >
+                Mulheres
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Homem")}
+              >
+                Homens
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Trans")}
+              >
+                Trans
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Casal")}
+              >
+                Casais
+              </Button>
+            </div>
           </div>
         </div>
         <div className="para-autorizar">

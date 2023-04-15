@@ -73,7 +73,7 @@
     text-decoration: none !important;
 }
 
-.autorizar{
+.autorizar-painel{
     background-color: #3bd624;
     color: #fff !important;
     text-decoration: none !important;
@@ -81,7 +81,7 @@
     border-radius: 50px;
     border: 1px solid #3bd624;
 }
-.autorizar:hover{
+.autorizar-painel:hover{
     background-color: #fff;
     color: #5edb28 !important;
     text-decoration: none !important;

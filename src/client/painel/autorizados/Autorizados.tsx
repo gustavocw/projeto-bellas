@@ -48,7 +48,6 @@ export interface Escort {
   };
 }
 
-
 const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
   const [selectedAcompanhante, setSelectedAcompanhante] =

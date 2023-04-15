@@ -72,6 +72,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
         }
       )
       .then((response) => {
+        onClose();
         console.log("autorizada");
       })
       .catch((error) => {
@@ -209,7 +210,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               ¢{acompanhante.dataEscort?.price}
             </Text>
             <Flex className="ajustes">
-              <Link className="autorizar" onClick={handleAutorizar}>
+              <Link className="autorizar-painel" onClick={handleAutorizar}>
                 Autorizar
               </Link>
               <Link className="rejeitar" onClick={handleRegeitar}>

@@ -21,6 +21,7 @@ import {
   Link,
   Center,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import { FaWhatsapp } from "react-icons/fa";
 import Slider from "react-slick";
@@ -80,9 +81,10 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
   };
 
   const handleRegeitar = () => {
+    const toast = useToast();
     api
       .post(
-        "/escorts/authorization",
+        "/adm/deleteEscort",
         {
           escortId: acompanhante.id,
           access: false,
@@ -94,7 +96,14 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
         }
       )
       .then((response) => {
-        console.log("rejeitada");
+        toast({
+          title: "Acompanhante excluída",
+          description: "Você excluiu uma acompanhante",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        onClose();
       })
       .catch((error) => {
         console.log("erro na req");
