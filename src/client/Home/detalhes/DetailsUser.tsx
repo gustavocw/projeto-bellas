@@ -19,6 +19,7 @@ import {
   ListItem,
   IconButton,
   Link,
+  Center,
 } from "@chakra-ui/react";
 import { FaWhatsapp } from "react-icons/fa";
 import Slider from "react-slick";
@@ -144,7 +145,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
           </Box>
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
-          <Box as={"header"}>
+          <Box className="centro" style={{ textAlign: 'center' }} as={"header"}>
             <Heading
               lineHeight={1.1}
               fontWeight={600}
@@ -153,13 +154,12 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             >
               {acompanhante.name}
               {" - "}
-              <span className="age">
-                {acompanhante.dataEscort?.age} anos
-              </span>
+              <span className="age">{acompanhante.dataEscort?.age} anos</span>
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
               ¢{acompanhante.dataEscort?.price}
             </Text>
+              <Link className="contatar" href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}>Contatar</Link>
           </Box>
 
           <Stack
@@ -243,9 +243,31 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                     </Text>{" "}
                     {acompanhante.dataEscort?.weight} kg
                   </ListItem>
-                </div>
-                <div className="separado">
-                <ListItem className="textos-hl" >
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Local:
+                    </Text>{" "}
+                    {acompanhante.dataEscort?.location}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Sexo anal:
+                    </Text>{" "}
+                    {acompanhante.dataEscort?.isSexAnal ? "Sim" : "Não"}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Linguagens:
+                    </Text>{" "}
+                    {acompanhante.dataEscort?.languages}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Nacionalidade:
+                    </Text>{" "}
+                    {acompanhante.dataEscort?.nationality}
+                  </ListItem>
+                  <ListItem className="textos-hl">
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}
@@ -255,38 +277,6 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               </List>
             </Box>
           </Stack>
-
-          <Link
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              borderRadius: "10px",
-            }}
-            w={"full"}
-            mt={8}
-            size={"lg"}
-            py={"7"}
-            bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.50")}
-            color="#e47ce8"
-            textTransform={"uppercase"}
-            _hover={{
-              transform: "translateY(2px)",
-              boxShadow: "lg",
-            }}
-            href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}
-            isExternal
-          >
-            <Text
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FaWhatsapp style={{ color: "#e47ce8", marginRight: "10px" }} />
-              Contatar
-            </Text>
-          </Link>
         </Stack>
       </SimpleGrid>
     </Container>

@@ -40,6 +40,10 @@ export interface Escort {
     piercing: number;
     weight: string;
     height: string;
+    languages: string;
+    location: string;
+    isSexAnal: boolean;
+    nationality: string;
     obsScheduling: string;
     age: number;
   };

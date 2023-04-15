@@ -55,44 +55,51 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
   const top = useBreakpointValue({ base: "90%", md: "50%" });
   const side = useBreakpointValue({ base: "30%", md: "40px" });
 
-
-  const token = Cookies.get('token');
+  const token = Cookies.get("token");
   const handleAutorizar = () => {
     api
-      .post("/escorts/authorization", {
-        escortId: acompanhante.id,
-        access: true,
-        }, {
+      .post(
+        "/escorts/authorization",
+        {
+          escortId: acompanhante.id,
+          access: true,
+        },
+        {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
-        console.log('autorizada')
+        console.log("autorizada");
       })
       .catch((error) => {
-        console.log('erro na req')
+        console.log("erro na req");
       });
   };
-  
+
   const handleRegeitar = () => {
     api
-      .post("/escorts/authorization", {
-        escortId: acompanhante.id,
-        access: false,
-        }, {
+      .post(
+        "/escorts/authorization",
+        {
+          escortId: acompanhante.id,
+          access: false,
+        },
+        {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
-        console.log('rejeitada')
+        console.log("rejeitada");
       })
       .catch((error) => {
-        console.log('erro na req')
+        console.log("erro na req");
       });
   };
-  
+
   return (
     <Container maxW={"7xl"}>
       <div className="btns-ctn">
@@ -163,7 +170,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                   backgroundRepeat="no-repeat"
                   backgroundSize="contain"
                   backgroundImage={`url(${imagem.urlPhoto})`}
-                  style={{ backgroundSize: 'contain' }}
+                  style={{ backgroundSize: "contain" }}
                 >
                   {/* This is the block you need to change, to customize the caption */}
                   <Container
@@ -195,9 +202,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
             >
               {acompanhante.name}
               {" - "}
-              <span className="age">
-                {acompanhante.dataEscort?.age} anos
-              </span>
+              <span className="age">{acompanhante.dataEscort?.age} anos</span>
             </Heading>
             <Text color="#fff" fontWeight={300} fontSize={"2xl"}>
               ¢{acompanhante.dataEscort?.price}
@@ -218,7 +223,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                 {acompanhante.dataEscort?.description}
               </Text>
             </VStack>
-            <Box className="detalhes-escort" >
+            <Box className="detalhes-escort">
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
                 color={useColorModeValue("pink.500", "pink.300")}
@@ -240,161 +245,184 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
                 }}
               >
                 <div className="listas">
-                <div className="list">
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Contacto:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.contact}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Tipo:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.type}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Olhos:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.eyes}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Qtd. tatuagens:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.tatoo}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Qtd. Piercings:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.piercing}
-                  </ListItem>
-                </div>
-                <div className="list">
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Altura:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.height}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Peso:
-                    </Text>{" "}
-                    {acompanhante.dataEscort?.weight} kg
-                  </ListItem>
-                </div>
-                </div>
-                <div className="separado">
-                <ListItem className="textos-hl" >
+                  <div className="list">
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Contacto:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.contact}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Tipo:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.type}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Olhos:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.eyes}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Qtd. tatuagens:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.tatoo}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Qtd. Piercings:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.piercing}
+                    </ListItem>
+                  </div>
+                  <div className="list">
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Altura:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.height}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Peso:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.weight} kg
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Local:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.location}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Sexo anal:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.isSexAnal ? "Sim" : "Não"}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Linguagens:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.languages}
+                    </ListItem>
+                    <ListItem>
+                      <Text as={"span"} fontWeight={"bold"}>
+                        Nacionalidade:
+                      </Text>{" "}
+                      {acompanhante.dataEscort?.nationality}
+                    </ListItem>
+                  <ListItem className="textos-hl">
                     <Text as={"span"} fontWeight={"bold"}>
                       Horario e Local:
                     </Text>{" "}
                     {acompanhante.dataEscort?.obsScheduling}
                   </ListItem>
+                  </div>
                 </div>
               </List>
             </Box>
           </Stack>
-        <Center style={{ display: 'flex' }} >
-          <Link mx='2'
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              borderRadius: "10px",
-            }}
-            w={"20%"}
-            className="adm-btns"
-            mt={8}
-            size={"lg"}
-            py={"7"}
-            bg={useColorModeValue("green.500", "green.50")}
-            color="#fff"
-            textTransform={"uppercase"}
-            _hover={{
-              transform: "translateY(2px)",
-              boxShadow: "lg",
-            }}
-            isExternal
-            onClick={handleAutorizar}
-          >
-            <Text
+          <Center style={{ display: "flex" }}>
+            <Link
+              mx="2"
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
+                borderRadius: "10px",
               }}
+              w={"20%"}
+              className="adm-btns"
+              mt={8}
+              size={"lg"}
+              py={"7"}
+              bg={useColorModeValue("green.500", "green.50")}
+              color="#fff"
+              textTransform={"uppercase"}
+              _hover={{
+                transform: "translateY(2px)",
+                boxShadow: "lg",
+              }}
+              isExternal
+              onClick={handleAutorizar}
             >
-              AUTORIZAR
-            </Text>
-          </Link>
-          <Link mx='2'
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              borderRadius: "10px",
-            }}
-            className="adm-btns"
-            w={"20%"}
-            mt={8}
-            size={"lg"}
-            py={"7"}
-            bg={useColorModeValue("red.500", "red.50")}
-            color="#fff"
-            textTransform={"uppercase"}
-            _hover={{
-              transform: "translateY(2px)",
-              boxShadow: "lg",
-            }}
-            isExternal
-            onClick={handleRegeitar}
-          >
-            <Text
+              <Text
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                AUTORIZAR
+              </Text>
+            </Link>
+            <Link
+              mx="2"
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
+                borderRadius: "10px",
               }}
+              className="adm-btns"
+              w={"20%"}
+              mt={8}
+              size={"lg"}
+              py={"7"}
+              bg={useColorModeValue("red.500", "red.50")}
+              color="#fff"
+              textTransform={"uppercase"}
+              _hover={{
+                transform: "translateY(2px)",
+                boxShadow: "lg",
+              }}
+              isExternal
+              onClick={handleRegeitar}
             >
-              REGEITAR
-            </Text>
-          </Link>
-          <Link
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              borderRadius: "10px",
-            }}
-            w={"20%"}
-            className="adm-btns"
-            mt={8}
-            size={"lg"}
-            py={"7"}
-            bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.50")}
-            color="#e47ce8"
-            textTransform={"uppercase"}
-            _hover={{
-              transform: "translateY(2px)",
-              boxShadow: "lg",
-            }}
-            href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}
-            isExternal
-          >
-            <Text
+              <Text
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                REGEITAR
+              </Text>
+            </Link>
+            <Link
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
+                borderRadius: "10px",
               }}
+              w={"20%"}
+              className="adm-btns"
+              mt={8}
+              size={"lg"}
+              py={"7"}
+              bg={useColorModeValue("whiteAlpha.900", "whiteAlpha.50")}
+              color="#e47ce8"
+              textTransform={"uppercase"}
+              _hover={{
+                transform: "translateY(2px)",
+                boxShadow: "lg",
+              }}
+              href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}
+              isExternal
             >
-              <FaWhatsapp style={{ color: "#e47ce8", marginRight: "2px" }} />
-              Contatar
-            </Text>
-          </Link>
-        </Center>
-
+              <Text
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <FaWhatsapp style={{ color: "#e47ce8", marginRight: "2px" }} />
+                Contatar
+              </Text>
+            </Link>
+          </Center>
         </Stack>
       </SimpleGrid>
     </Container>

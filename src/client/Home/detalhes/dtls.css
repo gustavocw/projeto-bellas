@@ -29,6 +29,35 @@
     color: #fff;
 }
 
+.centro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.toda-lista{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    text-align: center;
+    margin: auto;
+}
+
+.contatar{
+    background-color: #e47ce8;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid #e47ce8;
+}
+.contatar:hover{
+    background-color: #fff;
+    color: #e47ce8 !important;
+    text-decoration: none !important;
+}
+
 @media screen and (max-width: 768px) and (min-width: 200px)  {
     .separado{
         display: flex;

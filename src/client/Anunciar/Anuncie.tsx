@@ -14,6 +14,7 @@ import {
   Center,
   Textarea,
   useToast,
+  Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import RegisterDialogUser from "../../components/RegisterDialog/RegisterUser";
@@ -31,6 +32,10 @@ export default function AnunciePage(): JSX.Element {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [obsScheduling, setObsScheduling] = useState("");
+  const [languages, setLanguages] = useState("");
+  const [location, setLocation] = useState("");
+  const [isSexAnal, setIsSexAnal] = useState(false);
+  const [nationality, setNationality] = useState("");
   const [age, setAge] = useState(0);
   const [tatoo, setTatoo] = useState(0);
   const [piercing, setPiercing] = useState(0);
@@ -40,6 +45,7 @@ export default function AnunciePage(): JSX.Element {
   const handleSubmit = () => {
     uploadImages();
     const token = Cookies.get("token");
+    console.log(token);
     api
       .post(
         "/description/create",
@@ -55,6 +61,10 @@ export default function AnunciePage(): JSX.Element {
           age,
           height,
           obsScheduling,
+          languages,
+          location,
+          isSexAnal,
+          nationality,
         },
         {
           headers: {
@@ -65,7 +75,8 @@ export default function AnunciePage(): JSX.Element {
       .then((response) => {
         toast({
           title: "ANUNCIO ENVIADO PARA ANÁLISE",
-          description: "Uma mensagem chegará no seu whatsapp quando for aprovado ou rejeitado",
+          description:
+            "Uma mensagem chegará no seu whatsapp quando for aprovado ou rejeitado",
           status: "warning",
           duration: 3000,
           isClosable: true,
@@ -131,6 +142,15 @@ export default function AnunciePage(): JSX.Element {
       isClosable: true,
     });
   };
+
+  const handleSexAnalChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    if (event.target.value === "sim") {
+      setIsSexAnal(true);
+    } else {
+      setIsSexAnal(false);
+    }
+  };
+  
 
   return (
     <div className="container">
@@ -357,7 +377,50 @@ export default function AnunciePage(): JSX.Element {
                   }
                 />
               </FormControl>
-              <FormControl id="peso" isRequired>
+              <FormControl id="linguagens" isRequired>
+                <FormLabel>Linguages</FormLabel>
+                <Input
+                  placeholder="Português, Ingles..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="text"
+                  value={languages}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setLanguages(e.target.value)
+                  }
+                />
+              </FormControl>
+              <FormControl id="local" isRequired>
+                <FormLabel>Local</FormLabel>
+                <Input
+                  placeholder="Lisboa..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="text"
+                  value={location}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setLocation(e.target.value)
+                  }
+                />
+              </FormControl>
+              <FormControl id="local" isRequired>
+                <FormLabel>Faz sexo anal ?</FormLabel>
+                <Select onChange={handleSexAnalChange}>
+                  <option value="nao">Não</option>
+                  <option value="sim">Sim</option>
+                </Select>
+              </FormControl>
+              <FormControl id="nacionalidade" isRequired>
+                <FormLabel>Nacionalidade</FormLabel>
+                <Input
+                  placeholder="Brasileira, Portuguêsa..."
+                  _placeholder={{ color: "gray.500" }}
+                  type="text"
+                  value={nationality}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setNationality(e.target.value)
+                  }
+                />
+              </FormControl>
+              <FormControl id="obs" isRequired>
                 <FormLabel>Informe Horário e Local em que atende</FormLabel>
                 <Input
                   placeholder="Ex: Ap 123, somente a noite..."
