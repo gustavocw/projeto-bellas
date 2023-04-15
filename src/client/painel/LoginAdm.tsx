@@ -77,17 +77,17 @@ import {
         {!isLoggedIn && (
           <Button
             m={2}
-            size={"md"}
-            fontSize={"18"}
+            size={"sm"}
+            fontSize={"12"}
             style={{
               backgroundColor: "#e048e0",
               color: "#fff",
               textAlign: 'center',
-              padding: '30px 10px',
+              padding: '10px 10px',
             }}
             onClick={onOpen}
           >
-            Seja bem vindo Administrador! <br></br> Logar como ADM!
+            Entre Adm
           </Button>
         )}
       </Box>

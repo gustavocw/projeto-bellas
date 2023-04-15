@@ -97,10 +97,6 @@ const PainelAdm = () => {
         )}
         <div className="titulo">
           <h1 className="apresentacao">ANUNCIOS PARA AUTORIZAR</h1>
-          <LoginDialogAdm
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-          />
           <div className="escolha">
             <Button
               className="btnse"

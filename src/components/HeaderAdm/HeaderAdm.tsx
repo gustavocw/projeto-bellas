@@ -15,6 +15,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import LoginDialogUser from "../LoginDialog/LoginUser";
 import Cookies from "js-cookie";
 import RegistyerDialogUser from "../RegisterDialog/RegisterUser";
+import LoginDialogAdm from "../../client/painel/LoginAdm";
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,9 +36,16 @@ export default function Header() {
       >
         <HStack spacing={8} alignItems={"center"}>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-            <Link className="links" href="/">Início</Link>
-            <Link className="links" href="/administracao">Autorizar</Link>
-            <Link className="links" href="/autorizados"> Autorizados</Link>
+            <Link className="links" href="/">
+              Início
+            </Link>
+            <Link className="links" href="/administracao">
+              Autorizar
+            </Link>
+            <Link className="links" href="/autorizados">
+              {" "}
+              Autorizados
+            </Link>
           </HStack>
         </HStack>
         <Flex
@@ -55,27 +63,6 @@ export default function Header() {
           />
           {isLoggedIn ? (
             <Flex>
-              <Link
-                mx="2"
-                onClick={onOpen}
-                href="/anunciar"
-                size={"sm"}
-                color="#fff"
-                className="anunciar"
-              >
-                Anunciar
-              </Link>
-              <Link
-                fontSize={"14"}
-                onClick={onOpen}
-                href="/profile"
-                size={"sm"}
-                mx={2}
-                color="#fff"
-                className="anunciar"
-              >
-                Minha conta
-              </Link>
               <Button
                 className="sair"
                 size={"sm"}
@@ -93,7 +80,7 @@ export default function Header() {
           ) : (
             <>
               <div className="login-button">
-                <LoginDialogUser
+                <LoginDialogAdm
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
                 />
