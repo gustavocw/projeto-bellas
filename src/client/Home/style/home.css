@@ -2,9 +2,13 @@ body {
     background-color: #131313 !important;
 }
 
-.escolha {
-    margin: 10px;
+.escolha{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 40%;
 }
+
 
 
 .msg {
@@ -41,7 +45,6 @@ body {
     text-align: center;
     font-size: 27px;
     color: #fff;
-    border-bottom: 2px solid #e47ce8;
 }
 
 
@@ -91,6 +94,9 @@ body {
 
     .btnse {
         margin: 3px !important;
+        width: 55px !important;
+        padding: 0px 20px !important;
+        font-size: 11px !important;
     }
 
     .image-card-adm {
@@ -99,20 +105,23 @@ body {
         margin: auto;
     }
 
+    .escolha-sexo{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
 }
 
 .escolha-local {
     display: flex;
-    justify-content: end;
-    margin: 4px auto;
-    width: 35%;
+    width: 45%;
 }
 
 .local {
     background-color: #e47ce8 !important;
     color: #fff;
     margin-right: 20px;
-    text-align: center;
 }
 
 .valores-local {
@@ -139,6 +148,13 @@ body {
     .local{
         padding: 2px 30px !important;
         text-align: center;
+    }
+
+    .escolha {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
     }
 
 }

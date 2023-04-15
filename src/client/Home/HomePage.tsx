@@ -48,7 +48,6 @@ export interface Escort {
   };
 }
 
-
 const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
   const [selectedAcompanhante, setSelectedAcompanhante] =
@@ -195,120 +194,122 @@ const HomePage = () => {
         )}
         <div className="titulo">
           <h1 className="apresentacao">Acompanhantes de Luxo em destaque</h1>
-          <div className="escolha-local">
-            <Select
-              className="local"
-              value={localizacaoSelecionada}
-              onChange={(event) =>
-                setLocalizacaoSelecionada(event.target.value)
-              }
-            >
-              <option className="valores-local" value="Todos">
-                Localização
-              </option>
-              {![0].includes(quantidadeAveiro) && (
-                <option className="valores-local" value="Aveiro">
-                  Aveiro ({quantidadeAveiro})
-                </option>
-              )}
-              {![0].includes(quantidadeBraganca) && (
-                <option className="valores-local" value="Bragança">
-                  Bragança ({quantidadeBraganca})
-                </option>
-              )}
-              {![0].includes(quantidadeCasteloBranco) && (
-                <option className="valores-local" value="Castelo Branco">
-                  Castelo Branco ({quantidadeCasteloBranco})
-                </option>
-              )}
-              {![0].includes(quantidadeCoimbra) && (
-                <option className="valores-local" value="Coimbra">
-                  Coimbra ({quantidadeCoimbra})
-                </option>
-              )}
-              {![0].includes(quantidadeEvora) && (
-                <option className="valores-local" value="Évora">
-                  Évora ({quantidadeEvora})
-                </option>
-              )}
-              {![0].includes(quantidadeFaro) && (
-                <option className="valores-local" value="Faro">
-                  Faro ({quantidadeFaro})
-                </option>
-              )}
-              {![0].includes(quantidadeGuarda) && (
-                <option className="valores-local" value="Guarda">
-                  Guarda ({quantidadeGuarda})
-                </option>
-              )}
-              {![0].includes(quantidadeLisboa) && (
-                <option className="valores-local" value="Lisboa">
-                  Lisboa ({quantidadeLisboa})
-                </option>
-              )}
-              {![0].includes(quantidadeLeiria) && (
-                <option className="valores-local" value="Leiria">
-                  Leiria ({quantidadeLeiria})
-                </option>
-              )}
-              {![0].includes(quantidadeBraga) && (
-                <option className="valores-local" value="Braga">
-                  Braga ({quantidadeBraga})
-                </option>
-              )}
-              {![0].includes(quantidadePorto) && (
-                <option className="valores-local" value="Porto">
-                  Porto ({quantidadePorto})
-                </option>
-              )}
-            </Select>
-          </div>
           <div className="escolha">
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Todos")}
-            >
-              Todos
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Mulher")}
-            >
-              Mulheres
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Homem")}
-            >
-              Homens
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Trans")}
-            >
-              Trans
-            </Button>
-            <Button
-              className="btnse"
-              color={"#fff"}
-              bg={"pink.300"}
-              mx="2"
-              onClick={() => setGeneroSelecionado("Casal")}
-            >
-              Casais
-            </Button>
+            <div className="escolha-sexo">
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Todos")}
+              >
+                Todos
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Mulher")}
+              >
+                Mulheres
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Homem")}
+              >
+                Homens
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Trans")}
+              >
+                Trans
+              </Button>
+              <Button
+                className="btnse"
+                color={"#fff"}
+                bg={"pink.300"}
+                mx="2"
+                onClick={() => setGeneroSelecionado("Casal")}
+              >
+                Casais
+              </Button>
+            </div>
+            <div className="escolha-local">
+              <Select
+                className="local"
+                value={localizacaoSelecionada}
+                onChange={(event) =>
+                  setLocalizacaoSelecionada(event.target.value)
+                }
+              >
+                <option className="valores-local" value="Todos">
+                  Localização
+                </option>
+                {![0].includes(quantidadeAveiro) && (
+                  <option className="valores-local" value="Aveiro">
+                    Aveiro ({quantidadeAveiro})
+                  </option>
+                )}
+                {![0].includes(quantidadeBraganca) && (
+                  <option className="valores-local" value="Bragança">
+                    Bragança ({quantidadeBraganca})
+                  </option>
+                )}
+                {![0].includes(quantidadeCasteloBranco) && (
+                  <option className="valores-local" value="Castelo Branco">
+                    Castelo Branco ({quantidadeCasteloBranco})
+                  </option>
+                )}
+                {![0].includes(quantidadeCoimbra) && (
+                  <option className="valores-local" value="Coimbra">
+                    Coimbra ({quantidadeCoimbra})
+                  </option>
+                )}
+                {![0].includes(quantidadeEvora) && (
+                  <option className="valores-local" value="Évora">
+                    Évora ({quantidadeEvora})
+                  </option>
+                )}
+                {![0].includes(quantidadeFaro) && (
+                  <option className="valores-local" value="Faro">
+                    Faro ({quantidadeFaro})
+                  </option>
+                )}
+                {![0].includes(quantidadeGuarda) && (
+                  <option className="valores-local" value="Guarda">
+                    Guarda ({quantidadeGuarda})
+                  </option>
+                )}
+                {![0].includes(quantidadeLisboa) && (
+                  <option className="valores-local" value="Lisboa">
+                    Lisboa ({quantidadeLisboa})
+                  </option>
+                )}
+                {![0].includes(quantidadeLeiria) && (
+                  <option className="valores-local" value="Leiria">
+                    Leiria ({quantidadeLeiria})
+                  </option>
+                )}
+                {![0].includes(quantidadeBraga) && (
+                  <option className="valores-local" value="Braga">
+                    Braga ({quantidadeBraga})
+                  </option>
+                )}
+                {![0].includes(quantidadePorto) && (
+                  <option className="valores-local" value="Porto">
+                    Porto ({quantidadePorto})
+                  </option>
+                )}
+              </Select>
+            </div>
           </div>
         </div>
         <div className="card-content">
