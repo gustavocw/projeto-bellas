@@ -16,24 +16,7 @@ import LoginDialogUser from "../LoginDialog/LoginUser";
 import Cookies from "js-cookie";
 import RegistyerDialogUser from "../RegisterDialog/RegisterUser";
 
-const Links = ["Início", "Anuncios", "Autorizar"];
-
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    className="link-navbar"
-    _hover={{
-      textDecoration: "none",
-    }}
-    href={"/"}
-  >
-    {children}
-  </Link>
-);
-
-export default function HeaderAdm() {
+export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -52,9 +35,9 @@ export default function HeaderAdm() {
       >
         <HStack spacing={8} alignItems={"center"}>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-            {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
-            ))}
+            <Link className="links" href="/">Início</Link>
+            <Link className="links" href="/administracao">Autorizar</Link>
+            <Link className="links" href="/autorizados"> Autorizados</Link>
           </HStack>
         </HStack>
         <Flex
@@ -128,9 +111,9 @@ export default function HeaderAdm() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              <Link href="/">Início</Link>
+              <Link href="/administracao">Autorizar</Link>
+              <Link href="/autorizados"> Autorizados</Link>
             </Stack>
           </Box>
         ) : null}

@@ -1,5 +1,6 @@
-.link-navbar {
+.links {
     color: #fff !important;
+    text-decoration: none !important;
 }
 
 .link-navbar:hover {
