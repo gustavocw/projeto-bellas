@@ -49,4 +49,9 @@
     .navbar {
         justify-content: space-around !important;
     }
+    
+    .links {
+        color: #fff !important;
+        text-decoration: none !important;
+    }
 }
