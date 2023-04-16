@@ -60,6 +60,8 @@ export default function Header() {
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
+            variant="unstyled"
+            color="#fff"
           />
           {isLoggedIn ? (
             <Flex>
