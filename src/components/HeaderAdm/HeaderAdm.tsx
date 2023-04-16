@@ -98,9 +98,9 @@ export default function Header() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              <Link href="/">Início</Link>
-              <Link href="/administracao">Autorizar</Link>
-              <Link href="/autorizados"> Autorizados</Link>
+              <Link color="#fff" href="/">Início</Link>
+              <Link color="#fff" href="/administracao">Autorizar</Link>
+              <Link color="#fff" href="/autorizados"> Autorizados</Link>
             </Stack>
           </Box>
         ) : null}
