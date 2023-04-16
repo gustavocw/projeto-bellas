@@ -84,6 +84,7 @@ import {
               color: "#fff",
               textAlign: 'center',
               padding: '10px 10px',
+              borderRadius: '20px'
             }}
             onClick={onOpen}
           >

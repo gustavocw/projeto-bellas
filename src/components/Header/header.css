@@ -2,6 +2,11 @@
     color: #fff !important;
 }
 
+.navbar.transparent {
+    background-color: transparent;
+  }
+  
+
 .link-navbar:hover {
     color: #e47ce8 !important;
     background-color: #fff !important;
@@ -27,6 +32,10 @@
     width: 90%;
 }
 
+.sair{
+    border-radius: 20px !important;
+}
+
 .sair:hover {
     background-color: #fff !important;
     color: #e47ce8 !important;
@@ -34,11 +43,13 @@
 
 .display {
     display: flex;
+    border-radius: 0 0 20px 20px;
 }
 
 @media screen and (max-width: 768px) and (min-width: 200px) {
     .anunciar {
         font-size: 14px !important;
+        border-radius: 50px;
     }
 
     .display {

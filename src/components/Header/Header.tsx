@@ -24,6 +24,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     py={1}
     rounded={"md"}
     className="link-navbar"
+    borderRadius={'20px'}
     _hover={{
       textDecoration: "none",
     }}
@@ -41,6 +42,7 @@ export default function Header() {
     setIsLoggedIn(false);
     Cookies.remove("token");
   };
+  
 
   return (
     <>
@@ -64,10 +66,13 @@ export default function Header() {
           justifyContent={"end"}
         >
           <IconButton
+            bg="#000"
+            color="#fff"
             size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
+            variant="unstyled"
             onClick={isOpen ? onClose : onOpen}
           />
           {isLoggedIn ? (
@@ -101,6 +106,7 @@ export default function Header() {
                   backgroundColor: "#e048e0",
                   color: "#fff",
                   fontWeight: "normal",
+                  borderRadius: '20px'
                 }}
                 onClick={handleLogout}
               >

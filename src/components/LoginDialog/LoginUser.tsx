@@ -89,6 +89,7 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
             width: "100%",
             backgroundColor: "#e048e0",
             color: "#fff",
+            borderRadius: '20px'
           }}
           onClick={onOpen}
         >

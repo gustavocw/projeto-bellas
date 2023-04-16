@@ -165,6 +165,10 @@ const HomePage = () => {
         (acompanhante: { city: string }) => acompanhante.city === "Porto"
       ).length;
       setQuantidadePorto(countPorto);
+      const countSantarém = response.data.filter(
+        (acompanhante: { city: string }) => acompanhante.city === "Santarém"
+      ).length;
+      setQuantidadeSantarém(countSantarém);
     }
     fetchData();
   }, []);
@@ -181,6 +185,7 @@ const HomePage = () => {
   const [quantidadeLeiria, setQuantidadeLeiria] = useState<number>(0);
   const [quantidadeBraga, setQuantidadeBraga] = useState<number>(0);
   const [quantidadePorto, setQuantidadePorto] = useState<number>(0);
+  const [quantidadeSantarém, setQuantidadeSantarém] = useState<number>(0);
 
   return (
     <div className="container">
@@ -308,6 +313,11 @@ const HomePage = () => {
                     Porto ({quantidadePorto})
                   </option>
                 )}
+                {![0].includes(quantidadeSantarém) && (
+                  <option className="valores-local" value="Santarém">
+                    Santarém ({quantidadeSantarém})
+                  </option>
+                )}
               </Select>
             </div>
           </div>
@@ -354,7 +364,7 @@ const HomePage = () => {
                       maxWidth={"220px"}
                       maxHeight={"280px"}
                       src={acompanhante?.imagesEscort[0]?.urlPhoto}
-                      roundedTop="lg"
+                      roundedTop="md"
                     />
 
                     <Box p="6">
@@ -363,7 +373,8 @@ const HomePage = () => {
                           rounded="full"
                           px="2"
                           fontSize="0.8em"
-                          colorScheme="red"
+                          bg="gray.800"
+                          color="#fff"
                         >
                           {acompanhante?.city}
                         </Badge>
@@ -374,13 +385,18 @@ const HomePage = () => {
                         alignContent="center"
                       >
                         <Box
+                          color={"white"}
+                          textTransform={"uppercase"}
                           fontSize="1xl"
                           fontWeight="semibold"
-                          as="h4"
+                          as="h5"
                           lineHeight="tight"
                           isTruncated
                         >
-                          {acompanhante?.name}
+                          {acompanhante?.name &&
+                            (acompanhante?.name.length > 15
+                              ? acompanhante?.name.slice(0, 13) + "..."
+                              : acompanhante?.name)}
                         </Box>
                       </Flex>
                     </Box>

@@ -92,7 +92,8 @@ import {
             style={{
               width: "100%",
               backgroundColor: "#e048e0",
-              color: '#fff'
+              color: '#fff',
+              borderRadius: '20px'
             }}
             onClick={onOpen}
           >
