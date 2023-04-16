@@ -94,7 +94,7 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
   const toast = useToast();
 
 
-  const handleRegeitar = () => {
+  const handleExcluir = () => {
     const toast = useToast();
     api
       .post(
@@ -324,6 +324,9 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
             </Text>
             <Flex className="ajustes">
               <Flex className="centrando">
+              <Link className="excluir" onClick={handleExcluir}>
+                Excluir
+              </Link>
                 <Link
                   className="contatar"
                   href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}
@@ -473,7 +476,7 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                         </UnorderedList>
                       </Box>
                     ) : (
-                      <div className="teste">
+                      <div className="form">
                         <div className="formularios-profile">
                           <Stack
                             className="all-profiles"

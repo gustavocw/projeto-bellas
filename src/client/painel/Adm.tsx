@@ -88,147 +88,149 @@ const PainelAdm = () => {
   return (
     <div className="container">
       <HeaderAdm />
-      <div className="content">
-        {popup && (
-          <DetailsUser
-            acompanhante={selectedAcompanhante}
-            onClose={() => setPopup(false)}
-          />
-        )}
-        <div className="titulo">
-          <h1 className="apresentacao">ANUNCIOS PARA AUTORIZAR</h1>
-          <div className="escolha">
-            <div className="escolha-sexo">
-              <Button
-                className="btnse"
-                color={"#fff"}
-                bg={"pink.300"}
-                mx="2"
-                onClick={() => setGeneroSelecionado("Todos")}
-              >
-                Todos
-              </Button>
-              <Button
-                className="btnse"
-                color={"#fff"}
-                bg={"pink.300"}
-                mx="2"
-                onClick={() => setGeneroSelecionado("Mulher")}
-              >
-                Mulheres
-              </Button>
-              <Button
-                className="btnse"
-                color={"#fff"}
-                bg={"pink.300"}
-                mx="2"
-                onClick={() => setGeneroSelecionado("Homem")}
-              >
-                Homens
-              </Button>
-              <Button
-                className="btnse"
-                color={"#fff"}
-                bg={"pink.300"}
-                mx="2"
-                onClick={() => setGeneroSelecionado("Trans")}
-              >
-                Trans
-              </Button>
-              <Button
-                className="btnse"
-                color={"#fff"}
-                bg={"pink.300"}
-                mx="2"
-                onClick={() => setGeneroSelecionado("Casal")}
-              >
-                Casais
-              </Button>
+      {popup && (
+        <DetailsUser
+          acompanhante={selectedAcompanhante}
+          onClose={() => setPopup(false)}
+        />
+      )}
+      {[false].includes(popup) && (
+        <div className="content">
+          <div className="titulo">
+            <h1 className="apresentacao">ANUNCIOS PARA AUTORIZAR</h1>
+            <div className="escolha">
+              <div className="escolha-sexo">
+                <Button
+                  className="btnse"
+                  color={"#fff"}
+                  bg={"pink.300"}
+                  mx="2"
+                  onClick={() => setGeneroSelecionado("Todos")}
+                >
+                  Todos
+                </Button>
+                <Button
+                  className="btnse"
+                  color={"#fff"}
+                  bg={"pink.300"}
+                  mx="2"
+                  onClick={() => setGeneroSelecionado("Mulher")}
+                >
+                  Mulheres
+                </Button>
+                <Button
+                  className="btnse"
+                  color={"#fff"}
+                  bg={"pink.300"}
+                  mx="2"
+                  onClick={() => setGeneroSelecionado("Homem")}
+                >
+                  Homens
+                </Button>
+                <Button
+                  className="btnse"
+                  color={"#fff"}
+                  bg={"pink.300"}
+                  mx="2"
+                  onClick={() => setGeneroSelecionado("Trans")}
+                >
+                  Trans
+                </Button>
+                <Button
+                  className="btnse"
+                  color={"#fff"}
+                  bg={"pink.300"}
+                  mx="2"
+                  onClick={() => setGeneroSelecionado("Casal")}
+                >
+                  Casais
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className="para-autorizar">
+            <div className="card-content">
+              {filterAcompanhantes().length === 0 ? (
+                <div className="msg">
+                  <div className="spinner">
+                    <Spinner />
+                  </div>
+                  Ainda não possui acompanhantes nesta região
+                </div>
+              ) : (
+                <div className="card">
+                  {filterAcompanhantes().map((acompanhante) => (
+                    <Flex
+                      maxWidth={"200px"}
+                      className="anuncio"
+                      key={acompanhante.id}
+                    >
+                      <Link
+                        onClick={() => click(acompanhante)}
+                        className="anunciante"
+                        bg={useColorModeValue("gray.200", "gray.800")}
+                        maxW="sm"
+                        borderWidth="1px"
+                        rounded="lg"
+                        shadow="lg"
+                        position="relative"
+                      >
+                        {acompanhante.name && (
+                          <div className="on">
+                            <Circle
+                              size="10px"
+                              position="absolute"
+                              top={2}
+                              left={2}
+                              bg="orange.400"
+                            />
+                            <Text mx="6">Aguardando autorização</Text>
+                          </div>
+                        )}
+                        <Image
+                          className="image-card-adm"
+                          width={"100%"}
+                          maxHeight={"250px"}
+                          src={acompanhante.imagesEscort[0]?.urlPhoto}
+                          roundedTop="lg"
+                        />
+
+                        <Box p="6">
+                          <Box display={"flex"} alignItems="baseline">
+                            <Badge
+                              rounded="full"
+                              px="2"
+                              fontSize="0.8em"
+                              colorScheme="red"
+                            >
+                              {acompanhante.city}
+                            </Badge>
+                          </Box>
+                          <Flex
+                            mt="1"
+                            justifyContent="space-between"
+                            alignContent="center"
+                          >
+                            <Box
+                              fontSize="1xl"
+                              fontWeight="semibold"
+                              as="h4"
+                              lineHeight="tight"
+                              isTruncated
+                            >
+                              {acompanhante.name}
+                            </Box>
+                          </Flex>
+                        </Box>
+                      </Link>
+                    </Flex>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <div className="para-autorizar">
-          <div className="card-content">
-            {filterAcompanhantes().length === 0 ? (
-              <div className="msg">
-                <div className="spinner">
-                  <Spinner />
-                </div>
-                Ainda não possui acompanhantes nesta região
-              </div>
-            ) : (
-              <div className="card">
-                {filterAcompanhantes().map((acompanhante) => (
-                  <Flex
-                    maxWidth={"200px"}
-                    className="anuncio"
-                    key={acompanhante.id}
-                  >
-                    <Link
-                      onClick={() => click(acompanhante)}
-                      className="anunciante"
-                      bg={useColorModeValue("gray.200", "gray.800")}
-                      maxW="sm"
-                      borderWidth="1px"
-                      rounded="lg"
-                      shadow="lg"
-                      position="relative"
-                    >
-                      {acompanhante.name && (
-                        <div className="on">
-                          <Circle
-                            size="10px"
-                            position="absolute"
-                            top={2}
-                            left={2}
-                            bg="orange.400"
-                          />
-                          <Text mx="6">Aguardando autorização</Text>
-                        </div>
-                      )}
-                      <Image
-                        className="image-card-adm"
-                        width={"100%"}
-                        maxHeight={"250px"}
-                        src={acompanhante.imagesEscort[0]?.urlPhoto}
-                        roundedTop="lg"
-                      />
-
-                      <Box p="6">
-                        <Box display={"flex"} alignItems="baseline">
-                          <Badge
-                            rounded="full"
-                            px="2"
-                            fontSize="0.8em"
-                            colorScheme="red"
-                          >
-                            {acompanhante.city}
-                          </Badge>
-                        </Box>
-                        <Flex
-                          mt="1"
-                          justifyContent="space-between"
-                          alignContent="center"
-                        >
-                          <Box
-                            fontSize="1xl"
-                            fontWeight="semibold"
-                            as="h4"
-                            lineHeight="tight"
-                            isTruncated
-                          >
-                            {acompanhante.name}
-                          </Box>
-                        </Flex>
-                      </Box>
-                    </Link>
-                  </Flex>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      )}
       <Footer />
     </div>
   );

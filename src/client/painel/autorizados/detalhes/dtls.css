@@ -41,9 +41,9 @@
     background-color: #e47ce8;
     color: #fff !important;
     text-decoration: none !important;
-    padding: 10px;
     width: 100%;
-    border-radius: 50px;
+    margin: auto;
+    border-radius: 20px;
     border: 1px solid #e47ce8;
 }
 .contatar:hover{
