@@ -1,0 +1,16 @@
+.all-profiles{
+    width: 100%;
+    max-height: 300px; /* defina a altura máxima desejada */
+    overflow-y: auto;
+    overflow-x: none;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.valores{
+    color: #000 !important;
+}
+
+.editar-dados{
+    margin: 20px auto !important;
+}

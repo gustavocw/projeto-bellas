@@ -218,11 +218,8 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
               ¢{acompanhante.dataEscort?.price}
             </Text>
             <Flex className="ajustes">
-              <Link className="autorizar" onClick={handleAutorizar}>
-                Editar
-              </Link>
               <Link className="rejeitar" onClick={handleRegeitar}>
-                Excluir
+                Excluir Perfil
               </Link>
               <Flex className="centrando" >
               <Link className="contatar" href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}>

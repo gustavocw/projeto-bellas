@@ -17,6 +17,7 @@ import {
   Select,
 } from "@chakra-ui/react";
 import DetailsUser from "./detalhes/DetailsUser";
+import EditEscort from "./detalhes/editEscort/editEscort";
 
 export interface Escort {
   id: number;
@@ -52,7 +53,10 @@ const HomePage = () => {
   const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
   const [selectedAcompanhante, setSelectedAcompanhante] =
     useState<Escort | null>(null);
+  const [selectedAcompanhanteEdit, setSelectedAcompanhanteEdit] =
+    useState<Escort | null>(null);
   const [popup, setPopup] = useState(false);
+  const [popupEdit, setPopupEdit] = useState(false);
   const [generoSelecionado, setGeneroSelecionado] = useState<string>("Todos");
   const [localizacaoSelecionada, setLocalizacaoSelecionada] =
     useState<string>("Todos");
@@ -69,6 +73,12 @@ const HomePage = () => {
     setSelectedAcompanhante(acompanhante);
     setPopup(true);
   };
+  const clickEdit = (acompanhante: Escort) => {
+    setSelectedAcompanhanteEdit(acompanhante);
+    setPopup(false);
+    setPopupEdit(true);
+  };
+  
 
   const filterAcompanhantes = () => {
     if (generoSelecionado === "Todos" && localizacaoSelecionada === "Todos") {
@@ -186,6 +196,12 @@ const HomePage = () => {
     <div className="container">
       <HeaderAdm />
       <div className="content">
+        {popupEdit && (
+          <EditEscort
+            acompanhante={selectedAcompanhanteEdit}
+            onClose={() => setPopupEdit(false)}
+          />
+        )}
         {popup && (
           <DetailsUser
             acompanhante={selectedAcompanhante}
@@ -324,6 +340,15 @@ const HomePage = () => {
                 <Flex className="anuncio" key={acompanhante?.id}>
                   <Link
                     onClick={() => {
+                      clickEdit(acompanhante);
+                      window.scrollTo({ top: 0, behavior: "auto" });
+                    }}
+                    className="editar"
+                  >
+                    Editar
+                  </Link>
+                  <Link
+                    onClick={() => {
                       click(acompanhante);
                       window.scrollTo({ top: 0, behavior: "auto" });
                     }}
@@ -370,6 +395,7 @@ const HomePage = () => {
                         mt="1"
                         justifyContent="space-between"
                         alignContent="center"
+                        style={{ display: "flex", flexDirection: "column" }}
                       >
                         <Box
                           fontSize="1xl"
