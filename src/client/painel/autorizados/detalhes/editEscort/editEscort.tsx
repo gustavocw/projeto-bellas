@@ -143,6 +143,7 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
   const handleEditar = () => {
     const token = Cookies.get("token");
     const dataToSend = {
+      userId: acompanhante?.id,
       price: price || acompanhante.dataEscort?.price,
       description: description || acompanhante.dataEscort?.description,
       contact: contact || acompanhante.dataEscort?.contact,
@@ -183,24 +184,6 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
         });
       });
   };
-
-  interface EscortData {
-    price: string;
-    description: string;
-    contact: string;
-    type: string;
-    eyes: string;
-    weight: string;
-    height: string;
-    obsScheduling: string;
-    age: number;
-    tatoo: number;
-    piercing: number;
-    isSexAnal: boolean;
-    languages: string;
-    location: string;
-    nationality: string;
-  }
 
 
   const handleSexAnalChange = (

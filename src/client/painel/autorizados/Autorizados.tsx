@@ -61,6 +61,19 @@ const HomePage = () => {
   const [localizacaoSelecionada, setLocalizacaoSelecionada] =
     useState<string>("Todos");
 
+  const [escort, setEscort] = useState([]);
+
+  useEffect(() => {
+    api
+      .get("/")
+      .then((response) => {
+        setEscort(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   useEffect(() => {
     async function fetchData() {
       const response = await api.get("/");
@@ -345,7 +358,17 @@ const HomePage = () => {
                       }}
                       className="editar"
                     >
-                      Editar
+                      <span
+                        style={{
+                          color: "#e47ce8",
+                          backgroundColor: "#fff",
+                          borderRadius: "20px",
+                          padding: "10px",
+                          margin: "5px",
+                        }}
+                      >
+                        Editar
+                      </span>
                     </Link>
                     <Link
                       onClick={() => {
@@ -358,6 +381,7 @@ const HomePage = () => {
                       borderWidth="1px"
                       rounded="lg"
                       shadow="lg"
+                      my="2"
                       position="relative"
                     >
                       {acompanhante?.name && (
