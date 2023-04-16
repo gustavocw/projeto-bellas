@@ -34,7 +34,7 @@ import React, { useEffect, useState } from "react";
 import { CloseIcon } from "@chakra-ui/icons";
 import api from "../../../../../services/api";
 import Cookies from "js-cookie";
-import "./edit.css"
+import "./edit.css";
 interface EditEscortProps {
   acompanhante: Escort | null;
   onClose: () => void;
@@ -92,7 +92,6 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
   };
 
   const toast = useToast();
-
 
   const handleExcluir = () => {
     const toast = useToast();
@@ -184,7 +183,6 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
         });
       });
   };
-
 
   const handleSexAnalChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -307,9 +305,9 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
             </Text>
             <Flex className="ajustes">
               <Flex className="centrando">
-              <Link className="excluir" onClick={handleExcluir}>
-                Excluir
-              </Link>
+                <Link className="excluir" onClick={handleExcluir}>
+                  Excluir
+                </Link>
                 <Link
                   className="contatar"
                   href={`https://api.whatsapp.com/send?phone=${acompanhante.dataEscort?.contact}`}
@@ -369,11 +367,31 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                   }}
                   className="listas"
                 >
-                  <div className="editar">
+                  <div style={{ marginTop: '5px' }} className="editar">
                     {!showTable ? (
-                        <Link onClick={show}>Ver Detalhes</Link>
+                      <Link
+                        style={{
+                          backgroundColor: "#fff",
+                          color: "#000",
+                          padding: "5px",
+                          borderRadius: "20px",
+                        }}
+                        onClick={show}
+                      >
+                        Ver Detalhes
+                      </Link>
                     ) : (
-                    <Link onClick={hidden}>Editar Detalhes</Link>
+                      <Link
+                        style={{
+                          backgroundColor: "#fff",
+                          color: "#000",
+                          padding: "5px",
+                          borderRadius: "20px",
+                        }}
+                        onClick={hidden}
+                      >
+                        Editar Detalhes
+                      </Link>
                     )}
                   </div>
                   <div className="list">
@@ -468,11 +486,15 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             rounded={"xl"}
                             p="12"
                           >
-                            <FormLabel color="#000">Fale um pouco de sí (*)</FormLabel>
+                            <FormLabel color="#000">
+                              Fale um pouco de sí (*)
+                            </FormLabel>
                             <Center>
                               <Textarea
                                 _placeholder={{ color: "black" }}
-                                placeholder={acompanhante.dataEscort?.description}
+                                placeholder={
+                                  acompanhante.dataEscort?.description
+                                }
                                 value={description}
                                 onChange={(
                                   e: React.ChangeEvent<HTMLTextAreaElement>
@@ -481,8 +503,11 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </Center>
                             <FormControl id="idade" isRequired>
                               <FormLabel color="#000">Idade</FormLabel>
-                              <Input color="#000"
-                                placeholder={String(acompanhante.dataEscort?.age)}
+                              <Input
+                                color="#000"
+                                placeholder={String(
+                                  acompanhante.dataEscort?.age
+                                )}
                                 type="number"
                                 value={age}
                                 onChange={(event) =>
@@ -492,7 +517,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="olhos" isRequired>
                               <FormLabel color="#000">Olhos</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.eyes}
                                 _placeholder={{ color: "black" }}
                                 type="text"
@@ -504,8 +530,11 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="olhos" isRequired>
                               <FormLabel color="#000">Nacionalidade</FormLabel>
-                              <Input color="#000"
-                                placeholder={acompanhante.dataEscort?.nationality}
+                              <Input
+                                color="#000"
+                                placeholder={
+                                  acompanhante.dataEscort?.nationality
+                                }
                                 _placeholder={{ color: "black" }}
                                 type="text"
                                 value={nationality}
@@ -516,7 +545,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="userName" isRequired>
                               <FormLabel color="#000">Preço</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 _placeholder={{ color: "black" }}
                                 type="number"
                                 placeholder={acompanhante.dataEscort?.price}
@@ -527,7 +557,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="password" isRequired>
                               <FormLabel color="#000">Contacto</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.contact}
                                 _placeholder={{ color: "black" }}
                                 type="text"
@@ -539,7 +570,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="userName" isRequired>
                               <FormLabel color="#000">Tipo</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.type}
                                 _placeholder={{ color: "black" }}
                                 type="text"
@@ -551,7 +583,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="tatoo" isRequired>
                               <FormLabel color="#000">Qtd. Tatuagens</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.tatoo.toString()}
                                 _placeholder={{ color: "black" }}
                                 type="number"
@@ -563,7 +596,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="manequim" isRequired>
                               <FormLabel color="#000">Qtd. Piercings</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.piercing.toString()}
                                 _placeholder={{ color: "black" }}
                                 type="number"
@@ -575,7 +609,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="olhos" isRequired>
                               <FormLabel color="#000">Linguagens</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.languages}
                                 _placeholder={{ color: "black" }}
                                 type="text"
@@ -587,7 +622,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="altura" isRequired>
                               <FormLabel color="#000">Altura</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.height}
                                 _placeholder={{ color: "black" }}
                                 type="text"
@@ -599,7 +635,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="peso" isRequired>
                               <FormLabel color="#000">Peso</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.weight}
                                 _placeholder={{ color: "black" }}
                                 type="text"
@@ -611,7 +648,8 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="local" isRequired>
                               <FormLabel color="#000">Localidade</FormLabel>
-                              <Input color="#000"
+                              <Input
+                                color="#000"
                                 placeholder={acompanhante.dataEscort?.location}
                                 _placeholder={{ color: "black" }}
                                 type="text"
@@ -623,17 +661,27 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
                             </FormControl>
                             <FormControl id="olhos" isRequired>
                               <FormLabel color="#000">Sexo Anal</FormLabel>
-                              <Select className="valores" onChange={handleSexAnalChange}>
-                                <option className="valores" value="nao">Não</option>
-                                <option className="valores" value="sim">Sim</option>
+                              <Select
+                                className="valores"
+                                onChange={handleSexAnalChange}
+                              >
+                                <option className="valores" value="nao">
+                                  Não
+                                </option>
+                                <option className="valores" value="sim">
+                                  Sim
+                                </option>
                               </Select>
                             </FormControl>
                             <FormControl id="peso" isRequired>
                               <FormLabel color="#000">
                                 Informe Horário e Local em que atende
                               </FormLabel>
-                              <Input color="#000"
-                                placeholder={acompanhante.dataEscort?.obsScheduling}
+                              <Input
+                                color="#000"
+                                placeholder={
+                                  acompanhante.dataEscort?.obsScheduling
+                                }
                                 _placeholder={{ color: "black" }}
                                 type="text"
                                 value={obsScheduling}
