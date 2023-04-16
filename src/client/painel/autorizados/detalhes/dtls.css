@@ -9,6 +9,7 @@
 .btns-ctn{
     display: flex;
     justify-content: end;
+    border-radius: 50px !important;
 }
 
 .btns{

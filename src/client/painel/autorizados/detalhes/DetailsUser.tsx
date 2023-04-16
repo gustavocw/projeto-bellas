@@ -113,8 +113,8 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
   return (
     <Container maxW={"7xl"}>
       <div className="btns-ctn">
-        <Button className="btns" onClick={onClose}>
-          <CloseIcon />
+        <Button borderRadius={'50px'}  className="btns" onClick={onClose}>
+          <CloseIcon className="close" />
         </Button>
       </div>
       <SimpleGrid

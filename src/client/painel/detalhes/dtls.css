@@ -9,6 +9,7 @@
 .btns-ctn{
     display: flex;
     justify-content: end;
+    border-radius: 50px !important;
 }
 
 .btns{
@@ -58,6 +59,7 @@
     justify-content: space-between;
     width: 45%;
 }
+
 
 .rejeitar{
     background-color: #d93232;

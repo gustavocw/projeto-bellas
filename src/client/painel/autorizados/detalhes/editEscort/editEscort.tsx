@@ -219,7 +219,7 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
     <Container maxW={"7xl"}>
       <div className="btns-ctn">
         <Button className="btns" onClick={onClose}>
-          <CloseIcon />
+          <CloseIcon className="close" />
         </Button>
       </div>
       <SimpleGrid

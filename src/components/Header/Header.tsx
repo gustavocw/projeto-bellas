@@ -69,7 +69,7 @@ export default function Header() {
             bg="#000"
             color="#fff"
             size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            icon={isOpen ? <CloseIcon className="close" /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             variant="unstyled"
