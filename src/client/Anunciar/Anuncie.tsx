@@ -17,10 +17,11 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import RegisterDialogUser from "../../components/RegisterDialog/RegisterUser";
-import LoginDialogUser from "../../components/LoginDialog/LoginUser";
+import { Checkbox } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import Loading from "../../components/loading/loading";
+
+const languageOptions = ["Portugês", "Inglês", "Espanhol", "Francês", "Alemão"];
 
 export default function AnunciePage(): JSX.Element {
   const [price, setPrice] = useState("");
@@ -31,13 +32,23 @@ export default function AnunciePage(): JSX.Element {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [obsScheduling, setObsScheduling] = useState("");
-  const [languages, setLanguages] = useState("");
+  const [languages, setLanguages] = useState<string[]>([]);
   const [location, setLocation] = useState("");
   const [isSexAnal, setIsSexAnal] = useState(false);
   const [nationality, setNationality] = useState("");
   const [age, setAge] = useState(0);
   const [tatoo, setTatoo] = useState(0);
   const [piercing, setPiercing] = useState(0);
+
+  const handleLanguageChange = (language: string) => {
+    if (languages.includes(language)) {
+      // Remove the language from the array if it was previously selected
+      setLanguages(languages.filter((l) => l !== language));
+    } else {
+      // Add the language to the array if it was not previously selected
+      setLanguages([...languages, language]);
+    }
+  };
 
   const toast = useToast();
 
@@ -60,7 +71,7 @@ export default function AnunciePage(): JSX.Element {
           age,
           height,
           obsScheduling,
-          languages,
+          languages: languages.join(","),
           location,
           isSexAnal,
           nationality,
@@ -228,6 +239,15 @@ export default function AnunciePage(): JSX.Element {
                       }}
                     />
                   </Center>
+                  <FormLabel>Fale um pouco de sí (*)</FormLabel>
+                  <Center>
+                    <Textarea
+                      value={description}
+                      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                        setDescription(e.target.value)
+                      }
+                    />
+                  </Center>
                 </Stack>
               </FormControl>
             </Stack>
@@ -239,15 +259,6 @@ export default function AnunciePage(): JSX.Element {
               rounded={"xl"}
               p="12"
             >
-              <FormLabel>Fale um pouco de sí (*)</FormLabel>
-              <Center>
-                <Textarea
-                  value={description}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setDescription(e.target.value)
-                  }
-                />
-              </Center>
               <FormControl id="idade" isRequired>
                 <FormLabel>Idade</FormLabel>
                 <Input
@@ -282,17 +293,20 @@ export default function AnunciePage(): JSX.Element {
                   }
                 />
               </FormControl>
-              <FormControl id="userName" isRequired>
-                <FormLabel>Tipo</FormLabel>
-                <Input
-                  placeholder="Loira, Morena..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
+              <FormControl id="tipo" isRequired>
+                <FormLabel>Tipo de pessoa</FormLabel>
+                <Select
+                  placeholder="Selecione o tipo"
                   value={type}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setType(e.target.value)
-                  }
-                />
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <option value="loira">Loira</option>
+                  <option value="morena">Morena</option>
+                  <option value="ruiva">Ruiva</option>
+                  <option value="negra">Negra</option>
+                  <option value="asiática">Asiática</option>
+                  <option value="indígena">Indígena</option>
+                </Select>
               </FormControl>
               <FormControl id="olhos" isRequired>
                 <FormLabel>Olhos</FormLabel>
@@ -306,15 +320,6 @@ export default function AnunciePage(): JSX.Element {
                   }
                 />
               </FormControl>
-            </Stack>
-            <Stack
-              className="all"
-              spacing={6}
-              maxW={"lg"}
-              bg={useColorModeValue("white", "gray.700")}
-              rounded={"xl"}
-              p="12"
-            >
               <FormControl id="tatoo" isRequired>
                 <FormLabel>Qtd. Tatuagens</FormLabel>
                 <Input
@@ -337,6 +342,15 @@ export default function AnunciePage(): JSX.Element {
                   }
                 />
               </FormControl>
+            </Stack>
+            <Stack
+              className="all"
+              spacing={6}
+              maxW={"lg"}
+              bg={useColorModeValue("white", "gray.700")}
+              rounded={"xl"}
+              p="12"
+            >
               <FormControl id="altura" isRequired>
                 <FormLabel>Altura</FormLabel>
                 <Input
@@ -363,15 +377,16 @@ export default function AnunciePage(): JSX.Element {
               </FormControl>
               <FormControl id="linguagens" isRequired>
                 <FormLabel>Linguages</FormLabel>
-                <Input
-                  placeholder="Português, Ingles..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
-                  value={languages}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setLanguages(e.target.value)
-                  }
-                />
+                {languageOptions.map((language) => (
+                  <Checkbox
+                    colorScheme="pink"
+                    key={language}
+                    isChecked={languages.includes(language)}
+                    onChange={() => handleLanguageChange(language)}
+                  >
+                    {language}
+                  </Checkbox>
+                ))}
               </FormControl>
               <FormControl id="local" isRequired>
                 <FormLabel>Local</FormLabel>
@@ -394,16 +409,21 @@ export default function AnunciePage(): JSX.Element {
               </FormControl>
               <FormControl id="nacionalidade" isRequired>
                 <FormLabel>Nacionalidade</FormLabel>
-                <Input
-                  placeholder="Brasileira, Portuguêsa..."
-                  _placeholder={{ color: "gray.500" }}
-                  type="text"
+                <Select
+                  placeholder="Selecione uma opção"
                   value={nationality}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                     setNationality(e.target.value)
                   }
-                />
+                >
+                  <option value="br">Brasileira</option>
+                  <option value="pt">Portuguesa</option>
+                  <option value="es">Espanhola</option>
+                  <option value="us">Americana</option>
+                  <option value="uk">Britânica</option>
+                </Select>
               </FormControl>
+
               <FormControl id="obs" isRequired>
                 <FormLabel>Informe Horário e Local em que atende</FormLabel>
                 <Input

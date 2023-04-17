@@ -69,27 +69,6 @@ const EditEscort: React.FC<EditEscortProps> = ({ acompanhante, onClose }) => {
   };
 
   const token = Cookies.get("token");
-  const handleAutorizar = () => {
-    api
-      .post(
-        "/escorts/authorization",
-        {
-          escortId: acompanhante.id,
-          access: true,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log("autorizada");
-      })
-      .catch((error) => {
-        console.log("erro na req");
-      });
-  };
 
   const toast = useToast();
 
