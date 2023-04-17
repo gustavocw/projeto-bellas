@@ -100,6 +100,7 @@ export default function RegisterUser() {
                 <FormControl id="firstName" isRequired>
                   <FormLabel>Nome Fantasia</FormLabel>
                   <Input
+                    focusBorderColor="pink.400"
                     type="name"
                     placeholder="Ex: Natália Loirinha"
                     value={name}
@@ -113,6 +114,7 @@ export default function RegisterUser() {
                 <FormControl id="lastName">
                   <FormLabel>Telefone</FormLabel>
                   <Input
+                    focusBorderColor="pink.400"
                     type="text"
                     placeholder="EX: 932136875"
                     value={email}
@@ -127,6 +129,7 @@ export default function RegisterUser() {
               <Box>
                 <FormControl id="sexo" isRequired>
                   <Select
+                    focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Opção Sexual"
                     value={sexo}
@@ -144,6 +147,7 @@ export default function RegisterUser() {
               <Box>
                 <FormControl id="distrito" isRequired>
                   <Select
+                    focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Distrito"
                     value={city}
@@ -176,6 +180,7 @@ export default function RegisterUser() {
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
+                  focusBorderColor="pink.400"
                   placeholder="Senha"
                   value={password}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

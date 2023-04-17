@@ -135,6 +135,7 @@ export default function LoginUser() {
               >
                 Entrar
               </Button>
+              <Link textAlign={'center'} color={"pink.400"}>Criar uma conta no Bellas</Link>
             </Stack>
           </Stack>
         </Box>
