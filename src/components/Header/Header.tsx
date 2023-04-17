@@ -24,7 +24,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     py={1}
     rounded={"md"}
     className="link-navbar"
-    borderRadius={'20px'}
+    borderRadius={"20px"}
     _hover={{
       textDecoration: "none",
     }}
@@ -42,7 +42,6 @@ export default function Header() {
     setIsLoggedIn(false);
     Cookies.remove("token");
   };
-  
 
   return (
     <>
@@ -106,7 +105,7 @@ export default function Header() {
                   backgroundColor: "#e048e0",
                   color: "#fff",
                   fontWeight: "normal",
-                  borderRadius: '20px'
+                  borderRadius: "20px",
                 }}
                 onClick={handleLogout}
               >
@@ -116,16 +115,7 @@ export default function Header() {
           ) : (
             <>
               <div className="login-button">
-                <LoginDialogUser
-                  isLoggedIn={isLoggedIn}
-                  setIsLoggedIn={setIsLoggedIn}
-                />
-              </div>
-              <div className="login-button">
-                <RegistyerDialogUser
-                  isLoggedIn={isLoggedIn}
-                  setIsLoggedIn={setIsLoggedIn}
-                />
+                <Link color={'#fff'} className="anunciar" href="/login">Entrar</Link>
               </div>
             </>
           )}

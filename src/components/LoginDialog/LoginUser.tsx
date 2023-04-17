@@ -1,35 +1,30 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
+  Flex,
+  Box,
   FormControl,
   FormLabel,
   Input,
-  useDisclosure,
+  Checkbox,
+  Stack,
+  Link,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import { Dispatch, SetStateAction } from "react";
-import React, { useState } from "react";
-import api from "../../services/api";
 import Cookies from "js-cookie";
+import { useState } from "react";
+import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
-  isLoggedIn: boolean;
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-}
 
-const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [email, setEmail] = useState("");
+
+export default function LoginUser() {
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   const toast = useToast();
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
 
   const handleLogin = () => {
     api
@@ -40,25 +35,18 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
       .then((response) => {
         const token = response.data.token;
         if (token) {
-          setIsLoggedIn(true);
           Cookies.set("token", token, { expires: 1 });
-          onClose();
           handleLoginSuccessToast();
+          navigate("/");
         } else {
-          handleLoginFailToast("Usuário não encontrado.");
+          handleLoginFailToast("Você não está registrado.");
         }
       })
       .catch((error) => {
         handleLoginFailToast("Email ou senha incorretos.");
       });
   };
-
-  const token = Cookies.get("token");
-
-  if (token) {
-    setIsLoggedIn(true);
-  }
-
+  
   const handleLoginSuccessToast = () => {
     toast({
       title: "Login realizado com sucesso!",
@@ -67,7 +55,7 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
       isClosable: true,
     });
   };
-
+  
   const handleLoginFailToast = (message: string) => {
     toast({
       title: "Falha no login",
@@ -79,50 +67,47 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   return (
-    <>
-      {!isLoggedIn && (
-        <Button
-          size={"sm"}
-          px={"2"}
-          fontSize={"12"}
-          style={{
-            width: "100%",
-            backgroundColor: "#e048e0",
-            color: "#fff",
-            borderRadius: '20px'
-          }}
-          onClick={onOpen}
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>
+            Bem vindo{"a"} ao{" "}
+            <Link href="/" color={"pink.400"}>
+              Bellas
+            </Link>
+          </Heading>
+          <Text fontSize={"lg"} color={"gray.600"}>
+            Entre com seu número e senha
+          </Text>
+        </Stack>
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
         >
-          Entrar
-        </Button>
-      )}
-
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Entre na sua conta</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Tel</FormLabel>
+          <Stack spacing={4}>
+            <FormControl id="email">
+              <FormLabel>Número de Telefone</FormLabel>
               <Input
-                type="text"
-                ref={initialRef}
-                placeholder="Ex: 932136875"
+                placeholder="Ex: 932136845"
                 value={email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setEmail(e.target.value)
                 }
+                focusBorderColor="pink.400"
+                type="email"
               />
             </FormControl>
-            <FormControl mt={4}>
+            <FormControl id="password">
               <FormLabel>Senha</FormLabel>
               <Input
+                focusBorderColor="pink.400"
                 type="password"
                 placeholder="Senha"
                 value={password}
@@ -131,18 +116,29 @@ const LoginDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
                 }
               />
             </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button onClick={handleLogin} colorScheme="pink" mr={3}>
-              Entrar
-            </Button>
-            <Button onClick={onClose}>Cancelar</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+            <Stack spacing={10}>
+              <Stack
+                direction={{ base: "column", sm: "row" }}
+                align={"start"}
+                justify={"space-between"}
+              >
+                <Checkbox>Memorizar Usuário</Checkbox>
+                <Link color={"pink.400"}>Esqueceu a senha?</Link>
+              </Stack>
+              <Button
+                bg={"pink.400"}
+                color={"white"}
+                onClick={handleLogin}
+                _hover={{
+                  bg: "pink.500",
+                }}
+              >
+                Entrar
+              </Button>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
   );
-};
-
-export default LoginDialogUser;
+}
