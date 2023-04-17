@@ -23,7 +23,6 @@ import Cookies from "js-cookie";
 import Loading from "../../components/loading/loading";
 
 export default function AnunciePage(): JSX.Element {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
@@ -143,14 +142,15 @@ export default function AnunciePage(): JSX.Element {
     });
   };
 
-  const handleSexAnalChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+  const handleSexAnalChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
     if (event.target.value === "sim") {
       setIsSexAnal(true);
     } else {
       setIsSexAnal(false);
     }
   };
-  
 
   return (
     <div className="container">
@@ -167,21 +167,19 @@ export default function AnunciePage(): JSX.Element {
               rounded={"xl"}
               p="12"
             >
-              {isLoggedIn && (
-                <Heading
-                  color="#e47ce8"
-                  textAlign={"center"}
-                  lineHeight={1.1}
-                  fontSize={{ base: "2xl", sm: "3xl" }}
-                >
-                  Preencha os campos abaixo com suas características.
-                  <br></br>
-                  <br></br>
-                  <span className="informe">
-                    Seram estas características que iram paarecer no anuncio
-                  </span>
-                </Heading>
-              )}
+              <Heading
+                color="#e47ce8"
+                textAlign={"center"}
+                lineHeight={1.1}
+                fontSize={{ base: "2xl", sm: "3xl" }}
+              >
+                Preencha os campos abaixo com suas características.
+                <br></br>
+                <br></br>
+                <span className="informe">
+                  Seram estas características que iram paarecer no anuncio
+                </span>
+              </Heading>
               <Center className="campos-images">
                 {images.length > 0 &&
                   images.map((image, index) => (
@@ -212,26 +210,24 @@ export default function AnunciePage(): JSX.Element {
                       </div>
                     ) : null}
                   </Center>
-                  {isLoggedIn && (
-                    <Center display={"block"}>
-                      <Heading
-                        style={{ textAlign: "center", color: "#e47ce8" }}
-                        lineHeight={1.1}
-                        fontSize={{ base: "2x1", sm: "12xl" }}
-                      >
-                        Selecione as imagens que quer no anuncio
-                      </Heading>
-                      <input
-                        type="file"
-                        multiple
-                        onChange={(event) => {
-                          if (event.target.files) {
-                            setImages([...event.target.files]);
-                          }
-                        }}
-                      />
-                    </Center>
-                  )}
+                  <Center display={"block"}>
+                    <Heading
+                      style={{ textAlign: "center", color: "#e47ce8" }}
+                      lineHeight={1.1}
+                      fontSize={{ base: "2x1", sm: "12xl" }}
+                    >
+                      Selecione as imagens que quer no anuncio
+                    </Heading>
+                    <input
+                      type="file"
+                      multiple
+                      onChange={(event) => {
+                        if (event.target.files) {
+                          setImages([...event.target.files]);
+                        }
+                      }}
+                    />
+                  </Center>
                 </Stack>
               </FormControl>
             </Stack>
@@ -421,20 +417,17 @@ export default function AnunciePage(): JSX.Element {
                 />
               </FormControl>
               <Stack spacing={6} direction={["column", "row"]}>
-                {isLoggedIn && (
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!isLoggedIn}
-                    bg={"pink.400"}
-                    color={"white"}
-                    w="full"
-                    _hover={{
-                      bg: "pink.500",
-                    }}
-                  >
-                    Concluir
-                  </Button>
-                )}
+                <Button
+                  onClick={handleSubmit}
+                  bg={"pink.400"}
+                  color={"white"}
+                  w="full"
+                  _hover={{
+                    bg: "pink.500",
+                  }}
+                >
+                  Concluir
+                </Button>
               </Stack>
             </Stack>
           </Flex>
