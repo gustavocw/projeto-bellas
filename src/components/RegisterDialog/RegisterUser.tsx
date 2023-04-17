@@ -1,197 +1,225 @@
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
-    FormControl,
-    FormLabel,
-    Input,
-    useDisclosure,
-    useToast,
-    Select,
-  } from "@chakra-ui/react";
-  import { Dispatch, SetStateAction } from 'react'
-  import React, { useState } from "react";
-  import api from "../../services/api";
-  import Cookies from 'js-cookie';
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  HStack,
+  InputRightElement,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Link,
+  useToast,
+  Select,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import Cookies from "js-cookie";
+import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
-  interface Props {
-    isLoggedIn: boolean,
-    setIsLoggedIn: Dispatch<SetStateAction<boolean>>,
-  }
-  
-  const RegistyerDialogUser: React.FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [sexo, setSexo] = useState("");
-    const [city, setCity] = useState("");
-    const [password, setPassword] = useState("");
-    const toast = useToast();
-    const initialRef = React.useRef(null);
-    const finalRef = React.useRef(null);
-  
-    const token = Cookies.get('token');
+export default function RegisterUser() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [sexo, setSexo] = useState("");
+  const [city, setCity] = useState("");
+  const [password, setPassword] = useState("");
+  const toast = useToast();
+  const navigate = useNavigate();
 
-    const handleRegister = () => {
-      api
-        .post("/escort/create", {
+  const token = Cookies.get("token");
+
+  const handleRegister = () => {
+    api
+      .post(
+        "/escort/create",
+        {
           email,
           password,
           name,
           sexo,
           city,
-        }, {
+        },
+        {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        .then((response) => {
-          setIsLoggedIn(true);
-          Cookies.set('token', response.data.token);
-          console.log("response", response);
-        })
-        .catch((error) => {
-          toast({
-            title: "Falha no registro",
-            description: "Digite um email e senha válidos.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        Cookies.set("token", response.data.token);
+        toast({
+          title: "Registrado(a) com sucesso!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
         });
-    };
-  
-    const handleRegisterSuccessToast = () => {
-      toast({
-        title: "Registrado(a) com sucesso!",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
+        navigate("/");
+      })
+      .catch((error) => {
+        toast({
+          title: "Falha no registro",
+          description: "Digite um email e senha válidos.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       });
-    };
-  
-    React.useEffect(() => {
-      if (isLoggedIn) {
-        onClose();
-      }
-    }, [isLoggedIn, onClose]);
-  
-    return (
-      <>
-        {!isLoggedIn && (
-          <Button
-            size={"sm"}
-            mx="2"
-            px={'1'}
-            fontSize={'12'}
-            style={{
-              width: "100%",
-              backgroundColor: "#e048e0",
-              color: '#fff',
-              borderRadius: '20px'
-            }}
-            onClick={onOpen}
-          >
-            Criar conta
-          </Button>
-        )}
-  
-        <Modal
-          initialFocusRef={initialRef}
-          finalFocusRef={finalRef}
-          isOpen={isOpen}
-          onClose={onClose}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Bem vinda{'(o)'} ao Bellas, preencha os campos para começar a anunciar</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Nome Fantasia</FormLabel>
-                <Input
-                  type="name"
-                  ref={initialRef}
-                  placeholder="Ex: Natália Loirinha Fogosa"
-                  value={name}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-                />
-              </FormControl>
+  };
 
-              <FormControl>
-                <FormLabel>Tel</FormLabel>
+  return (
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"} textAlign={"center"}>
+            Registre-se no Bellas
+          </Heading>
+          <Text fontSize={"lg"} color={"gray.600"}>
+            para poder anunciar seu serviço ✌️
+          </Text>
+        </Stack>
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={5}>
+            <HStack>
+              <Box>
+                <FormControl id="firstName" isRequired>
+                  <FormLabel>Nome Fantasia</FormLabel>
+                  <Input
+                    type="name"
+                    placeholder="Ex: Natália Loirinha"
+                    value={name}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setName(e.target.value)
+                    }
+                  />
+                </FormControl>
+              </Box>
+              <Box>
+                <FormControl id="lastName">
+                  <FormLabel>Telefone</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="EX: 932136875"
+                    value={email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEmail(e.target.value)
+                    }
+                  />
+                </FormControl>
+              </Box>
+            </HStack>
+            <HStack>
+              <Box>
+                <FormControl id="sexo" isRequired>
+                  <Select
+                    w="194px"
+                    placeholder="Opção Sexual"
+                    value={sexo}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      setSexo(e.target.value)
+                    }
+                  >
+                    <option value="Mulher">Mulher</option>
+                    <option value="Homem">Homem</option>
+                    <option value="Trans">Trans</option>
+                    <option value="Casal">Casal</option>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box>
+                <FormControl id="distrito" isRequired>
+                  <Select
+                    w="194px"
+                    placeholder="Distrito"
+                    value={city}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      setCity(e.target.value)
+                    }
+                  >
+                    <option value="Aveiro">Aveiro</option>
+                    <option value="Bragança">Bragança</option>
+                    <option value="Castelo Branco">Castelo Branco</option>
+                    <option value="Coimbra">Coimbra</option>
+                    <option value="Évora">Évora</option>
+                    <option value="Faro">Faro</option>
+                    <option value="Guarda">Guarda</option>
+                    <option value="Lisboa">Lisboa</option>
+                    <option value="Leiria">Leiria</option>
+                    <option value="Braga">Braga</option>
+                    <option value="Portalegre">Portalegre</option>
+                    <option value="Porto">Porto</option>
+                    <option value="Santarém">Santarém</option>
+                    <option value="Setúbal">Setúbal</option>
+                    <option value="Viana do Castelo">Viana do Castelo</option>
+                    <option value="Vila Real">Vila Real</option>
+                    <option value="Viseu">Viseu</option>
+                  </Select>
+                </FormControl>
+              </Box>
+            </HStack>
+            <FormControl id="password" isRequired>
+              <FormLabel>Password</FormLabel>
+              <InputGroup>
                 <Input
-                  type="text"
-                  ref={initialRef}
-                  placeholder="EX: 932136875"
-                  value={email}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                />
-              </FormControl>
-  
-              <FormControl mt={4} id="sexo" isRequired>
-                <Select
-                placeholder="Opção Sexual"
-                value={sexo}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSexo(e.target.value)}
-                >
-                  <option value="Mulher">Mulher</option>
-                  <option value="Homem">Homem</option>
-                  <option value="Trans">Trans</option>
-                  <option value="Casal">Casal</option>
-                </Select>
-              </FormControl>
-              <FormControl mt={4} id="distrito" isRequired>
-                <Select
-                placeholder="Distrito"
-                value={city}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCity(e.target.value)}
-                >
-                  <option value="Aveiro">Aveiro</option>
-                  <option value="Bragança">Bragança</option>
-                  <option value="Castelo Branco">Castelo Branco</option>
-                  <option value="Coimbra">Coimbra</option>
-                  <option value="Évora">Évora</option>
-                  <option value="Faro">Faro</option>
-                  <option value="Guarda">Guarda</option>
-                  <option value="Lisboa">Lisboa</option>
-                  <option value="Leiria">Leiria</option>
-                  <option value="Braga">Braga</option>
-                  <option value="Portalegre">Portalegre</option>
-                  <option value="Porto">Porto</option>
-                  <option value="Santarém">Santarém</option>
-                  <option value="Setúbal">Setúbal</option>
-                  <option value="Viana do Castelo">Viana do Castelo</option>
-                  <option value="Vila Real">Vila Real</option>
-                  <option value="Viseu">Viseu</option>
-                </Select>
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Senha</FormLabel>
-                <Input
-                  type="password"
                   placeholder="Senha"
                   value={password}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setPassword(e.target.value)
+                  }
+                  type={showPassword ? "text" : "password"}
                 />
-              </FormControl>
-            </ModalBody>
-  
-            <ModalFooter>
-              <Button onClick={handleRegister} colorScheme="pink" mr={3}>
-                Registrar
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <Stack spacing={10} pt={2}>
+              <Button
+                loadingText="Submitting"
+                size="lg"
+                bg={"pink.400"}
+                color={"white"}
+                onClick={handleRegister}
+                _hover={{
+                  bg: "pink.500",
+                }}
+              >
+                Criar
               </Button>
-              <Button onClick={onClose}>Cancelar</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </>
-    );
-  }
-  
-  export default RegistyerDialogUser;
+            </Stack>
+            <Stack pt={6}>
+              <Text align={"center"}>
+                Já possui conta?{" "}
+                <Link href="/login" color={"pink.400"}>
+                  Entrar
+                </Link>
+              </Text>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
+  );
+}

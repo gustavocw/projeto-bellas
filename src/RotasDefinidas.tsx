@@ -9,6 +9,7 @@ import ProfilePage from "./client/profile/profile";
 import Teste from "./client/profile/teste";
 import AutorizadosAdm from "./client/painel/autorizados/Autorizados";
 import LoginUser from "./components/LoginDialog/LoginUser";
+import RegisterUser from "./components/RegisterDialog/RegisterUser";
 
 // @ts-ignore
 // const PrivateRoute = ({ children, redirectTo }) => {
@@ -25,6 +26,7 @@ export function RoutesDefinided() {
           <Route path="/anunciar" element={<AnunciePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/login" element={<LoginUser />} />
+          <Route path="/register" element={<RegisterUser />} />
           <Route path="/autorizados" element={<AutorizadosAdm />} />
           <Route path="/test" element={<Teste />} />
           <Route path="/login-adm" element={<LoginAdm isLoggedIn={false} setIsLoggedIn={function (value: React.SetStateAction<boolean>): void {
