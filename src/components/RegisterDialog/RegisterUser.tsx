@@ -177,11 +177,11 @@ export default function RegisterUser() {
               </Box>
             </HStack>
             <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Senha</FormLabel>
               <InputGroup>
                 <Input
                   focusBorderColor="pink.400"
-                  placeholder="Senha"
+                  placeholder="Digite sua senha"
                   value={password}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setPassword(e.target.value)
