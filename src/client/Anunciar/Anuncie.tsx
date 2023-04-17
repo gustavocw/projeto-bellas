@@ -167,18 +167,6 @@ export default function AnunciePage(): JSX.Element {
               rounded={"xl"}
               p="12"
             >
-              {!isLoggedIn && (
-                <div className="centralizar">
-                  <RegisterDialogUser
-                    isLoggedIn={isLoggedIn}
-                    setIsLoggedIn={setIsLoggedIn}
-                  />
-                  <LoginDialogUser
-                    isLoggedIn={isLoggedIn}
-                    setIsLoggedIn={setIsLoggedIn}
-                  />
-                </div>
-              )}
               {isLoggedIn && (
                 <Heading
                   color="#e47ce8"
