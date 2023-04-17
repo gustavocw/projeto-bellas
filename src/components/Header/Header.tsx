@@ -36,12 +36,6 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    Cookies.remove("token");
-  };
 
   return (
     <>
@@ -74,51 +68,49 @@ export default function Header() {
             variant="unstyled"
             onClick={isOpen ? onClose : onOpen}
           />
-          {isLoggedIn ? (
-            <Flex>
-              <Link
-                mx="2"
-                onClick={onOpen}
-                href="/anunciar"
-                size={"sm"}
-                color="#fff"
-                className="anunciar"
-              >
-                Anunciar
+          <Flex>
+            <Link
+              mx="2"
+              onClick={onOpen}
+              href="/anunciar"
+              size={"sm"}
+              color="#fff"
+              className="anunciar"
+            >
+              Anunciar
+            </Link>
+            <Link
+              fontSize={"14"}
+              onClick={onOpen}
+              href="/profile"
+              size={"sm"}
+              mx={2}
+              color="#fff"
+              className="anunciar"
+            >
+              Minha conta
+            </Link>
+            <Button
+              className="sair"
+              size={"sm"}
+              fontSize={"14"}
+              style={{
+                backgroundColor: "#e048e0",
+                color: "#fff",
+                fontWeight: "normal",
+                borderRadius: "20px",
+              }}
+            >
+              Sair
+            </Button>
+          </Flex>
+          <>
+            <div className="login-button">
+              <Link color={"#fff"} className="anunciar" href="/login">
+                Entrar
               </Link>
-              <Link
-                fontSize={"14"}
-                onClick={onOpen}
-                href="/profile"
-                size={"sm"}
-                mx={2}
-                color="#fff"
-                className="anunciar"
-              >
-                Minha conta
-              </Link>
-              <Button
-                className="sair"
-                size={"sm"}
-                fontSize={"14"}
-                style={{
-                  backgroundColor: "#e048e0",
-                  color: "#fff",
-                  fontWeight: "normal",
-                  borderRadius: "20px",
-                }}
-                onClick={handleLogout}
-              >
-                Sair
-              </Button>
-            </Flex>
-          ) : (
-            <>
-              <div className="login-button">
-                <Link color={'#fff'} className="anunciar" href="/login">Entrar</Link>
-              </div>
-            </>
-          )}
+            </div>
+          </>
         </Flex>
 
         {isOpen ? (
