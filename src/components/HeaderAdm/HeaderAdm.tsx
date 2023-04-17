@@ -63,7 +63,6 @@ export default function Header() {
             variant="unstyled"
             color="#fff"
           />
-          {isLoggedIn ? (
             <Flex>
               <Button
                 className="sair"
@@ -79,7 +78,6 @@ export default function Header() {
                 Sair
               </Button>
             </Flex>
-          ) : (
             <>
               <div className="login-button">
                 <LoginDialogAdm
@@ -87,14 +85,7 @@ export default function Header() {
                   setIsLoggedIn={setIsLoggedIn}
                 />
               </div>
-              <div className="login-button">
-                <RegistyerDialogUser
-                  isLoggedIn={isLoggedIn}
-                  setIsLoggedIn={setIsLoggedIn}
-                />
-              </div>
             </>
-          )}
         </Flex>
 
         {isOpen ? (
