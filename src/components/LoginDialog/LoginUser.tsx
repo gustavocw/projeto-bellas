@@ -122,7 +122,7 @@ export default function LoginUser() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox>Memorizar Usuário</Checkbox>
+                <Checkbox colorScheme="pink" >Memorizar Usuário</Checkbox>
                 <Link color={"pink.400"}>Esqueceu a senha?</Link>
               </Stack>
               <Button
