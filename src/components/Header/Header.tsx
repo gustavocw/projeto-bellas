@@ -12,9 +12,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import LoginDialogUser from "../LoginDialog/LoginUser";
 import Cookies from "js-cookie";
-import RegistyerDialogUser from "../RegisterDialog/RegisterUser";
 
 const Links = ["Início"];
 
@@ -36,6 +34,12 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const isLogged = Cookies.get("token") != null;
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    window.location.href = "/login";
+  };
 
   return (
     <>
@@ -68,49 +72,53 @@ export default function Header() {
             variant="unstyled"
             onClick={isOpen ? onClose : onOpen}
           />
-          <Flex>
-            <Link
-              mx="2"
-              onClick={onOpen}
-              href="/anunciar"
-              size={"sm"}
-              color="#fff"
-              className="anunciar"
-            >
-              Anunciar
-            </Link>
-            <Link
-              fontSize={"14"}
-              onClick={onOpen}
-              href="/profile"
-              size={"sm"}
-              mx={2}
-              color="#fff"
-              className="anunciar"
-            >
-              Minha conta
-            </Link>
-            <Button
-              className="sair"
-              size={"sm"}
-              fontSize={"14"}
-              style={{
-                backgroundColor: "#e048e0",
-                color: "#fff",
-                fontWeight: "normal",
-                borderRadius: "20px",
-              }}
-            >
-              Sair
-            </Button>
-          </Flex>
-          <>
-            <div className="login-button">
-              <Link color={"#fff"} className="anunciar" href="/login">
-                Entrar
+          {isLogged ? (
+            <Flex>
+              <Link
+                mx="2"
+                onClick={onOpen}
+                href="/anunciar"
+                size={"sm"}
+                color="#fff"
+                className="anunciar"
+              >
+                Anunciar
               </Link>
-            </div>
-          </>
+              <Link
+                fontSize={"14"}
+                onClick={onOpen}
+                href="/profile"
+                size={"sm"}
+                mx={2}
+                color="#fff"
+                className="anunciar"
+              >
+                Minha conta
+              </Link>
+              <Button
+                className="sair"
+                size={"sm"}
+                fontSize={"14"}
+                style={{
+                  backgroundColor: "#e048e0",
+                  color: "#fff",
+                  fontWeight: "normal",
+                  borderRadius: "20px",
+                }}
+                onClick={handleLogout}
+              >
+                Sair
+              </Button>
+            </Flex>
+          ) : (
+            <>
+              <div className="login-button">
+                <Link color={"#fff"} className="anunciar" href="/login">
+                  Entrar
+                </Link>
+              </div>
+            </>
+          )}
         </Flex>
 
         {isOpen ? (

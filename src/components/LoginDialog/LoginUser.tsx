@@ -17,6 +17,7 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import RememberPassword from "../remember/remember";
 
 
 
@@ -123,7 +124,7 @@ export default function LoginUser() {
                 justify={"space-between"}
               >
                 <Checkbox colorScheme="pink" >Memorizar Usuário</Checkbox>
-                <Link color={"pink.400"}>Esqueceu a senha?</Link>
+                <RememberPassword />
               </Stack>
               <Button
                 bg={"pink.400"}
