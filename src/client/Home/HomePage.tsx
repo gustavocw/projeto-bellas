@@ -354,7 +354,7 @@ const HomePage = () => {
                           bgRepeat={'no-repeat'}
                           bgPosition={'center'}
                           borderWidth="1px"
-                          rounded="lg"
+                          rounded="md"
                           shadow="lg"
                           py='130'
                           px='4'

@@ -64,7 +64,7 @@ export default function RegisterUser() {
       .catch((error) => {
         toast({
           title: "Falha no registro",
-          description: "Digite um email e senha válidos.",
+          description: "Verifique se seu número já foi cadastrado ou se está incorreto.",
           status: "error",
           duration: 5000,
           isClosable: true,

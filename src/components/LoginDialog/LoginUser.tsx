@@ -44,7 +44,7 @@ export default function LoginUser() {
         }
       })
       .catch((error) => {
-        handleLoginFailToast("Email ou senha incorretos.");
+        handleLoginFailToast("Número ou senha incorretos.");
       });
   };
   
