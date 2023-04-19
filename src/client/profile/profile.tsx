@@ -73,6 +73,36 @@ export default function ProfilePage(): JSX.Element {
       });
   };
 
+  interface User {
+    city: string;
+    sexo: string;
+    name: string;
+    email: string;
+  }
+
+  const [user, setUser] = useState<User>({
+    city: "",
+    sexo: "",
+    name: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      api
+        .get("/escort/list", config)
+        .then((response) => {
+          const userData = response.data;
+          console.log(userData);
+          setUser(userData);
+        })
+        .catch((error) => console.error(error));
+    } else {
+      console.log("Token not found!");
+    }
+  }, []);
 
 
   // const handleEditar = () => {
@@ -168,7 +198,7 @@ export default function ProfilePage(): JSX.Element {
                   <Input
                     focusBorderColor="pink.400"
                     type="name"
-                    placeholder="Ex: Natália Loirinha"
+                    placeholder={user?.name}
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setName(e.target.value)
@@ -182,7 +212,7 @@ export default function ProfilePage(): JSX.Element {
                   <Input
                     focusBorderColor="pink.400"
                     type="text"
-                    placeholder="EX: 932136875"
+                    placeholder={user?.email}
                     value={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setEmail(e.target.value)
@@ -195,51 +225,51 @@ export default function ProfilePage(): JSX.Element {
               <Box>
                 <FormControl id="sexo" isRequired>
                   <Select
-                    color="#000" 
+                    color="#fff" 
                     focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Opção Sexual"
-                    value={sexo}
+                    value={sexo || user?.sexo}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                       setSexo(e.target.value)
                     }
                   >
-                    <option color="#000" value="Mulher">Mulher</option>
-                    <option color="#000" value="Homem">Homem</option>
-                    <option color="#000" value="Trans">Trans</option>
-                    <option color="#000" value="Casal">Casal</option>
+                    <option style={{ color: '#000' }} value="Mulher">Mulher</option>
+                    <option style={{ color: '#000' }} value="Homem">Homem</option>
+                    <option style={{ color: '#000' }} value="Trans">Trans</option>
+                    <option style={{ color: '#000' }} value="Casal">Casal</option>
                   </Select>
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="distrito" isRequired>
                   <Select
-                    color="#000" 
+                    color="#fff" 
                     focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Distrito"
-                    value={city}
+                    value={city || user?.city}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                       setCity(e.target.value)
                     }
                   >
-                    <option value="Aveiro">Aveiro</option>
-                    <option value="Bragança">Bragança</option>
-                    <option value="Castelo Branco">Castelo Branco</option>
-                    <option value="Coimbra">Coimbra</option>
-                    <option value="Évora">Évora</option>
-                    <option value="Faro">Faro</option>
-                    <option value="Guarda">Guarda</option>
-                    <option value="Lisboa">Lisboa</option>
-                    <option value="Leiria">Leiria</option>
-                    <option value="Braga">Braga</option>
-                    <option value="Portalegre">Portalegre</option>
-                    <option value="Porto">Porto</option>
-                    <option value="Santarém">Santarém</option>
-                    <option value="Setúbal">Setúbal</option>
-                    <option value="Viana do Castelo">Viana do Castelo</option>
-                    <option value="Vila Real">Vila Real</option>
-                    <option value="Viseu">Viseu</option>
+                    <option style={{ color: '#000' }} value="Aveiro">Aveiro</option>
+                    <option style={{ color: '#000' }} value="Bragança">Bragança</option>
+                    <option style={{ color: '#000' }} value="Castelo Branco">Castelo Branco</option>
+                    <option style={{ color: '#000' }} value="Coimbra">Coimbra</option>
+                    <option style={{ color: '#000' }} value="Évora">Évora</option>
+                    <option style={{ color: '#000' }} value="Faro">Faro</option>
+                    <option style={{ color: '#000' }} value="Guarda">Guarda</option>
+                    <option style={{ color: '#000' }} value="Lisboa">Lisboa</option>
+                    <option style={{ color: '#000' }} value="Leiria">Leiria</option>
+                    <option style={{ color: '#000' }} value="Braga">Braga</option>
+                    <option style={{ color: '#000' }} value="Portalegre">Portalegre</option>
+                    <option style={{ color: '#000' }} value="Porto">Porto</option>
+                    <option style={{ color: '#000' }} value="Santarém">Santarém</option>
+                    <option style={{ color: '#000' }} value="Setúbal">Setúbal</option>
+                    <option style={{ color: '#000' }} value="Viana do Castelo">Viana do Castelo</option>
+                    <option style={{ color: '#000' }} value="Vila Real">Vila Real</option>
+                    <option style={{ color: '#000' }} value="Viseu">Viseu</option>
                   </Select>
                 </FormControl>
               </Box>
