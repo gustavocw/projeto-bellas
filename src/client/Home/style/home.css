@@ -19,10 +19,13 @@ body {
 
 .btnse{
     border-radius: 20px !important;
+    border: 1px solid #e47ce8;
+    background-color: #ffffff00 !important;
+    color: #e47ce8 !important;
 }
 .btnse:hover{
-    color: #e47ce8 !important;
-    background-color: #fff !important;
+    color: #ffffff !important;
+    transition: 0.3s;
 }
 
 

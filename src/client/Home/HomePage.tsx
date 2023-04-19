@@ -209,7 +209,6 @@ const HomePage = () => {
                     <Button
                       className="btnse"
                       color={"#fff"}
-                      bg={"pink.300"}
                       mx="2"
                       onClick={() => setGeneroSelecionado("Todos")}
                     >
@@ -218,7 +217,6 @@ const HomePage = () => {
                     <Button
                       className="btnse"
                       color={"#fff"}
-                      bg={"pink.300"}
                       mx="2"
                       onClick={() => setGeneroSelecionado("Mulher")}
                     >
@@ -227,7 +225,6 @@ const HomePage = () => {
                     <Button
                       className="btnse"
                       color={"#fff"}
-                      bg={"pink.300"}
                       mx="2"
                       onClick={() => setGeneroSelecionado("Homem")}
                     >
@@ -236,7 +233,6 @@ const HomePage = () => {
                     <Button
                       className="btnse"
                       color={"#fff"}
-                      bg={"pink.300"}
                       mx="2"
                       onClick={() => setGeneroSelecionado("Trans")}
                     >
@@ -245,7 +241,6 @@ const HomePage = () => {
                     <Button
                       className="btnse"
                       color={"#fff"}
-                      bg={"pink.300"}
                       mx="2"
                       onClick={() => setGeneroSelecionado("Casal")}
                     >
