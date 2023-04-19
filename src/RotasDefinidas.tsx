@@ -10,6 +10,7 @@ import Teste from "./client/profile/teste";
 import AutorizadosAdm from "./client/painel/autorizados/Autorizados";
 import LoginUser from "./components/LoginDialog/LoginUser";
 import RegisterUser from "./components/RegisterDialog/RegisterUser";
+import ProfileAnuncio from "./client/profile/ProfileAnuncio";
 
 // @ts-ignore
 // const PrivateRoute = ({ children, redirectTo }) => {
@@ -25,6 +26,7 @@ export function RoutesDefinided() {
           <Route path="/" element={<HomePage />} />
           <Route path="/anunciar" element={<AnunciePage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile-anuncio" element={<ProfileAnuncio />} />
           <Route path="/login" element={<LoginUser />} />
           <Route path="/register" element={<RegisterUser />} />
           <Route path="/autorizados" element={<AutorizadosAdm />} />

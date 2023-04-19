@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL:'https://oralmax.eu/'
+    baseURL:'http://oralmax.eu/'
 });
 
 export default api;

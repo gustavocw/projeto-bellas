@@ -349,10 +349,15 @@ const HomePage = () => {
                           }}
                           className="anunciante-card"
                           bg={useColorModeValue("gray.200", "gray.800")}
-                          maxW="sm"
+                          bgImage={acompanhante?.imagesEscort[0].urlPhoto}
+                          bgSize={'cover'}
+                          bgRepeat={'no-repeat'}
+                          bgPosition={'center'}
                           borderWidth="1px"
                           rounded="lg"
                           shadow="lg"
+                          py='130'
+                          px='4'
                           position="relative"
                         >
                           {acompanhante?.name && (
@@ -364,25 +369,19 @@ const HomePage = () => {
                                 left={2}
                                 bg="green.400"
                               />
-                              <Text mx="6">Disponível</Text>
                             </div>
                           )}
-                          <Image
-                            className="img-card-home"
-                            maxWidth={"220px"}
-                            maxHeight={"280px"}
-                            src={acompanhante?.imagesEscort[0]?.urlPhoto}
-                            roundedTop="md"
-                          />
-
-                          <Box p="6">
+                          <Box p="4">
+                          </Box>
+                        </Link>
                             <Box display={"flex"} alignItems="baseline">
                               <Badge
                                 rounded="full"
                                 px="2"
                                 fontSize="0.8em"
-                                bg="gray.800"
+                                bg="pink.500"
                                 color="#fff"
+                                my='1'
                               >
                                 {acompanhante?.city}
                               </Badge>
@@ -407,8 +406,6 @@ const HomePage = () => {
                                     : acompanhante?.name)}
                               </Box>
                             </Flex>
-                          </Box>
-                        </Link>
                       </Flex>
                     ))}
                   </div>
