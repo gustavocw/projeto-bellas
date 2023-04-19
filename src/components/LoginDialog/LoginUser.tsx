@@ -38,7 +38,7 @@ export default function LoginUser() {
         if (token) {
           Cookies.set("token", token, { expires: 1 });
           handleLoginSuccessToast();
-          navigate("/");
+          navigate("/profile");
         } else {
           handleLoginFailToast("Você não está registrado.");
         }
