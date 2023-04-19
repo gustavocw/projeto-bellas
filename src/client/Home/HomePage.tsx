@@ -345,14 +345,14 @@ const HomePage = () => {
                           className="anunciante-card"
                           bg={useColorModeValue("gray.200", "gray.800")}
                           bgImage={acompanhante?.imagesEscort[0].urlPhoto}
-                          bgSize={'cover'}
-                          bgRepeat={'no-repeat'}
-                          bgPosition={'center'}
+                          bgSize={"cover"}
+                          bgRepeat={"no-repeat"}
+                          bgPosition={"center"}
                           borderWidth="1px"
                           rounded="md"
                           shadow="lg"
-                          py='130'
-                          px='4'
+                          py="130"
+                          px="4"
                           position="relative"
                         >
                           {acompanhante?.name && (
@@ -364,43 +364,53 @@ const HomePage = () => {
                                 left={2}
                                 bg="green.400"
                               />
+                              <p
+                                style={{
+                                  zIndex: "999",
+                                  position: "relative",
+                                  bottom: "130px",
+                                  color: "#fff",
+                                  marginLeft: '10px'
+                                }}
+                              >
+                                Disponível
+                              </p>
                             </div>
                           )}
-                          <Box p="4">
-                          </Box>
+                          <Box p="4"></Box>
                         </Link>
-                            <Box display={"flex"} alignItems="baseline">
-                              <Badge
-                                rounded="full"
-                                px="2"
-                                fontSize="0.8em"
-                                bg="pink.500"
-                                color="#fff"
-                                my='1'
-                              >
-                                {acompanhante?.city}
-                              </Badge>
-                            </Box>
-                            <Flex
-                              mt="1"
-                              justifyContent="space-between"
-                              alignContent="center"
-                            >
-                              <Box
-                                color={"white"}
-                                textTransform={"uppercase"}
-                                fontSize="1xl"
-                                fontWeight="semibold"
-                                as="h5"
-                                lineHeight="tight"
-                                isTruncated
-                              >
-                                {acompanhante?.name &&
-                                  (acompanhante?.name.length > 15
-                                    ? acompanhante?.name.slice(0, 13) + "..."
-                                    : acompanhante?.name)}
-                              </Box>
-                            </Flex>
+                        <Box display={"flex"} alignItems="baseline">
+                          <Badge
+                            rounded="full"
+                            px="2"
+                            fontSize="0.8em"
+                            bg="pink.500"
+                            color="#fff"
+                            my="1"
+                          >
+                            {acompanhante?.city}
+                          </Badge>
+                        </Box>
+                        <Flex
+                          mt="1"
+                          justifyContent="space-between"
+                          alignContent="center"
+                        >
+                          <Box
+                            color={"white"}
+                            textTransform={"uppercase"}
+                            fontSize="1xl"
+                            fontWeight="semibold"
+                            as="h5"
+                            lineHeight="tight"
+                            isTruncated
+                          >
+                            {acompanhante?.name &&
+                              (acompanhante?.name.length > 15
+                                ? acompanhante?.name.slice(0, 13) + "..."
+                                : acompanhante?.name)}
+                          </Box>
+                        </Flex>
                       </Flex>
                     ))}
                   </div>
