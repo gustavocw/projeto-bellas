@@ -13,7 +13,8 @@
 }
 
 .anunciar {
-    background-color: #e47ce8;
+    background-color: #e47ce800 !important;
+    color: #e47ce8 !important;
     border: 1px solid #e47ce8;
     padding: 4px 10px;
     border-radius: 5px;
@@ -21,8 +22,7 @@
 
 .anunciar:hover {
     text-decoration: none !important;
-    background-color: #fff;
-    color: #e47ce8;
+    color: #fff !important;
 }
 
 .navbar {
