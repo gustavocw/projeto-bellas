@@ -145,17 +145,18 @@ export default function ProfilePage(): JSX.Element {
       minH={"100vh"}
       align={"center"}
       justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
+      bg={useColorModeValue("gray.1000", "gray.1000")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack spacing={3} mx={"auto"} maxW={"lg"} py={8} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
+          <Heading color="#fff" fontSize={"4xl"} textAlign={"center"}>
             Editar dados da conta
           </Heading>
         </Stack>
         <Box
+          color="#fff"
           rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
+          bg={useColorModeValue("gray.1000", "gray.1000")}
           boxShadow={"lg"}
           p={8}
         >
@@ -194,6 +195,7 @@ export default function ProfilePage(): JSX.Element {
               <Box>
                 <FormControl id="sexo" isRequired>
                   <Select
+                    color="#000" 
                     focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Opção Sexual"
@@ -202,16 +204,17 @@ export default function ProfilePage(): JSX.Element {
                       setSexo(e.target.value)
                     }
                   >
-                    <option value="Mulher">Mulher</option>
-                    <option value="Homem">Homem</option>
-                    <option value="Trans">Trans</option>
-                    <option value="Casal">Casal</option>
+                    <option color="#000" value="Mulher">Mulher</option>
+                    <option color="#000" value="Homem">Homem</option>
+                    <option color="#000" value="Trans">Trans</option>
+                    <option color="#000" value="Casal">Casal</option>
                   </Select>
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="distrito" isRequired>
                   <Select
+                    color="#000" 
                     focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Distrito"
