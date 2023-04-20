@@ -49,6 +49,9 @@ body {
 
 .anunciante-card{
     text-decoration: none !important;
+    width: 320px !important;
+    max-width: 270px;
+    height: 400px;
 }
 
 .apresentacao {
@@ -88,7 +91,9 @@ body {
     }
 
     .anunciante-card {
-        width: 180px;
+        width: 180px !important;
+        max-width: 270px;
+        height: 200px;
     }
 
     .img-card-home {
