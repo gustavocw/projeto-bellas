@@ -21,7 +21,7 @@ import Cookies from "js-cookie";
 import Loading from "../../components/loading/loading";
 import EditImage from "./imageEdit";
 
-export default function ProfilePage(): JSX.Element {
+export default function ProfileAnuncio(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -221,24 +221,22 @@ export default function ProfilePage(): JSX.Element {
   return (
     <div className="container-profile">
       {isLoading && <Loading />}
-      <Header />
       <div className="content-profile">
         <div className="anuncio-profile">
-          <Flex className="all-cards-profile" bg="white">
+          <Flex className="all-cards-profile" bg="gray.1000">
             <Stack
               className="all-profile"
               spacing={15}
-              maxW={"xxl"}
-              bg={useColorModeValue("white", "gray.700")}
+              width={'1000px'}
+              maxW={'800px'}
               rounded={"xl"}
-              p="30"
             >
-              <Flex className="campos-images-profile">
+              <Flex style={{ border: '1px solid #fff', borderRadius: '10px' }} flexDir={'column'} className="campos-images-profile">
+                <h1 style={{ color: '#fff', textAlign: 'center', fontSize: '25px', fontWeight: 'bold' }} >Imagens do anuncio</h1>
                 <EditImage />
               </Flex>
               <FormControl id="userName">
-                <Stack direction={["column"]} spacing={6}>
-                  <Center></Center>
+                <Stack direction={["row"]} spacing={6}>
                   <Center>
                     {sendingImages ? (
                       <div>Enviando...</div>
@@ -276,15 +274,14 @@ export default function ProfilePage(): JSX.Element {
               <Stack
                 className="all-profile"
                 spacing={6}
-                maxW={"lg"}
-                bg={useColorModeValue("white", "gray.700")}
                 rounded={"xl"}
+                color="#fff"
                 p="12"
               >
                 <FormLabel>Fale um pouco de sí (*)</FormLabel>
                 <Center>
                   <Textarea
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     placeholder={user.dataEscort?.description}
                     value={description}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -296,7 +293,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>City</FormLabel>
                   <Input
                     placeholder={user.city}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={city}
                     onChange={(e) => setUser({ ...user, city: e.target.value })}
@@ -315,7 +312,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Olhos</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.eyes}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={eyes}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -327,7 +324,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Nacionalidade</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.nationality}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={nationality}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -335,19 +332,10 @@ export default function ProfilePage(): JSX.Element {
                     }
                   />
                 </FormControl>
-              </Stack>
-              <Stack
-                className="all-profile"
-                spacing={6}
-                maxW={"lg"}
-                bg={useColorModeValue("white", "gray.700")}
-                rounded={"xl"}
-                p="12"
-              >
                 <FormControl id="userName" isRequired>
                   <FormLabel>Preço</FormLabel>
                   <Input
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="number"
                     placeholder={user.dataEscort?.price}
                     onChange={(event) => setPrice(event.target.value)}
@@ -357,7 +345,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Contacto</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.contact}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={contact}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -369,7 +357,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Tipo</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.type}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={type}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -381,7 +369,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Qtd. Tatuagens</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.tatoo.toString()}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="number"
                     value={tatoo}
                     onChange={(event) => setTatoo(parseInt(event.target.value))}
@@ -391,7 +379,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Qtd. Piercings</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.piercing.toString()}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="number"
                     value={piercing}
                     onChange={(event) =>
@@ -403,7 +391,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Linguagens</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.languages}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={languages}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -411,20 +399,11 @@ export default function ProfilePage(): JSX.Element {
                     }
                   />
                 </FormControl>
-              </Stack>
-              <Stack
-                className="all-profile"
-                spacing={6}
-                maxW={"lg"}
-                bg={useColorModeValue("white", "gray.700")}
-                rounded={"xl"}
-                p="12"
-              >
                 <FormControl id="altura" isRequired>
                   <FormLabel>Altura</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.height}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={height}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -436,7 +415,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Peso</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.weight}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={weight}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -448,7 +427,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Localidade</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.location}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={location}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -467,7 +446,7 @@ export default function ProfilePage(): JSX.Element {
                   <FormLabel>Informe Horário e Local em que atende</FormLabel>
                   <Input
                     placeholder={user.dataEscort?.obsScheduling}
-                    _placeholder={{ color: "black" }}
+                    _placeholder={{ color: "white" }}
                     type="text"
                     value={obsScheduling}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -491,7 +470,6 @@ export default function ProfilePage(): JSX.Element {
           </Flex>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

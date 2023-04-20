@@ -24,6 +24,7 @@ import { SmallCloseIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import Loading from "../../components/loading/loading";
+import ProfileAnuncio from "./ProfileAnuncio";
 
 export default function ProfilePage(): JSX.Element {
   const [showPassword, setShowPassword] = useState(false);
@@ -172,15 +173,14 @@ export default function ProfilePage(): JSX.Element {
       <Header />
       <div className="content-profile">
       <Flex
+      className="conteudo-profile"
       minH={"100vh"}
-      align={"center"}
-      justify={"center"}
       bg={useColorModeValue("gray.1000", "gray.1000")}
     >
-      <Stack spacing={3} mx={"auto"} maxW={"lg"} py={8} px={6}>
-        <Stack align={"center"}>
-          <Heading color="#fff" fontSize={"4xl"} textAlign={"center"}>
-            Editar dados da conta
+      <Stack spacing={3} py={8} >
+        <Stack>
+          <Heading color="#fff" fontSize={"3xl"} textAlign={"center"}>
+            Detalhes da conta
           </Heading>
         </Stack>
         <Box
@@ -199,6 +199,7 @@ export default function ProfilePage(): JSX.Element {
                     focusBorderColor="pink.400"
                     type="name"
                     placeholder={user?.name}
+                    _placeholder={{ color: "white" }}
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setName(e.target.value)
@@ -213,6 +214,7 @@ export default function ProfilePage(): JSX.Element {
                     focusBorderColor="pink.400"
                     type="text"
                     placeholder={user?.email}
+                    _placeholder={{ color: "white" }}
                     value={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setEmail(e.target.value)
@@ -221,15 +223,17 @@ export default function ProfilePage(): JSX.Element {
                 </FormControl>
               </Box>
             </HStack>
-            <HStack>
+            <HStack className="osselect" >
               <Box>
                 <FormControl id="sexo" isRequired>
                   <Select
+                    className="select-profile"
                     color="#fff" 
                     focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Opção Sexual"
                     value={sexo || user?.sexo}
+                    _placeholder={{ color: "white" }}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                       setSexo(e.target.value)
                     }
@@ -244,11 +248,13 @@ export default function ProfilePage(): JSX.Element {
               <Box>
                 <FormControl id="distrito" isRequired>
                   <Select
+                    className="select-profile"
                     color="#fff" 
                     focusBorderColor="pink.400"
                     w="194px"
                     placeholder="Distrito"
                     value={city || user?.city}
+                    _placeholder={{ color: "white" }}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                       setCity(e.target.value)
                     }
@@ -336,6 +342,9 @@ export default function ProfilePage(): JSX.Element {
             </Stack>
           </Stack>
         </Box>
+      </Stack>
+      <Stack spacing={3} py={8} px={6}>
+        <ProfileAnuncio />
       </Stack>
     </Flex>
       </div>

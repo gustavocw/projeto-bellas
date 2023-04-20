@@ -1,61 +1,88 @@
-import { useEffect, useState } from "react";
-import api from "../../services/api";
-import { useParams } from "react-router-dom";
-import Cookies from "js-cookie";
+import React from 'react'
 
-export interface Escort {
-  id: number;
-  isOnline: boolean;
-  city: string;
-  sexo: string;
-  name: string;
-  imagesEscort: {
-    id: string;
-    urlPhoto: string;
-    escortId: string;
-  }[];
-  dataEscort: {
-    price: string;
-    description: string;
-    contact: string;
-    type: string;
-    eyes: string;
-    tatoo: number;
-    piercing: number;
-    weight: string;
-    height: string;
-    languages: string;
-    location: string;
-    isSexAnal: boolean;
-    nationality: string;
-    obsScheduling: string;
-    age: number;
-  };
-}
-
-export default function Teste() {
-  const { id } = useParams();
-  const [acompanhantes, setAcompanhantes] = useState<Escort[]>([]);
-
-  useEffect(() => {
-    const token = Cookies.get("token");
-    api
-      .get(`/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => setAcompanhantes(response.data))
-      .catch((error) => console.error(error));
-  }, [id]);
-
+const teste = () => {
   return (
-    <div>
-      {acompanhantes.map((acompanhante) => (
-        <div key={acompanhante.id}>
-          <h1>{acompanhante.name}</h1>
-          <p>{acompanhante.dataEscort.description}</p>
-          {/* outras informações do acompanhante */}
-        </div>
-      ))}
-    </div>
-  );
+    <div>teste</div>
+  )
 }
+
+export default teste
+
+
+// import React, { useState } from "react";
+// import axios from "axios";
+
+// const teste = () => {
+//   async function getData() {
+//     const response = await axios.get(
+//       "https://api.eumidas.com.br/isonwa?receiver=351932136888&token=heZD93Lyq8yJxzZMXhYC"
+//     );
+//     console.log(response.data);
+//   }
+
+//   getData();
+
+//   async function postData() {
+//     const url = "https://api.eumidas.com.br/isonwa";
+//     const data = {
+//       receiver: "351932136888",
+//       token: "heZD93Lyq8yJxzZMXhYC",
+//     };
+
+//     try {
+//       const response = await axios.post(url, data, {
+//         headers: {
+//           "Content-Type": "application/x-www-form-urlencoded",
+//         },
+//         timeout: 30000,
+//       });
+//       console.log(response.data); // Output {success:true/false, isonwa:true/false}
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
+
+//   postData();
+
+//   const click = () => {
+//     const nodeurl = "https://api.eumidas.com.br/send";
+//     // const mediaurl = "https://painel.eumidas.com.br/public/users/1/avatar.png";
+
+//     // const buttons = {
+//     //   replyButtons: [
+//     //     {
+//     //       buttonId: "yesContinue",
+//     //       buttonText: { displayText: "YES" },
+//     //       type: 1,
+//     //     },
+//     //     { buttonId: "noContinue", buttonText: { displayText: "NO" }, type: 1 },
+//     //     { buttonId: "info", buttonText: { displayText: "More Info" }, type: 1 },
+//     //   ],
+//     //   footerText: "This is footer",
+//     // };
+
+//     const data = {
+//       receiver: "351932136888",
+//       msgtext: `*Seja bem vinda(o) ao Bellas* \n\nSeu perfil será analizado por nossa equipe, caso seu anuncio for aprovado, receberá uma mensagem de aviso. \u2764\ufe0f`,
+//       token: "heZD93Lyq8yJxzZMXhYC",
+//       // mediaurl: mediaurl,
+//     };
+
+//     axios
+//       .post(nodeurl, data)
+//       .then((response) => {
+//         console.log(response.data)
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   };
+
+//   return (
+//     <div style={{ backgroundColor: "#fff" }}>
+//       <button onClick={click}>CLICK</button>
+//     </div>
+//   );
+// };
+
+// export default teste;

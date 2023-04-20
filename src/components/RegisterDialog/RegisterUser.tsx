@@ -59,7 +59,7 @@ export default function RegisterUser() {
           duration: 3000,
           isClosable: true,
         });
-        navigate("/profile");
+        navigate("/anunciar");
       })
       .catch((error) => {
         toast({

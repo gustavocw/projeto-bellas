@@ -29,6 +29,7 @@ import React, { useState } from "react";
 import { CloseIcon } from "@chakra-ui/icons";
 import api from "../../../services/api";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 interface DetailsUserProps {
   acompanhante: Escort | null;
@@ -56,6 +57,76 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
   const top = useBreakpointValue({ base: "90%", md: "50%" });
   const side = useBreakpointValue({ base: "30%", md: "40px" });
 
+  const mensagemAutorizada = () => {
+    const nodeurl = "https://api.eumidas.com.br/send";
+    // const mediaurl = "https://painel.eumidas.com.br/public/users/1/avatar.png";
+
+    // const buttons = {
+    //   replyButtons: [
+    //     {
+    //       buttonId: "yesContinue",
+    //       buttonText: { displayText: "YES" },
+    //       type: 1,
+    //     },
+    //     { buttonId: "noContinue", buttonText: { displayText: "NO" }, type: 1 },
+    //     { buttonId: "info", buttonText: { displayText: "More Info" }, type: 1 },
+    //   ],
+    //   footerText: "This is footer",
+    // };
+
+    const data = {
+      receiver: `${acompanhante?.dataEscort?.contact}`,
+      msgtext: `*Seu anuncio foi aprovado.* \n\n
+      DETALHES PARA MENSAGEM DE EXEMPLO COMO QUISER. \u2764\ufe0f`,
+      token: "heZD93Lyq8yJxzZMXhYC",
+      // mediaurl: mediaurl,
+    };
+
+    axios
+      .post(nodeurl, data)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const mensagemRejeitada = () => {
+    const nodeurl = "https://api.eumidas.com.br/send";
+    // const mediaurl = "https://painel.eumidas.com.br/public/users/1/avatar.png";
+
+    // const buttons = {
+    //   replyButtons: [
+    //     {
+    //       buttonId: "yesContinue",
+    //       buttonText: { displayText: "YES" },
+    //       type: 1,
+    //     },
+    //     { buttonId: "noContinue", buttonText: { displayText: "NO" }, type: 1 },
+    //     { buttonId: "info", buttonText: { displayText: "More Info" }, type: 1 },
+    //   ],
+    //   footerText: "This is footer",
+    // };
+
+    const data = {
+      receiver: `${acompanhante?.dataEscort?.contact}`,
+      msgtext: `*Seu anuncio foi rejeitado.* \n\n
+      DETALHES PARA MENSAGEM DE EXEMPLO COMO QUISER. \u2764\ufe0f`,
+      token: "heZD93Lyq8yJxzZMXhYC",
+      // mediaurl: mediaurl,
+    };
+
+    axios
+      .post(nodeurl, data)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const token = Cookies.get("token");
   const handleAutorizar = () => {
     api
@@ -73,7 +144,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
       )
       .then((response) => {
         onClose();
-        console.log("autorizada");
+        mensagemAutorizada()
       })
       .catch((error) => {
         console.log("erro na req");
@@ -95,7 +166,7 @@ const DetailsUser: React.FC<DetailsUserProps> = ({ acompanhante, onClose }) => {
         }
       )
       .then((response) => {
-        console.log("rejeitada");
+        mensagemRejeitada()
       })
       .catch((error) => {
         console.log("erro na req");

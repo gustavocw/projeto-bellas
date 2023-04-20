@@ -38,6 +38,16 @@
     .formularios-profile{
         display: block !important;
     }
+
+    .conteudo-profile{
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .osselect{
+        width: 100px !important;
+    }
 }
 
 .imagens-profile{

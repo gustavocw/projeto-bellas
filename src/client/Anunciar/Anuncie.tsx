@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { Checkbox } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import Loading from "../../components/loading/loading";
+import axios from "axios";
 
 const languageOptions = ["Portugês", "Inglês", "Espanhol", "Francês", "Alemão"];
 
@@ -51,6 +52,50 @@ export default function AnunciePage(): JSX.Element {
   };
 
   const toast = useToast();
+  const [response, setResponse] = useState<string>("");
+
+  const nodeurl = "https://api.eumidas.com.br/isonwa";
+  
+  const data = {
+    receiver: "351932136888",
+    token: "heZD93Lyq8yJxzZMXhYC",
+    message: "Olá! Bem-vindo à nossa loja!",
+  };
+  
+  const handleEnvioMensagem = () => {
+      const nodeurl = "https://api.eumidas.com.br/send";
+      // const mediaurl = "https://painel.eumidas.com.br/public/users/1/avatar.png";
+  
+      // const buttons = {
+      //   replyButtons: [
+      //     {
+      //       buttonId: "yesContinue",
+      //       buttonText: { displayText: "YES" },
+      //       type: 1,
+      //     },
+      //     { buttonId: "noContinue", buttonText: { displayText: "NO" }, type: 1 },
+      //     { buttonId: "info", buttonText: { displayText: "More Info" }, type: 1 },
+      //   ],
+      //   footerText: "This is footer",
+      // };
+  
+      const data = {
+        receiver: `${contact}`,
+        msgtext: `*Seja bem vinda(o) ao Bellas* \n\nSeu perfil será analizado por nossa equipe, caso seu anuncio for aprovado, receberá uma mensagem de aviso. \u2764\ufe0f`,
+        token: "heZD93Lyq8yJxzZMXhYC",
+        // mediaurl: mediaurl,
+      };
+  
+      axios
+        .post(nodeurl, data)
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
 
   const handleSubmit = () => {
     uploadImages();
@@ -83,6 +128,7 @@ export default function AnunciePage(): JSX.Element {
         }
       )
       .then((response) => {
+        handleEnvioMensagem()
         toast({
           title: "ANUNCIO ENVIADO PARA ANÁLISE",
           description:
